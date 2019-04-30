@@ -1,9 +1,30 @@
 import React, { Component } from "react";
 import Nav from "../../components/admin/nav";
 import Card from "../../components/admin/card";
+
 import "./style.css";
 
 class Admin extends Component {
+
+  // loadActiveTrucks = () => {
+  //   <div>This is a test to see if anything comes up</div>
+  // };
+
+  // loadBooks = () => {
+  //   API.getBooks()
+  //     .then(res =>
+  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
+
+  // loadBooks = () => {
+  //   API.getBooks()
+  //     .then(res =>
+  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
 
   render() {
     return (
@@ -18,6 +39,7 @@ class Admin extends Component {
             buttonText="View Trucks"
             imageClass="truckImg"
             link="/admin/view/registered/trucks"
+
           />
           <Card
             image="https://cdn0.iconfinder.com/data/icons/glyph-user-group-icon-set-1-ibrandify/512/40-512.png"
@@ -25,6 +47,7 @@ class Admin extends Component {
             number={10}
             icon="fa-user"
             buttonText="View Users"
+            imageClass="userImg"
             link="/admin/view/registered/users"
           />
           <Card
@@ -42,6 +65,7 @@ class Admin extends Component {
             number={5}
             icon="fa-clipboard"
             buttonText="Open Applications"
+            imageClass="openImg"
             link="/admin/view/applications/open"
           />
           <Card
@@ -50,6 +74,7 @@ class Admin extends Component {
             number={3}
             icon="fa-thumbs-down"
             buttonText="View Denied"
+            imageClass="deniedImg"
             link="/admin/view/applications/denied"
           />
           <Card
@@ -58,6 +83,7 @@ class Admin extends Component {
             number={5}
             icon="fa-thumbs-up"
             buttonText="View Approved"
+            imageClass="approvedImg"
             link="/admin/view/applications/approved"
           />
         </div>

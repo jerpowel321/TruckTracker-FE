@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import Nav from "../../../components/admin/navToHome";
-
+import Container from "../../../components/admin/container";
 
 
 class Admin extends Component {
 
     render() {
       return (
-        <div className="oppenApp">
+        <div className="brickBackground">
           <Nav 
           currentPage="Open Applications"
           />
-          <h1>Whats UP</h1>
+          <Container>
+          <h1>Whats UP WHYYYY CAIN hello hello hello hello</h1>
+ 
+          </Container>
+         
         </div>)
     }
   

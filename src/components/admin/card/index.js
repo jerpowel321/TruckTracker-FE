@@ -4,18 +4,18 @@ import "./style.css";
 
 function Card(props) {
 	return (
-		<div className="card ">
-			<div className="card-image">
-				<div><img className={props.imageClass} src={props.image} /></div>
-			</div>
-			<div className="card-content info">
-				<div className="card-title center-align font5 red-text text-darken-4">{props.title}</div>
-				<p className="font center-align font red-text text-darken-4">{props.number}</p>
-				<div className="center-align">
-					<Link className="red darken-4 btn text-white hvr-icon-pulse" to={props.link}>
-						<i className={`fas la-lg ${props.icon} buttonIcon hvr-icon`}></i>
-						{props.buttonText}
-					</Link>
+		<div>
+			<div className="card" >
+			<div className="text-center">
+				<img className={`${props.imageClass} card-img-top `} src={props.image}/>
+				</div>	
+			<div className="card-body">
+					<h5 className="card-title font5 redText text-center">{props.title}</h5>
+					<h5 className="card-title font5 redText text-center">{props.number}</h5>
+					<div className="text-center adminbtnarea">
+					<Link className="btn text-white redBg hvr-icon-pulse " to={props.link} >{props.buttonText}
+					<i className={`fas la-lg ${props.icon} buttonIcon hvr-icon`}></i>
+					</Link></div>
 				</div>
 			</div>
 		</div>
