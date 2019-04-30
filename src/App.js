@@ -31,7 +31,7 @@ import * as ROUTES from './constants/routes';
 
 function App() {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <NavigationAuth />
 
        <hr />
