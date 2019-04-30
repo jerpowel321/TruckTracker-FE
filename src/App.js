@@ -25,6 +25,9 @@ import HomePage from './pages/Signin/Home';
 import AccountPage from './pages/Signin/Account';
 import AdminPage from './pages/Signin/Admin';
 
+// CONSTANTS
+import * as ROUTES from './constants/routes';
+
 
 function App() {
   return (
