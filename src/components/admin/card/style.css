@@ -1,0 +1,47 @@
+.card-image {
+width: 100px;
+display: block;
+justify-content: center;
+padding-top: 20px;
+margin:auto;
+}
+.font {
+font-size: 30px;
+font-family: 'Luckiest Guy', cursive;
+text-shadow: 2px 2px rgb(240, 188, 16);
+}
+.font5 {
+font-family: 'Roboto', sans-serif;
+font-size: 15px;
+text-shadow: 1px 1px black;
+}
+a:hover {
+opacity: 0.6;
+}
+.card {
+box-shadow: 3px 5px black;
+margin-top: 40px;
+margin-right: 30px;
+margin-bottom: 20px
+}
+.card-content {
+padding-top: 0;
+padding-bottom: 0;
+}
+.buttonIcon{
+margin-right: 7px;
+}
+.activeUserImg {
+	height: 60px;
+	margin-top: 30px;
+}
+.truckImg {
+	width: 100%;
+}
+a {
+	color: #FFF;
+}
+a:hover {
+	 color: gold
+}
+

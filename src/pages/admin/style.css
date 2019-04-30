@@ -1,0 +1,49 @@
+
+.adminDashboard {
+    background-image: url("https://images.unsplash.com/photo-1519817914152-22d216bb9170?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    background-size: cover;
+    background-position: center center;
+}
+.adminPage{
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.registeredUsers{
+    background-image: url("https://images.unsplash.com/photo-1476365518243-f738bf58443d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+}
+.registeredTrucks{
+    background-image: url("https://images.unsplash.com/photo-1476365518243-f738bf58443d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+}
+.activeUsers{
+    background-image: url("https://images.unsplash.com/photo-1487088678257-3a541e6e3922?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2534&q=80");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+}
+.oppenApp{
+    background-image: url("https://images.unsplash.com/photo-1476365518243-f738bf58443d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+}
+.deniedApp{
+    background-image: url("https://images.unsplash.com/photo-1476365518243-f738bf58443d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+}
+.approvedApp{
+    background-image: url("https://hayleydevlin.com/wp-content/uploads/2018/08/wedding-overwhelm.jpg");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+}
+
