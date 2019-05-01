@@ -16,4 +16,11 @@
     background-size: cover;
     background-position: center center;
     min-height: 100vh;
+    padding-bottom:40px;
+}
+.truckApplication {
+    width: 60%;
+    margin: auto;
+   background-color: white;
+   padding: 30px;
 }
