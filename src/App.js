@@ -15,8 +15,8 @@ import AdminApprovedApp from "./pages/admin/approvedApplications";
 import User from "./pages/user";
 import Trucker from "./pages/trucker";
 
-// Auth section
-import Navigation from './pages/Signin/Navigation';
+// import AppTwo from './pages/Signin/AppTwo';
+import NavigationAuth from './pages/Signin/NavigationAuth';
 import LandingPage from './pages/Signin/Landing';
 import SignUpPage from './pages/Signin/SignUp';
 import SignInPage from './pages/Signin/SignIn';
@@ -27,29 +27,22 @@ import AdminPage from './pages/Signin/Admin';
 
 // CONSTANTS
 import * as ROUTES from './constants/routes';
-import { withAuthentication } from './pages/Signin/Session';
 
 
-const App = () => (
-  
-  <Router>
-    <div>
-      <Navigation />
+function App() {
+  return (
+    <Router basename={process.env.PUBLIC_URL}>
+      <NavigationAuth />
 
        <hr />
 
        <Route exact path={ROUTES.LANDING} component={LandingPage} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-      <Route
-        path={ROUTES.PASSWORD_FORGET}
-        component={PasswordForgetPage}
-      />
-      <Route path={ROUTES.HOME} component={HomePage} />
-      <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-      <Route path={ROUTES.ADMIN} component={AdminPage} />
-     
-       </div>
+       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+       <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+       <Route path={ROUTES.HOME} component={HomePage} />
+       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
+       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Switch>
         <Route exact path="/" component={Splash} />
 
@@ -66,7 +59,7 @@ const App = () => (
       </Switch>
     </Router>
   );
+}
 
 
-
-  export default withAuthentication(App);
+export default App;
