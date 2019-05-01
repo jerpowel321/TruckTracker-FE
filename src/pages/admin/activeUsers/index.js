@@ -1,20 +1,55 @@
 import React, { Component } from "react";
 import Nav from "../../../components/admin/navToHome";
-// import API from "../../../../routes/api-routes"
-import Container from "../../../components/admin/container";
+import API from "../../../utils/API"
 
 class Admin extends Component {
-  // componentDidMount() {
-  //   this.loadActtiveUsers();
-  // }
+  state = {
+    businessName: "",
+    website: "",
+    cuisine: "",
+    menu: "", 
+    firstName: "",
+    middleInitial: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    address2: "",
+    city: "", 
+    state: "",
+    zip: ""   
+  }
 
-  // loadActtiveUsers = () => {
-  //   API.getUser()
-  //     .then(res =>
-  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
+  createNewTruck = (event) => {
+    event.preventDefault();  
+    const newTruck = {  
+    businessName: this.state.companyName,
+    website: this.state.website,
+    cuisine: this.state.cuisine,
+    menu: this.state.menu, 
+    firstName: this.state.firstName,
+    middleInitial: this.state.middleInitial,
+    lastName: this.state.lastName,
+    email: this.state.email,
+    phone: this.state.phoneNumber,
+    address: this.state.address1,
+    address2: this.state.address2,
+    city: this.state.city, 
+    state: this.state.state,
+    zip: this.state.zip    
+  }
+  console.log(newTruck)
+    API.saveTruck(newTruck)
+      .then(res => console.log(res));
+  }
+  handleInputChange = (event) => {
+    let { name, value } = event.target;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
   render() {
     return (
       <div className="brickBackground">
@@ -32,17 +67,17 @@ class Admin extends Component {
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="companyName">Company Name</label>
-                <input type="text" class="form-control" id="companyName" placeholder="Koja Kitchen" />
+                <input name="companyName" type="text" class="form-control" id="companyName" placeholder="Koja Kitchen" onChange={this.handleInputChange}/>
               </div>
               <div class="form-group col-md-6">
                 <label for="website">Website</label>
-                <input type="text" class="form-control" id="inputMiddleName" placeholder="" />
+                <input name="website" type="text" class="form-control" id="inputMiddleName" placeholder="" onChange={this.handleInputChange}/>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputCuisineType">Type of Cuisine</label>
-                <select id="inputCuisineType" class="form-control" >
+                <select name="cuisine" id="inputCuisineType" class="form-control" onChange={this.handleInputChange} >
                   <option selected>Select type</option>
                   <option value="American">American</option>
                   <option value="Cajun">Cajun</option>
@@ -67,49 +102,49 @@ class Admin extends Component {
               </div>
               <div class="form-group col-md-6">
                 <label for="inputMenuLink">Menu Link</label>
-                <input type="text" class="form-control" id="inputMenuLink" placeholder="" />
+                <input name="menu" type="text" class="form-control" id="inputMenuLink" placeholder="" onChange={this.handleInputChange} />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-5">
                 <label for="inputFirstName"> Contact First Name</label>
-                <input type="text" class="form-control" id="inputFirstName" placeholder="William" />
+                <input name="firstName" type="text" class="form-control" id="inputFirstName" placeholder="William" onChange={this.handleInputChange} />
               </div>
               <div class="form-group col-md-2">
                 <label for="inputMiddleName">Middle Initial</label>
-                <input type="text" class="form-control" id="inputMiddleName" placeholder="B." />
+                <input name="middleInitial" type="text" class="form-control" id="inputMiddleName" placeholder="B." onChange={this.handleInputChange} />
               </div>
               <div class="form-group col-md-5">
                 <label for="inputLastName">Last Name</label>
-                <input type="password" class="form-control" id="inputLastName" placeholder="Pitt" />
+                <input name="lastName" type="text" class="form-control" id="inputLastName" placeholder="Pitt" onChange={this.handleInputChange} />
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputEmail4">Email</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Email" />
+                <input name="email" type="email" class="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleInputChange} />
               </div>
               <div class="form-group col-md-6">
                 <label for="inputPhoneNumber">Phone Number</label>
-                <input type="number" class="form-control" id="inputPhoneNumber" placeholder="4155555" />
+                <input name="phoneNumber" type="number" class="form-control" id="inputPhoneNumber" placeholder="4155555" onChange={this.handleInputChange} />
               </div>
             </div>
             <div class="form-group">
               <label for="inputAddress">Address</label>
-              <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" />
+              <input name="address1" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" onChange={this.handleInputChange} />
             </div>
             <div class="form-group">
               <label for="inputAddress2">Address 2</label>
-              <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" />
+              <input name="address2" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" onChange={this.handleInputChange} />
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="inputCity">City</label>
-                <input type="text" class="form-control" id="inputCity" />
+                <input name="city" type="text" class="form-control" id="inputCity" onChange={this.handleInputChange} />
               </div>
               <div class="form-group col-md-4">
                 <label for="inputState">State</label>
-                <select id="inputState" class="form-control" >
+                <select name="state" id="inputState" class="form-control" onChange={this.handleInputChange} >
                   <option selected>Choose a State</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -166,11 +201,11 @@ class Admin extends Component {
               </div>
                 <div class="form-group col-md-2">
                   <label for="inputZip">Zip</label>
-                  <input type="text" class="form-control" id="inputZip" />
+                  <input name="zip" type="text" class="form-control" id="inputZip" onChange={this.handleInputChange} />
                 </div>
               </div>
               <div class="text-center">
-                <button type="submit" class="btn redBg text-white">Submit</button>
+                <button type="submit" class="btn redBg text-white" onClick={this.createNewTruck}>Submit</button>
               </div>
           </form>
           </div>
