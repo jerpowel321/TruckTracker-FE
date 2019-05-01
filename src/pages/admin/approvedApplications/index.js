@@ -21,26 +21,7 @@ class Admin extends Component {
         .then(res => console.log(res));
   }
 
-  handleInputChange(event) {
-    let { name, value } = event.target;
 
-    this.setState({
-      [name]: value
-    });
-  }
-  
-  createNewTruck() {
-    
-    const newTruck = {
-      name: this.state.truckName,
-      cuisine: this.state.cuisine,
-      phone: this.state.phoneNumber
-    }
-
-    API.saveTruck(newTruck)
-      .then(res => console.log(res));
-  }
-  
     render() {
       return (
         <div class="brickBackground">
