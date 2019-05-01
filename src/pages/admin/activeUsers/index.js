@@ -22,11 +22,12 @@ class Admin extends Component {
         <Nav
           currentPage="Active Users"
         />
-      
-          <div className="truckApplication">
+        <div className="truckApplication">
           <form>
             <div class="form-row">
-              <h1>Food Truck Application 2019</h1>
+              <div class="form-group col-md-12">
+                <h1 class="text-center font redText">Food Truck Application</h1>
+              </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -39,15 +40,46 @@ class Admin extends Component {
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-6">
+                <label for="inputCuisineType">Type of Cuisine</label>
+                <select id="inputCuisineType" class="form-control" >
+                  <option selected>Select type</option>
+                  <option value="American">American</option>
+                  <option value="Cajun">Cajun</option>
+                  <option value="Chinese">Chinese</option>
+                  <option value="French<">French</option>
+                  <option value="Filipino">Filipino</option>
+                  <option value="Greek">Greek</option>
+                  <option value="Indian">Indian</option>
+                  <option value="Indonesian">Indonesian</option>
+                  <option value="Italian">Italian</option>
+                  <option value="Japanese">Japanese</option>
+                  <option value="Korean">Korean</option>
+                  <option value="Mediterranean">Mediterranean</option>
+                  <option value="Mexican">Mexican</option>
+                  <option value="Polish">Polish</option>
+                  <option value="Peruvian<">Peruvian</option>
+                  <option value="Russian">Russian</option>
+                  <option value="Taiwanese">Taiwanese</option>
+                  <option value="Thai">Thai</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="inputMenuLink">Menu Link</label>
+                <input type="text" class="form-control" id="inputMenuLink" placeholder="" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-5">
                 <label for="inputFirstName"> Contact First Name</label>
                 <input type="text" class="form-control" id="inputFirstName" placeholder="William" />
               </div>
-              <div class="form-group col-md-3">
+              <div class="form-group col-md-2">
                 <label for="inputMiddleName">Middle Initial</label>
                 <input type="text" class="form-control" id="inputMiddleName" placeholder="B." />
               </div>
-              <div class="form-group col-md-4">
+              <div class="form-group col-md-5">
                 <label for="inputLastName">Last Name</label>
                 <input type="password" class="form-control" id="inputLastName" placeholder="Pitt" />
               </div>
@@ -78,25 +110,75 @@ class Admin extends Component {
               <div class="form-group col-md-4">
                 <label for="inputState">State</label>
                 <select id="inputState" class="form-control" >
-                  <option selected>Choose...</option>
-                  <option>CA</option>
-                </select>
+                  <option selected>Choose a State</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="DC">District Of Columbia</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                  </select>
               </div>
-              <div class="form-group col-md-2">
-                <label for="inputZip">Zip</label>
-                <input type="text" class="form-control" id="inputZip" />
+                <div class="form-group col-md-2">
+                  <label for="inputZip">Zip</label>
+                  <input type="text" class="form-control" id="inputZip" />
+                </div>
               </div>
-            </div>
-            <div class="text-center">
-            <button type="submit" class="btn redBg text-white">Submit</button>
-            </div>
+              <div class="text-center">
+                <button type="submit" class="btn redBg text-white">Submit</button>
+              </div>
           </form>
           </div>
-       
-      </div>
-    )
-  }
 
-};
-
+        </div>
+        )
+      }
+    
+    };
+    
 export default Admin;
