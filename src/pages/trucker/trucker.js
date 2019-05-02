@@ -1,47 +1,141 @@
 import React, { Component } from "react";
 import Nav from "../../components/Nav";
 import GoogleMapReact from 'google-map-react';
-import * as firebase from "firebase"
+// import * as app from "app"
+import app from 'firebase/app';
+// import {geolocated} from 'react-geolocated';
+
+var substate
+
+
+
+// if (!app.apps.length) {
 
 // var config = {
-//   apiKey: "AIzaSyBZAsoLrmwUdH_uxJHTDTNKZBtVMT3QRy4",
-//   authDomain: "what-the-truck-test.firebaseapp.com",
-//   databaseURL: "https://what-the-truck-test.firebaseio.com",
-//   projectId: "what-the-truck-test",
-//   storageBucket: "what-the-truck-test.appspot.com",
-//   messagingSenderId: "518407603448"
+//   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
+//     authDomain: "truck-app.appapp.com",
+//     databaseURL: "https://truck-app.appio.com",
+//     projectId: "truck-app",
+//     storageBucket: "truck-app.appspot.com",
+//     messagingSenderId: "810502901238"
 // };
 
-// firebase.initializeApp(config)
-// const AnyReactComponent = ({ text }) => <div>{text}</div>;
+//     app.initializeApp(config);
+// }
+const db = app.database();
 
-class Trucker extends Component {
+class Trucker extends React.Component {
 
-  render() {
-    return (
 
-      <div>
-        <Nav />
-        {/* // Important! Always set the container height explicitly
-        <div style={{ height: '50vh', width: '50%', marginLeft: "25%", marginTop: "5%" }}>
-          <GoogleMapReact
-            bootstrapURLKeys={{ key: "AIzaSyCC9CsEo4ZXBb-6M2d9TfG8DgvcTXXcEo0" }}
-            defaultCenter={this.props.center}
-            defaultZoom={this.props.zoom}
-          >
-            <AnyReactComponent
-              lat={59.955413}
-              lng={30.337844}
-              text="My Marker"
-            />
-          </GoogleMapReact>
-        </div> */}
-        
-      </div>
-    );
 
+  state = {
+    name: "",
+    position: {},
+    active: false,
+    bool: true
   }
 
-};
+  // componentDidMount(){
+  //   while(this.state.active === true){
+  //     setTimeout(() => this.update(), 1000 * 300)
+  //   }
+  // }
+  update() {
+    let interval;
+    const updater = () => {
+      if (this.state.active === true) {
+        window.navigator.geolocation.getCurrentPosition(
+          position => this.setState({ position: position }),
+          err => console.log(err)
+        )
+
+        console.log("I work")
+        db.ref("-LduGXztZPLOWaQjzbq").child("lat").set(this.state.position.coords.latitude)
+        db.ref("-LduGXztZPLOWaQjzbq").child("lng").set(this.state.position.coords.longitude)
+      }
+
+      if (this.state.bool === true) {
+        interval = setInterval(updater, 300000)
+        this.setState({ bool: false })
+      }
+    }
+    updater();
+  }
+
+  handleInputChange = event => {
+    this.setState({ name: event.target.value });
+  };
+
+  post = (name, lat, lng) => {
+    if (name && lat && lng) {
+      db.ref().push({
+        name: name,
+        lat: lat,
+        lng: lng
+      })
+    }
+    console.log(this.state)
+  }
+  toggleState() {
+    if (this.state.active === false) {
+      this.setState({ active: true })
+    }
+    else {
+      this.setState({ active: false })
+    }
+    console.log(this.state.active)
+  }
+
+  render() {
+
+    return (
+      <div>
+        <input
+          id="name"
+          onChange={this.handleInputChange}
+        />
+        <button
+          onClick={() => { this.post(this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude) }}
+        >
+          Submit
+            </button>
+        <button
+          onClick={() => { this.toggleState(); this.update(); }}
+        >
+          Update location
+            </button>
+
+
+        {
+          window.navigator.geolocation.getCurrentPosition(
+            position => this.setState({ position: position }),
+            err => console.log(err)
+          )
+        }
+      </div>
+    )
+    //   return !this.props.isGeolocationAvailable
+    //     ? <div>Your browser does not support Geolocation</div>
+    //       : this.props.coords
+    //         ? <div>
+    //           <input
+    //           id="name"
+    //           onChange={this.handleInputChange}
+    //           />
+    //           <button
+    //           onClick={() => {this.post(this.state.name, this.props.coords.lat, this.props.coords.lat)}}
+    //           >
+    //           Submit
+    //           </button>
+    //         </div>
+    //         : <div>Getting the location data&hellip; </div>;
+  }
+}
 
 export default Trucker;
+// export default geolocated({
+//   positionOptions: {
+//     enableHighAccuracy: false,
+//   },
+//   userDecisionTimeout: 5000,
+// })(Trucker);
