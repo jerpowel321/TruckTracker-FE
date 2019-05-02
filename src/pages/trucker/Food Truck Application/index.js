@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Nav from "../../../components/admin/navToHome";
 import API from "../../../utils/API"
+import 'firebase/auth';
 
 class Admin extends Component {
 	state = {
@@ -41,6 +42,7 @@ class Admin extends Component {
 		console.log(newTruck)
 		API.saveTruck(newTruck)
 			.then(res => console.log(res)
+			
 			);
 	}
 	handleInputChange = (event) => {

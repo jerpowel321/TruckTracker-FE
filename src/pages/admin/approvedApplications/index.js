@@ -17,8 +17,8 @@ class Admin extends Component {
       })
       .catch(err => console.log(err));
 
-      API.getTruck(1)
-        .then(res => console.log(res));
+      // API.getTruck(1)
+      //   .then(res => console.log(res));
   }
 
 

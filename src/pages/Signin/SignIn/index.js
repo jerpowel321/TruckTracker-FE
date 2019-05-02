@@ -7,13 +7,18 @@ import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../../constants/routes';
 
-const SignInPage = () => (
-  <div>
+
+const SignInPage = () => (<div className=" brickBackground" >
+  <nav class="navbar navbar-expand-lg navbar-light goldBg redText">
+    <a class="navbar-brand font redText mr-5">Logo</a>
+  </nav>
+  <div className="container" >
     <h1>SignIn</h1>
     <SignInForm />
     <PasswordForgetLink />
     <SignUpLink />
   </div>
+</div>
 );
 
 const INITIAL_STATE = {
@@ -55,6 +60,10 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
+
+
+
+
       <form onSubmit={this.onSubmit}>
         <input
           name="email"
@@ -76,6 +85,8 @@ class SignInFormBase extends Component {
 
         {error && <p>{error.message}</p>}
       </form>
+
+
     );
   }
 }
