@@ -10,7 +10,7 @@ export default {
         return axios.get(BASEURL + "/api/trucks")
     },
     saveTruck(truck){
-        return axios.post("/api/trucks", truck)
+        return axios.post("https://cors-anywhere.herokuapp.com/https://api-food-truck.herokuapp.com/api/trucks", truck)
     },
     getTruck: function (id){
         return axios.get(`/api/trucks/${id}`)
