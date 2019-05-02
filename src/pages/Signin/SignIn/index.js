@@ -9,9 +9,9 @@ import * as ROUTES from '../../../constants/routes';
 
 
 const SignInPage = () => (<div className=" brickBackground" >
-  <nav class="navbar navbar-expand-lg navbar-light goldBg redText">
+  {/* <nav class="navbar navbar-expand-lg navbar-light goldBg redText">
     <a class="navbar-brand font redText mr-5">Logo</a>
-  </nav>
+  </nav> */}
   <div className="container" >
     <h1>SignIn</h1>
     <SignInForm />
