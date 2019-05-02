@@ -11,6 +11,8 @@
     "google-map-react": "^1.1.4",
     "hover.css": "^2.3.2",
     "react": "^16.8.6",
+    "react-alert": "^5.4.0",
+    "react-alert-template-basic": "^1.0.0",
     "react-chartjs-2": "^2.7.6",
     "react-dom": "^16.8.6",
     "react-materialize": "^3.2.0",
