@@ -49,7 +49,7 @@ class Admin extends Component {
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>
-                <div  data-toggle="modal" data-target={`#exampleModalCenter${truck.id}`}>
+                <div className=""  data-toggle="modal" data-target={`#exampleModalCenter${truck.id}`}>
                   <h1>{truck.businessName}</h1>
                 </div>
                 <div className="modal fade" id={`exampleModalCenter${truck.id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -62,20 +62,14 @@ class Admin extends Component {
                         </button>
                       </div>
                       <div className="modal-body">
-                        {truck.businessName}
-                        {truck.website}
-                        {truck.cuisine}
-                        {truck.menu}
-                        {truck.firstName}
-                        {truck.middleInitial}
-                        {truck.lastName}
-                        {truck.email}
-                        {truck.phone}
-                        {truck.address}
-                        {truck.address2}
-                        {truck.city}
-                        {truck.state}
-                        {truck.zip}
+                        Business Name: {truck.businessName}<br />
+                        Website: <a href={`${truck.website}`} target="_blank">Link</a><br />
+                        Cuisine: {truck.cuisine}<br />
+                        Menu: <a href={`${truck.menu}`} target="_blank">Link</a><br />
+                        Owner: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
+                        Email: {truck.email}<br />
+                        Phone: {truck.phone}<br />
+                        Address: {truck.address} {truck.address2}, {truck.city}, {truck.state} {truck.zip}
                       </div>
                       <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
