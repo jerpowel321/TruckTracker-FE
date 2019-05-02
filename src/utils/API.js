@@ -20,8 +20,8 @@ export default {
     //Jennifer
 
     //Cyrus
-    approveTruck: function (approved, applicationOpen){
-        return axios.post(BASEURL + "/api/trucks", {data: {approved: approved, applicationOpen: applicationOpen}})
+    updateTruck: function (companyId, approved, applicationOpen){
+        return axios.put(BASEURL + "/api/trucks", {data: {id: companyId, approved: approved, applicationOpen: applicationOpen}})
     }
 
 
