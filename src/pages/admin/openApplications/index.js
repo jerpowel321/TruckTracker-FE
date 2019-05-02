@@ -7,35 +7,71 @@ class Admin extends Component {
   state = {
     truckData: []
   }
-  componentDidMount(){
+  componentDidMount() {
     API.getAllTrucks()
       .then(res => {
         console.log(res)
-        this.setState({truckData: res.dataValues})
+        this.setState({ truckData: res.dataValues })
       })
       .catch(err => console.log(err));
 
-      // API.getTruck(1)
-      //   .then(res => console.log(res));
+    // API.getTruck(1)
+    //   .then(res => console.log(res));
   }
 
 
-    render() {
-      return (
-        <div class="brickBackground">
-          <Nav 
-          currentPage="Approved Applications"
-          />
+  render() {
+    return (
+      <div class="brickBackground">
+        <Nav
+          currentPage="Open Applications"
+        />
+        <Container >
           <h1>Whats UP</h1>
-          {this.state.truckData.map (truck => {
+          {this.state.truckData.map(truck => {
             return (
               <h1>{truck.name}</h1>
             )
           })}
+        </Container>
+      </div>)
+  }
 
-        </div>)
-    }
-  
-  };
-  
-  export default Admin;
+};
+
+export default Admin;
+
+
+
+// state = {
+//   truckData: []
+// }
+// componentDidMount() {
+//   API.getAllTrucks()
+//     .then(res => {
+//       console.log(res)
+//       this.setState({ truckData: res.dataValues })
+//     })
+//     .catch(err => console.log(err));
+
+//   // API.getTruck(1)
+//   //   .then(res => console.log(res));
+// }
+
+
+// render() {
+//   return (
+//     <div class="brickBackground">
+//       <Nav
+//         currentPage="Open Applications"
+//       />
+//       <Container >
+//         <h1>Whats UP</h1>
+//         {this.state.truckData.map(truck => {
+//           return (
+//             <h1>{truck.name}</h1>
+//           )
+//         })}
+//       </Container>
+//     </div>)
+// }

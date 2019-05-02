@@ -25,7 +25,7 @@ class Admin extends Component {
       return (
         <div class="brickBackground">
           <Nav 
-          currentPage="Approved Applications"
+          currentPage="Registered Trucks"
           />
           <h1>Whats UP</h1>
           {this.state.truckData.map (truck => {
