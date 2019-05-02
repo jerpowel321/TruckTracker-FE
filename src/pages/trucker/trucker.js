@@ -75,6 +75,40 @@ class Trucker extends React.Component {
     }
     console.log(this.state)
   }
+/////////////////////////////////////////////////
+////// CHECK ID PLACEMENT LATER
+  newPost = (id, name, lat, lng) => {
+    if(id && name && lat && lng) {
+      db.ref().child("trucks").child(id).push({
+        name: name,
+        lat: lat,
+        lng: lng
+      })
+    }
+  }
+
+  newUpdate() {
+    let interval;
+    const updater = (id) => {
+      if(this.state.active === true){
+        window.navigator.geolocation.getCurrentPosition(
+          position => this.setState({position: position}),
+          err => console.log(err)
+        )
+        
+        console.log("I work")
+        db.ref().child("trucks").child(id).child("lat").set(this.state.position.coords.latitude)
+        db.ref().child("trucks").child(id).child("lng").set(this.state.position.coords.longitude)
+      }
+      if(this.state.bool === true){
+      interval = setInterval(updater, 300000)
+      this.setState({bool: false})
+      }
+    }
+    updater();
+  }
+/////////////////////////////////////////////////
+
   toggleState(){
     if(this.state.active === false){
       this.setState({active: true})
