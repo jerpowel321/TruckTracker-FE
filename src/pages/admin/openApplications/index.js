@@ -9,17 +9,33 @@ class Admin extends Component {
   state = {
     truckData: []
   }
+  
   componentDidMount() {
     API.getAllTrucks()
       .then(res => {
-        console.log(res)
-        this.setState({ truckData: res.dataValues })
+        console.log("data:", res.data)
+        this.setState({ truckData: res.data })
       })
       .catch(err => console.log(err));
-
-    // API.getTruck(1)
-    //   .then(res => console.log(res));
   }
+  //   // API.getTruck(1)
+  //   //   .then(res => console.log(res));
+
+    approveApplication = id => {
+      API.updateTruck(id, true, false)
+        .then(res => {
+          console.log(res)
+
+        })
+    }
+
+    closeApplication = id => {
+      API.updateTruck(id, false, false)
+      .then(res => {
+        console.log(res)
+      })
+    }
+  
 
 
   render() {
@@ -32,7 +48,45 @@ class Admin extends Component {
           <h1>Whats UP</h1>
           {this.state.truckData.map(truck => {
             return (
-              <h1>{truck.name}</h1>
+              <div key={truck.id}>
+                <div  data-toggle="modal" data-target={`#exampleModalCenter${truck.id}`}>
+                  <h1>{truck.businessName}</h1>
+                </div>
+                <div className="modal fade" id={`exampleModalCenter${truck.id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div className="modal-dialog modal-dialog-centered" role="document">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalCenterTitle">{truck.businessName}</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div className="modal-body">
+                        {truck.businessName}
+                        {truck.website}
+                        {truck.cuisine}
+                        {truck.menu}
+                        {truck.firstName}
+                        {truck.middleInitial}
+                        {truck.lastName}
+                        {truck.email}
+                        {truck.phone}
+                        {truck.address}
+                        {truck.address2}
+                        {truck.city}
+                        {truck.state}
+                        {truck.zip}
+                      </div>
+                      <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-primary approve" onClick={() => this.approveApplication(this.id)}>Approve</button>
+                        <button type="button" className="btn btn-primary close" onClick={() => this.closeApplication(this.id)}>Reject</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             )
           })}
         </Container>
@@ -44,21 +98,8 @@ class Admin extends Component {
 export default Admin;
 
 
+// {`#exampleModalCenter${truck.id}`}
 
-// state = {
-//   truckData: []
-// }
-// componentDidMount() {
-//   API.getAllTrucks()
-//     .then(res => {
-//       console.log(res)
-//       this.setState({ truckData: res.dataValues })
-//     })
-//     .catch(err => console.log(err));
-
-//   // API.getTruck(1)
-//   //   .then(res => console.log(res));
-// }
 
 
 // render() {
@@ -91,7 +132,7 @@ export default Admin;
 //       <div data-toggle="modal" data-target="#exampleModalCenter">
 //       <h1>{truck.businessName}</h1>
 //       </div>
-//       <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+//       <div class="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 //       <div class="modal-dialog modal-dialog-centered" role="document">
 //         <div class="modal-content">
 //           <div class="modal-header">
@@ -125,18 +166,10 @@ export default Admin;
 //       </div>
 //     </div>
 //     </div>
-      
+
 //     )
 //   })}
 // </Container>
 // </div>)
 
 
-// approveApplication = id =>
-// API.approveTruck()
-//   .then(res => {
-//     console.log(res)
-//   })
-
-// closeApplication = id =>
-// API.removeTruck()
