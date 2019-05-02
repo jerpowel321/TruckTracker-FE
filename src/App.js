@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Splash from "./pages/splashPage";
+
 
 
 import Admin from "./pages/admin";
@@ -18,13 +18,12 @@ import TruckerApplication from "./pages/trucker/Food Truck Application";
 
 // Auth section
 import Navigation from './pages/Signin/Navigation';
-import LandingPage from './pages/Signin/Landing';
+
 import SignUpPage from './pages/Signin/SignUp';
 import SignInPage from './pages/Signin/SignIn';
 import PasswordForgetPage from './pages/Signin/PasswordForget';
 import HomePage from './pages/Signin/Home';
 import AccountPage from './pages/Signin/Account';
-import AdminPage from './pages/Signin/Admin';
 
 // CONSTANTS
 import * as ROUTES from './constants/routes';
@@ -40,22 +39,22 @@ const App = () => (
 
        <hr />
 
-       <Route exact path={ROUTES.LANDING} component={LandingPage} />
+      
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+      <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route
         path={ROUTES.PASSWORD_FORGET}
         component={PasswordForgetPage}
       />
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-      <Route path={ROUTES.ADMIN} component={AdminPage} />
+      <Route path={ROUTES.ADMIN} component={Admin} />
      
        </div>
       <Switch>
-        <Route exact path="/" component={Splash} />
+  
 
-        <Route exact path="/admin/dashboard" component={Admin} />
+   
         <Route exact path="/admin/view/registered/trucks" component={AdminTrucks} />
         <Route exact path="/admin/view/registered/users" component={AdminUsers} />
         <Route exact path="/admin/view/active/users" component={AdminActiveUsers} />
@@ -65,7 +64,7 @@ const App = () => (
         <Route exact path="/user/dashboard" component={User} />
         <Route exact path="/trucker/dashboard" component={Trucker} />
         <Route exact path="/trucker/application" component={TruckerApplication} />
-        <Route exact path="*" component={Splash} />
+
       </Switch>
     </Router>
   );
