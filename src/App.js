@@ -30,6 +30,7 @@ import * as ROUTES from './constants/routes';
 import { withAuthentication } from './pages/Signin/Session';
 
 
+
 const App = () => (
   
   <Router>
@@ -67,6 +68,8 @@ const App = () => (
     </Router>
   );
 
+//   LOOK AT FIREBASE FOR ERROR 
+// App.firebase = withFirebase
 
 
-  export default withAuthentication(App);
+export default withAuthentication(App);
