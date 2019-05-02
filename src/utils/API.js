@@ -2,21 +2,33 @@ import axios from "axios";
 const BASEURL = "";
 
 export default {
-  // Queries Google Books API
-    searchBooks: function(query) {
-        return axios.get(BASEURL + query );
+    // Queries Heroku App API
+    //Jennifer
+    saveTruck(truck) {
+        return axios.post("https://cors-anywhere.herokuapp.com/https://api-food-truck.herokuapp.com/api/trucks", truck)
     },
-    getAllTrucks(){
+    getAllTrucks() {
         return axios.get(BASEURL + "/api/trucks")
     },
-    saveTruck(truck){
-        return axios.post("/api/trucks", truck)
-    },
-    getTruck: function (id){
+    getTruck: function (id) {
         return axios.get(`/api/trucks/${id}`)
     },
-    approveTruck: function (company){
-        return axios.delete("/api/trucks/", {data: {name: company} })
+    approveTruck: function (company) {
+        return axios.delete("/api/trucks/", { data: { businessName: company } })
     },
-   
+
+    //Jennifer
+    //Cyrus
+    getAllTrucksOpenApplication() {
+        return axios.get(BASEURL + "/api/trucks")
+    },
+    getAllTrucksApproved() {
+        return axios.get(BASEURL + "/api/trucks")
+    },
+    getAllTrucksDenied() {
+        return axios.get(BASEURL + "/api/trucks")
+    },
+
+    //Cyrus
+
 };

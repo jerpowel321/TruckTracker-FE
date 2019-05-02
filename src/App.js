@@ -14,6 +14,7 @@ import AdminDeniedApp from "./pages/admin/deniedApplications";
 import AdminApprovedApp from "./pages/admin/approvedApplications";
 import User from "./pages/user";
 import Trucker from "./pages/trucker";
+import TruckerApplication from "./pages/trucker/Food Truck Application";
 
 // Auth section
 import Navigation from './pages/Signin/Navigation';
@@ -63,6 +64,7 @@ const App = () => (
         <Route exact path="/admin/view/applications/approved" component={AdminApprovedApp} />
         <Route exact path="/user/dashboard" component={User} />
         <Route exact path="/trucker/dashboard" component={Trucker} />
+        <Route exact path="/trucker/application" component={TruckerApplication} />
         <Route exact path="*" component={Splash} />
       </Switch>
     </Router>
