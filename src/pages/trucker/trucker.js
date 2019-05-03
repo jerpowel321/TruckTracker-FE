@@ -151,24 +151,22 @@ class Trucker extends React.Component {
             </div>
            
 
-// =======
-//            <input
-//             id="name"
-//             onChange={this.handleInputChange}
-//             />
-//             <button
-//             onClick={() => {this.post(this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude)}}
-//             >
-//             Submit
-//             </button>
-//             <button
-//             onClick={() => {this.toggleState(); this.update();}}
-//             >
-//             Update location
-//             </button>
+{/*             <input
+            id="name"
+            onChange={this.handleInputChange}
+            />
+            <button
+            onClick={() => {this.post(this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude)}}
+            >
+            Submit
+            </button>
+            <button
+            onClick={() => {this.toggleState(); this.update();}}
+            >
+            Update location
+            </button> */}
             
         
-// >>>>>>> master
         {
           window.navigator.geolocation.getCurrentPosition(
             position => this.setState({position: position}),
@@ -212,7 +210,7 @@ class Trucker extends React.Component {
 //   //         </div>
 //   //         : <div>Getting the location data&hellip; </div>;
 // >>>>>>> master
-//   }
+  }
 }
 
 export default Trucker;
