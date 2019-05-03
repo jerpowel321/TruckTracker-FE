@@ -34,7 +34,14 @@ class Trucker extends React.Component {
     name: "",
     position: {},
     active: false,
-    bool: true
+    bool: true,
+    bgColor: 'red'
+  }
+
+  handleButtonClick() {
+    this.setState({
+      bgColor: 'blue'
+    })
   }
 
   // componentDidMount(){
@@ -143,8 +150,8 @@ class Trucker extends React.Component {
 
         <div className="text-center">
         <button
-          className="redBg text-white updateLocation hvr-grow-shadow"
-          onClick={() => { this.toggleState(); this.update(); }}
+          className="redBg text-white updateLocation hvr-grow-shadow "
+          onClick={() => { this.toggleState(); this.update(); this.handleButtonClick();}}
         >
           Update location
             </button>

@@ -5,9 +5,22 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../../constants/routes';
 
 const PasswordForgetPage = () => (
-  <div>
-    <h1>PasswordForget</h1>
-    <PasswordForgetForm />
+  <div className="brickBackground">
+    <nav class="navbar navbar-expand-lg navbar-light goldBg redText">
+      <img src="https://cors-anywhere.herokuapp.com/https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      </div>
+    </nav>
+    <div className="d-flex justify-content-center">
+      <div class="card w-50 text-center bg-white signInCard">
+        <div class="card-body bg-white">
+          <div>
+            <h1 className="redText font">PasswordForget</h1>
+            <PasswordForgetForm />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 );
 
@@ -48,6 +61,8 @@ class PasswordForgetFormBase extends Component {
     const isInvalid = email === '';
 
     return (
+
+
       <form onSubmit={this.onSubmit}>
         <input
           name="email"
@@ -62,6 +77,7 @@ class PasswordForgetFormBase extends Component {
 
         {error && <p>{error.message}</p>}
       </form>
+
     );
   }
 }

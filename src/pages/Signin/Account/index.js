@@ -6,6 +6,7 @@ import PasswordChangeForm from '../PasswordChange';
 
 
 
+
 const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
