@@ -13,14 +13,14 @@ var substate
 
 // if (!app.apps.length) {
 
-// var config = {
-//   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
-//     authDomain: "truck-app.appapp.com",
-//     databaseURL: "https://truck-app.appio.com",
-//     projectId: "truck-app",
-//     storageBucket: "truck-app.appspot.com",
-//     messagingSenderId: "810502901238"
-// };
+  // var config = {
+  //   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
+  //     authDomain: "truck-app.appapp.com",
+  //     databaseURL: "https://truck-app.appio.com",
+  //     projectId: "truck-app",
+  //     storageBucket: "truck-app.appspot.com",
+  //     messagingSenderId: "810502901238"
+  // };
 
 //     app.initializeApp(config);
 // }
@@ -28,7 +28,7 @@ const db = app.database();
 
 class Trucker extends React.Component {
 
-
+  
 
   state = {
     name: "",
@@ -45,20 +45,19 @@ class Trucker extends React.Component {
   update() {
     let interval;
     const updater = () => {
-      if (this.state.active === true) {
+      if(this.state.active === true){
         window.navigator.geolocation.getCurrentPosition(
-          position => this.setState({ position: position }),
+          position => this.setState({position: position}),
           err => console.log(err)
         )
-
+        
         console.log("I work")
         db.ref("-LduGXztZPLOWaQjzbq").child("lat").set(this.state.position.coords.latitude)
         db.ref("-LduGXztZPLOWaQjzbq").child("lng").set(this.state.position.coords.longitude)
       }
-
-      if (this.state.bool === true) {
-        interval = setInterval(updater, 300000)
-        this.setState({ bool: false })
+      if(this.state.bool === true){
+      interval = setInterval(updater, 300000)
+      this.setState({bool: false})
       }
     }
     updater();
@@ -69,8 +68,8 @@ class Trucker extends React.Component {
   };
 
   post = (name, lat, lng) => {
-    if (name && lat && lng) {
-      db.ref().push({
+    if(name && lat && lng) {
+    db.ref().push({
         name: name,
         lat: lat,
         lng: lng
@@ -78,19 +77,53 @@ class Trucker extends React.Component {
     }
     console.log(this.state)
   }
-  toggleState() {
-    if (this.state.active === false) {
-      this.setState({ active: true })
+/////////////////////////////////////////////////
+////// CHECK ID PLACEMENT LATER
+  newPost = (id, name, lat, lng) => {
+    if(id && name && lat && lng) {
+      db.ref().child("trucks").child(id).push({
+        name: name,
+        lat: lat,
+        lng: lng
+      })
     }
-    else {
-      this.setState({ active: false })
+  }
+
+  newUpdate() {
+    let interval;
+    const updater = (id) => {
+      if(this.state.active === true){
+        window.navigator.geolocation.getCurrentPosition(
+          position => this.setState({position: position}),
+          err => console.log(err)
+        )
+        
+        console.log("I work")
+        db.ref().child("trucks").child(id).child("lat").set(this.state.position.coords.latitude)
+        db.ref().child("trucks").child(id).child("lng").set(this.state.position.coords.longitude)
+      }
+      if(this.state.bool === true){
+      interval = setInterval(updater, 300000)
+      this.setState({bool: false})
+      }
+    }
+    updater();
+  }
+/////////////////////////////////////////////////
+
+  toggleState(){
+    if(this.state.active === false){
+      this.setState({active: true})
+    }
+    else{
+      this.setState({active: false})
     }
     console.log(this.state.active)
   }
 
   render() {
 
-    return (
+    return(
       <div>
         <Nav 
         home="/trucker/dashboard"
@@ -118,9 +151,27 @@ class Trucker extends React.Component {
             </div>
            
 
+// =======
+//            <input
+//             id="name"
+//             onChange={this.handleInputChange}
+//             />
+//             <button
+//             onClick={() => {this.post(this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude)}}
+//             >
+//             Submit
+//             </button>
+//             <button
+//             onClick={() => {this.toggleState(); this.update();}}
+//             >
+//             Update location
+//             </button>
+            
+        
+// >>>>>>> master
         {
           window.navigator.geolocation.getCurrentPosition(
-            position => this.setState({ position: position }),
+            position => this.setState({position: position}),
             err => console.log(err)
           )
         }
@@ -144,7 +195,24 @@ class Trucker extends React.Component {
     //         : <div>Getting the location data&hellip; </div>;
   
    
-  }
+// =======
+//   //   return !this.props.isGeolocationAvailable
+//   //     ? <div>Your browser does not support Geolocation</div>
+//   //       : this.props.coords
+//   //         ? <div>
+//   //           <input
+//   //           id="name"
+//   //           onChange={this.handleInputChange}
+//   //           />
+//   //           <button
+//   //           onClick={() => {this.post(this.state.name, this.props.coords.lat, this.props.coords.lat)}}
+//   //           >
+//   //           Submit
+//   //           </button>
+//   //         </div>
+//   //         : <div>Getting the location data&hellip; </div>;
+// >>>>>>> master
+//   }
 }
 
 export default Trucker;
