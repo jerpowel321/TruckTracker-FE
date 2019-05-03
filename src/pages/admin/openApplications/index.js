@@ -9,7 +9,7 @@ class Admin extends Component {
   state = {
     truckData: []
   }
-  
+
   componentDidMount() {
     API.getAllTrucks()
       .then(res => {
@@ -21,24 +21,28 @@ class Admin extends Component {
   //   // API.getTruck(1)
   //   //   .then(res => console.log(res));
 
-    approveApplication = id => {
-      API.updateTruck(id, true, false)
-        .then(res => {
-          console.log(res)
-
+  approveApplication(id) {
+    API.updateTruck(id, true, false)
+      .then(res => {
+        console.log(res)
+        this.setState({
+          approved: true,
+          applicationOPen: false
         })
-    }
+      });
+  }
 
-    closeApplication = id => {
-      API.updateTruck(id, false, false)
+  closeApplication = id => {
+    API.updateTruck(id, false, false)
       .then(res => {
         console.log(res)
       })
-    }
-  
+  }
+
 
 
   render() {
+    console.log(this.state.truckData)
     return (
       <div class="brickBackground">
         <Nav
@@ -49,8 +53,21 @@ class Admin extends Component {
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>
-                <div className=""  data-toggle="modal" data-target={`#exampleModalCenter${truck.id}`}>
+                <div className="" data-toggle="modal" data-target={`#exampleModalCenter${truck.id}`}>
+                  <div class="card">
+                    <div class="card-header">
+                      <h1>{truck.businessName}</h1>
+                    </div>
+                    <div class="card-body">
+                      <blockquote class="blockquote mb-0">
+                        Owner: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
+                        Phone: {truck.phone}<br />
+                        Email: {truck.email}
+                      </blockquote>
+                    </div>
+                  </div>
                   <h1>{truck.businessName}</h1>
+
                 </div>
                 <div className="modal fade" id={`exampleModalCenter${truck.id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div className="modal-dialog modal-dialog-centered" role="document">
@@ -62,7 +79,6 @@ class Admin extends Component {
                         </button>
                       </div>
                       <div className="modal-body">
-                        Business Name: {truck.businessName}<br />
                         Website: <a href={`${truck.website}`} target="_blank">Link</a><br />
                         Cuisine: {truck.cuisine}<br />
                         Menu: <a href={`${truck.menu}`} target="_blank">Link</a><br />
@@ -73,8 +89,8 @@ class Admin extends Component {
                       </div>
                       <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary approve" onClick={() => this.approveApplication(this.id)}>Approve</button>
-                        <button type="button" className="btn btn-primary close" onClick={() => this.closeApplication(this.id)}>Reject</button>
+                        <button type="button" className="btn btn-primary approve" onClick={() => this.approveApplication(truck.id)}>Approve</button>
+                        <button type="button" className="btn btn-primary close" onClick={() => this.closeApplication(truck.id)}>Reject</button>
                       </div>
                     </div>
                   </div>
