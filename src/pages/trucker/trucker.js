@@ -108,8 +108,8 @@ class Trucker extends React.Component {
         )
 
         console.log("I work")
-        db.ref().child("trucks").child(id).child("lat").set(this.state.position.coords.latitude)
-        db.ref().child("trucks").child(id).child("lng").set(this.state.position.coords.longitude)
+        db.ref().child("trucks").child(id.replace(".", "")).child("lat").set(this.state.position.coords.latitude)
+        db.ref().child("trucks").child(id.replace(".", "")).child("lng").set(this.state.position.coords.longitude)
       }
       if (this.state.bool === true) {
         interval = setInterval(updater, 300000)
