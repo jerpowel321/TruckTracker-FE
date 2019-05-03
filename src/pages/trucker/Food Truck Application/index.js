@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Nav from "../../../components/admin/navToHome";
+import Nav from "../../../components/Nav";
 import API from "../../../utils/API"
 import 'firebase/auth';
 
@@ -58,7 +58,7 @@ class Admin extends Component {
 			<div className="brickBackground">
 
 				<Nav
-					currentPage="Food Truck Application"
+					 home="/trucker/dashboard"
 				/>
 				<div className="truckApplication">
 					<form>

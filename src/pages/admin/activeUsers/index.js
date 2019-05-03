@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Nav from "../../../components/admin/navToHome";
+import Nav from "../../../components/Nav";
 import API from "../../../utils/API"
 
 class Admin extends Component {
@@ -10,6 +10,7 @@ class Admin extends Component {
       <div className="brickBackground">
 
         <Nav
+          home="/admin/dashboard"
           currentPage="Active Users"
         />
         <div className="truckApplication">

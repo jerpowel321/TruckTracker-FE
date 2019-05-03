@@ -4,6 +4,8 @@ import GoogleMapReact from 'google-map-react';
 // import * as app from "app"
 import app from 'firebase/app';
 // import {geolocated} from 'react-geolocated';
+import Container from "../../components/admin/container"
+
 
 var substate
 
@@ -90,7 +92,13 @@ class Trucker extends React.Component {
 
     return (
       <div>
-        <input
+        <Nav 
+        home="/trucker/dashboard"
+        firstPage="/trucker/application"
+        firstPageName="Application"
+        />
+      <div className="brickBackground">
+        {/* <input
           id="name"
           onChange={this.handleInputChange}
         />
@@ -98,13 +106,17 @@ class Trucker extends React.Component {
           onClick={() => { this.post(this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude) }}
         >
           Submit
-            </button>
+            </button> */}
+
+        <div className="text-center">
         <button
+          className="redBg text-white updateLocation hvr-grow-shadow"
           onClick={() => { this.toggleState(); this.update(); }}
         >
           Update location
             </button>
-
+            </div>
+           
 
         {
           window.navigator.geolocation.getCurrentPosition(
@@ -112,6 +124,7 @@ class Trucker extends React.Component {
             err => console.log(err)
           )
         }
+      </div>
       </div>
     )
     //   return !this.props.isGeolocationAvailable
@@ -129,6 +142,8 @@ class Trucker extends React.Component {
     //           </button>
     //         </div>
     //         : <div>Getting the location data&hellip; </div>;
+  
+   
   }
 }
 

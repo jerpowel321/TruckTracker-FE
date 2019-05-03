@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Nav from "../../../components/admin/navToHome";
+import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API";
 
@@ -26,14 +26,11 @@ class Admin extends Component {
       return (
         <div class="brickBackground">
           <Nav 
+          home="/admin/dashboard"
           currentPage="Approved Applications"
           />
           <h1>Whats UP</h1>
-          {this.state.truckData.map (truck => {
-            return (
-              <h1>{truck.name}</h1>
-            )
-          })}
+    
 
         </div>)
     }
