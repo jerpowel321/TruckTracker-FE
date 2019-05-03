@@ -21,7 +21,8 @@ export default {
 
     //Cyrus
     updateTruck: function (companyId, approved, applicationOpen){
-        return axios.put(BASEURL + "/api/trucks", {data: {id: companyId, approved: approved, applicationOpen: applicationOpen}})
+        console.log("im in the utilities")
+        return axios.put(BASEURL + `/api/trucks/${companyId}`, {id: companyId, approved: approved, applicationOpen: applicationOpen})
     }
 
 
