@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Nav from "../../../components/admin/navToHome";
+import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API"
 import * as firebase from "firebase"
@@ -47,6 +47,7 @@ class Admin extends Component {
       return (
         <div className="brickBackground">
           <Nav 
+          home="/admin/dashboard"
           currentPage="Registered Users"
           />
         <Container>

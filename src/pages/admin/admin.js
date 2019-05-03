@@ -1,35 +1,24 @@
 import React, { Component } from "react";
-import Nav from "../../components/admin/nav";
+import Nav from "../../components/Nav";
 import Card from "../../components/admin/card";
 
 import "./style.css";
 
 class Admin extends Component {
 
-  // loadActiveTrucks = () => {
-  //   <div>This is a test to see if anything comes up</div>
-  // };
-
-  // loadBooks = () => {
-  //   API.getBooks()
-  //     .then(res =>
-  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
-  // loadBooks = () => {
-  //   API.getBooks()
-  //     .then(res =>
-  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
 
   render() {
     return (
       <div className="adminDashboard">
-        <Nav />
+        <Nav 
+        home="/admin/dashboard"
+        firstPage="/admin/view/registered/users"
+        firstPageName="Users"
+        secondPage="/admin/view/registered/trucks"
+        secondPageName="Trucks"
+        thirdPage="/admin/view/applications/open"
+        thirdPageName="Open Applications"/>
+
         <div className="container adminPage">
           <Card
             image="https://previews.123rf.com/images/jemastock/jemastock1710/jemastock171011501/88358216-food-truck-icon-image-vector-illustration-design-black-and-white.jpg"
