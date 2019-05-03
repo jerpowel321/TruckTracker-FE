@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Nav from "../../../components/admin/navToHome";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API"
+import { transformFileSync } from "@babel/core";
 
 // Cyrus Page Dont Touch
 
@@ -25,9 +26,15 @@ class Admin extends Component {
     API.updateTruck(id, true, false)
       .then(res => {
         console.log(res)
+        let truckData = [...this.state.truckData]
+        truckData.forEach(truck => {
+          if (truck.id === id){
+            truck.approved = true;
+            truck.applicationOpen = false;
+          }
+        })
         this.setState({
-          approved: true,
-          applicationOPen: false
+          truckData
         })
       });
   }
@@ -36,7 +43,17 @@ class Admin extends Component {
     API.updateTruck(id, false, false)
       .then(res => {
         console.log(res)
-      })
+        let truckData = [...this.state.truckData]
+        truckData.forEach(truck => {
+          if (truck.id === id){
+            truck.approved = false;
+            truck.applicationOpen = false;
+          }
+        })
+        this.setState({
+          truckData
+        })
+      });
   }
 
 
@@ -66,8 +83,6 @@ class Admin extends Component {
                       </blockquote>
                     </div>
                   </div>
-                  <h1>{truck.businessName}</h1>
-
                 </div>
                 <div className="modal fade" id={`exampleModalCenter${truck.id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div className="modal-dialog modal-dialog-centered" role="document">
