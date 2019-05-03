@@ -23,26 +23,28 @@ class Admin extends Component {
   //   //   .then(res => console.log(res));
 
   approveApplication(id) {
-    API.updateTruck(id, true, false)
-      .then(res => {
-        console.log(res)
-        let truckData = [...this.state.truckData]
-        truckData.forEach(truck => {
-          if (truck.id === id){
-            truck.approved = true;
-            truck.applicationOpen = false;
-          }
-        })
-        this.setState({
-          truckData
-        })
-      });
-  }
+    API.updateTruck(id)
+    .then(res => {
+      console.log(res)
+      console.log("z")
+      let truckData = [...this.state.truckData]
+      truckData.forEach(truck => {
+        if (truck.id === id){
+          truck.approved = true;
+          truck.applicationOpen = false;
+        }
+      })
+      this.setState({
+        truckData
+      })
+    })
+  };
 
   closeApplication = id => {
-    API.updateTruck(id, false, false)
+    API.updateTruck(id)
       .then(res => {
         console.log(res)
+        console.log("banana")
         let truckData = [...this.state.truckData]
         truckData.forEach(truck => {
           if (truck.id === id){
@@ -66,16 +68,16 @@ class Admin extends Component {
           currentPage="Open Applications"
         />
         <Container >
-          <h1>Whats UP</h1>
+          <h1>Open Applications</h1>
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>
                 <div className="" data-toggle="modal" data-target={`#exampleModalCenter${truck.id}`}>
-                  <div class="card">
-                    <div class="card-header">
-                      <h1>{truck.businessName}</h1>
+                  <div class="card w-100 text-white">
+                    <div class="card-header bg-dark">
+                      <h2>{truck.businessName}</h2>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body bg-secondary">
                       <blockquote class="blockquote mb-0">
                         Owner: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
                         Phone: {truck.phone}<br />
@@ -104,8 +106,8 @@ class Admin extends Component {
                       </div>
                       <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary approve" onClick={() => this.approveApplication(truck.id)}>Approve</button>
-                        <button type="button" className="btn btn-primary close" onClick={() => this.closeApplication(truck.id)}>Reject</button>
+                        <button type="button" className="btn btn-primary approve" data-dismiss="modal" onClick={() => this.approveApplication(truck.id)}>Approve</button>
+                        <button type="button" className="btn btn-danger reject" data-dismiss="modal" onClick={() => this.closeApplication(truck.id)}>Reject</button>
                       </div>
                     </div>
                   </div>
