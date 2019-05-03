@@ -90,12 +90,10 @@ class Trucker extends React.Component {
   ////// CHECK ID PLACEMENT LATER
   newPost = (id, name, lat, lng) => {
     if (id && name && lat && lng) {
-      db.ref().child("trucks").push({
-        id: {
+      db.ref().child("trucks").child(id.replace(".", "")).set({
           name: name,
           lat: lat,
           lng: lng
-        }
       })
     }
   }
