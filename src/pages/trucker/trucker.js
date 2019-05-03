@@ -5,11 +5,23 @@ import GoogleMapReact from 'google-map-react';
 import app from 'firebase/app';
 // import {geolocated} from 'react-geolocated';
 import Container from "../../components/admin/container"
+import { AuthUserContext, withAuthorization } from '../Signin/Session';
 
 
 var substate
 
 
+const AccountPage = () => (
+  <AuthUserContext.Consumer>
+    {authUser => (
+      <div>
+        {console.log("I am this user" + authUser.email)}
+      </div>
+    )}
+    </AuthUserContext.Consumer>
+    );
+
+ 
 
 // if (!app.apps.length) {
 
@@ -125,6 +137,7 @@ class Trucker extends React.Component {
 
     return(
       <div>
+        {  AccountPage ()}
         <Nav 
         home="/trucker/dashboard"
         firstPage="/trucker/application"
@@ -213,7 +226,10 @@ class Trucker extends React.Component {
   }
 }
 
-export default Trucker;
+const condition = authUser => !!authUser;
+    
+export default withAuthorization(condition)(Trucker);
+
 // export default geolocated({
 //   positionOptions: {
 //     enableHighAccuracy: false,
