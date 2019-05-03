@@ -79,8 +79,10 @@ class User extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div>
-        <Nav />
+      <div className="brickBackground">
+        <Nav 
+        home="/user/dashboard"
+        />
         <div style={{ height: '50vh', width: '50%', marginLeft: "25%", marginTop: "5%" }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: "AIzaSyCC9CsEo4ZXBb-6M2d9TfG8DgvcTXXcEo0" }}

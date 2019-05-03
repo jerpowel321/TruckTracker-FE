@@ -48,9 +48,9 @@ const NavigationNonAuth = () => (
     <a class="navbar-brand font redText mr-5">Logo</a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item active">
+        {/* <li class="nav-item active">
           <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   </nav>
