@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Nav from "../../../components/admin/navToHome";
+import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API"
 
@@ -23,6 +23,7 @@ class Admin extends Component {
       return (
         <div class="brickBackground">
           <Nav 
+          home="/admin/dashboard"
           currentPage="Registered Trucks"
           />
           <Container>
@@ -32,8 +33,8 @@ class Admin extends Component {
                 <div  data-toggle="modal" data-target={`#exampleModalCenter${truck.id}`}>
                 </div>
                       <ul>
-                      <h1 className="font red-text">{truck.businessName}</h1>
-                      <h3>Businiess Information</h3>
+                      <h1 className="font redText">{truck.businessName}</h1>
+                      <h3 className="redText">Businiess Information</h3>
                       <h5>
                       {truck.cuisine}
                         {truck.menu}
@@ -42,7 +43,7 @@ class Admin extends Component {
                       <h5>Name: {truck.firstName} {truck.middleInitial}
                         {truck.lastName} <br />
                           Phone: {truck.phone} <br />
-                          Address:  {truck.address} {truck.address2} {truck.city} {truck.state} {truck.zip}
+                          Address:  {truck.address} {truck.address2} {truck.city} {truck.state} {truck.zip}<br />
                           Email: {truck.email}
                       </h5>
                      
