@@ -1,3 +1,4 @@
+import { AuthUserContext, withAuthorization } from '../../Signin/Session';
 import React, { Component } from "react";
 import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
@@ -19,7 +20,7 @@ if (!firebase.apps.length) {
 }
 const db = firebase.database()
 
-class Admin extends Component {
+class RegisteredUsers extends Component {
 
   state = {
     userData: []
@@ -63,7 +64,9 @@ class Admin extends Component {
   
   };
   
-  export default Admin;
+  const condition = authUser => !!authUser;
+    
+  export default withAuthorization(condition)(RegisteredUsers);
 
 
 
