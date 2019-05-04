@@ -8,30 +8,6 @@ import Container from "../../components/admin/container"
 import { AuthUserContext, withAuthorization } from '../Signin/Session';
 import SignOutButton from '../Signin/SignOut';
 
-
-var substate
-
-
-
-// const AccountPage = () => (
-
-// );
-
-
-
-// if (!app.apps.length) {
-
-// var config = {
-//   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
-//     authDomain: "truck-app.appapp.com",
-//     databaseURL: "https://truck-app.appio.com",
-//     projectId: "truck-app",
-//     storageBucket: "truck-app.appspot.com",
-//     messagingSenderId: "810502901238"
-// };
-
-//     app.initializeApp(config);
-// }
 const db = app.database();
 
 class Trucker extends React.Component {
@@ -47,11 +23,6 @@ class Trucker extends React.Component {
     receivedEmail: false
   }
 
-  // componentDidMount(){
-  //   while(this.state.active === true){
-  //     setTimeout(() => this.update(), 1000 * 300)
-  //   }
-  // }
   update() {
     let interval;
     const updater = () => {
@@ -99,9 +70,9 @@ class Trucker extends React.Component {
     }
   }
 
-  newUpdate() {
+  newUpdate(id, name, lat, lng) {
     let interval;
-    const updater = (id) => {
+    const updater = () => {
       if (this.state.active === true) {
         window.navigator.geolocation.getCurrentPosition(
           position => this.setState({ position: position }),
@@ -109,8 +80,7 @@ class Trucker extends React.Component {
         )
 
         console.log("I work")
-        db.ref().child("trucks").child(id.replace(".", "")).child("lat").set(this.state.position.coords.latitude)
-        db.ref().child("trucks").child(id.replace(".", "")).child("lng").set(this.state.position.coords.longitude)
+        this.newPost(id, name, lat, lng)
       }
       if (this.state.bool === true) {
         interval = setInterval(updater, 300000)
@@ -149,9 +119,6 @@ class Trucker extends React.Component {
         <AuthUserContext.Consumer>
           {authUser => (
             this.handleAuthChange(authUser.email)
-            // <div>
-            //   {console.log("sajeel" + authUser.email)}
-            // </div>
           )}
         </AuthUserContext.Consumer>
         <Nav
@@ -176,7 +143,7 @@ class Trucker extends React.Component {
           <div className="text-center">
             <button
               className="redBg text-white updateLocation hvr-grow-shadow"
-              onClick={() => { this.toggleState(); this.newUpdate(); }}
+              onClick={() => { this.toggleState(); this.newUpdate(this.state.email, "Cyrus' Free Candy Van", this.state.position.coords.latitude, this.state.position.coords.longitude); console.log(this.state); }}
             >
               Update location
             </button>
@@ -188,22 +155,6 @@ class Trucker extends React.Component {
           </div>
 
 
-          {/*             <input
-            id="name"
-            onChange={this.handleInputChange}
-            />
-            <button
-            onClick={() => {this.post(this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude)}}
-            >
-            Submit
-            </button>
-            <button
-            onClick={() => {this.toggleState(); this.update();}}
-            >
-            Update location
-            </button> */}
-
-
           {
             window.navigator.geolocation.getCurrentPosition(
               position => this.setState({ position: position }),
@@ -213,56 +164,11 @@ class Trucker extends React.Component {
         </div>
       </div>
     )
-    //   return !this.props.isGeolocationAvailable
-    //     ? <div>Your browser does not support Geolocation</div>
-    //       : this.props.coords
-    //         ? <div>
-    //           <input
-    //           id="name"
-    //           onChange={this.handleInputChange}
-    //           />
-    //           <button
-    //           onClick={() => {this.post(this.state.name, this.props.coords.lat, this.props.coords.lat)}}
-    //           >
-    //           Submit
-    //           </button>
-    //         </div>
-    //         : <div>Getting the location data&hellip; </div>;
-
-
-    // =======
-    //   //   return !this.props.isGeolocationAvailable
-    //   //     ? <div>Your browser does not support Geolocation</div>
-    //   //       : this.props.coords
-    //   //         ? <div>
-    //   //           <input
-    //   //           id="name"
-    //   //           onChange={this.handleInputChange}
-    //   //           />
-    //   //           <button
-    //   //           onClick={() => {this.post(this.state.name, this.props.coords.lat, this.props.coords.lat)}}
-    //   //           >
-    //   //           Submit
-    //   //           </button>
-    //   //         </div>
-    //   //         : <div>Getting the location data&hellip; </div>;
-    // >>>>>>> master
+    
   }
 }
 
 const condition = authUser => !!authUser;
 
 export default withAuthorization(condition)(Trucker);
-
-// export default geolocated({
-//   positionOptions: {
-//     enableHighAccuracy: false,
-//   },
-//   userDecisionTimeout: 5000,
-// })(Trucker);
-
-
-
-
-
 
