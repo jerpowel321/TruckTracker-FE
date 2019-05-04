@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import { NavLink } from "react-router-dom";
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../../constants/routes';
 
@@ -9,6 +9,7 @@ const PasswordForgetPage = () => (
     <nav class="navbar navbar-expand-lg navbar-light goldBg redText">
       <img src="https://cors-anywhere.herokuapp.com/https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <NavLink className="font redText float-right" to="/">Sign In</NavLink>
       </div>
     </nav>
     <div className="d-flex justify-content-center">
@@ -74,7 +75,7 @@ class PasswordForgetFormBase extends Component {
           placeholder=""
         />
         <div className="text-center">
-        <button className="redBg text-white hvr-grow-shadow border border-dark mt-2 mb-2 p-1" disabled={isInvalid} type="submit">
+        <button className="redBg text-white hvr-grow-shadow border border-dark mt-2 mb-2 p-2" disabled={isInvalid} type="submit">
           <b>Email Me Password Reset Link</b>
         </button>
         </div>
@@ -87,8 +88,8 @@ class PasswordForgetFormBase extends Component {
 }
 
 const PasswordForgetLink = () => (
-  <p className="mr-5">
-    <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
+  <p className="mr-5 p-1 darkbackground">
+    <Link to={ROUTES.PASSWORD_FORGET}><b>Forgot Password?</b></Link>
   </p>
 );
 

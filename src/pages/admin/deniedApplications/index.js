@@ -1,10 +1,12 @@
+import { AuthUserContext, withAuthorization } from '../../Signin/Session';
 import React, { Component } from "react";
 import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import Chart from "../../../components/admin/chart";
 import { Bar, Line, Pie } from "react-chartjs-2";
+import SignOutButton from '../../Signin/SignOut';
 
-class Admin extends Component {
+class DeniedApplication extends Component {
 
   render() {
     return (
@@ -12,6 +14,7 @@ class Admin extends Component {
         <Nav
           home="/admin/dashboard"
           currentPage="Denied Applications"
+          signOut={<SignOutButton />}
         />
 
         <Chart />
@@ -22,4 +25,6 @@ class Admin extends Component {
 
 };
 
-export default Admin;
+const condition = authUser => !!authUser;
+    
+export default withAuthorization(condition)(DeniedApplication);

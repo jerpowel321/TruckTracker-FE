@@ -1,9 +1,10 @@
+import { AuthUserContext, withAuthorization } from '../../Signin/Session';
 import React, { Component } from "react";
 import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API"
 import * as firebase from "firebase"
-
+import SignOutButton from '../../Signin/SignOut';
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -19,7 +20,7 @@ if (!firebase.apps.length) {
 }
 const db = firebase.database()
 
-class Admin extends Component {
+class RegisteredUsers extends Component {
 
   state = {
     userData: []
@@ -50,6 +51,7 @@ class Admin extends Component {
           <Nav 
           home="/admin/dashboard"
           currentPage="Registered Users"
+          signOut={<SignOutButton />}
           />
         <Container>
           <h1>{this.state.userData.length}</h1>
@@ -62,7 +64,9 @@ class Admin extends Component {
   
   };
   
-  export default Admin;
+  const condition = authUser => !!authUser;
+    
+  export default withAuthorization(condition)(RegisteredUsers);
 
 
 

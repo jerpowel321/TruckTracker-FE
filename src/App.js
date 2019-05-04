@@ -8,7 +8,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Admin from "./pages/admin";
 import AdminTrucks from "./pages/admin/registeredTrucks";
 import AdminUsers from "./pages/admin/registeredUsers";
-import AdminActiveUsers from "./pages/admin/activeUsers";
 import AdminOpenApp from "./pages/admin/openApplications";
 import AdminDeniedApp from "./pages/admin/deniedApplications";
 import AdminApprovedApp from "./pages/admin/approvedApplications";
@@ -38,6 +37,7 @@ const App = () => (
       
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
       <Route exact path={ROUTES.SIGN_IN} component={SignInPage} />
+
       <Route
         path={ROUTES.PASSWORD_FORGET}
         component={PasswordForgetPage}
@@ -52,7 +52,6 @@ const App = () => (
    
         <Route exact path="/admin/view/registered/trucks" component={AdminTrucks} />
         <Route exact path="/admin/view/registered/users" component={AdminUsers} />
-        <Route exact path="/admin/view/active/users" component={AdminActiveUsers} />
         <Route exact path="/admin/view/applications/open" component={AdminOpenApp} />
         <Route exact path="/admin/view/applications/denied" component={AdminDeniedApp} />
         <Route exact path="/admin/view/applications/approved" component={AdminApprovedApp} />
