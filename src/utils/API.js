@@ -23,6 +23,9 @@ export default {
     updateTruck: function (companyId, approved, applicationOpen){
         console.log("im in the utilities")
         return axios.put(BASEURL + `/api/trucks/${companyId}`, {id: companyId, approved: approved, applicationOpen: applicationOpen})
+    },
+    getOpenApplications: function (){
+        return axios.get(BASEURL + "/api/trucks/open")
     }
 
 
