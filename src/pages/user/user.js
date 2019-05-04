@@ -18,7 +18,7 @@ if (!firebase.apps.length) {
 }
 const db = firebase.database()
 
-const AnyReactComponent = ({ text }) => <img src="https://api-food-truck.herokuapp.com/assets/images/truck.png" style={{width: "20px"}}></img>;
+const AnyReactComponent = ({ text }) => <div><img src="https://api-food-truck.herokuapp.com/assets/images/truck.png" style={{width: "20px"}}></img><p style={{fontSize: "8px"}}>{text}</p></div>;
 
 
 

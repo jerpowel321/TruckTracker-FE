@@ -7,6 +7,7 @@ import app from 'firebase/app';
 import Container from "../../components/admin/container"
 import { AuthUserContext, withAuthorization } from '../Signin/Session';
 import SignOutButton from '../Signin/SignOut';
+import API from "./../../utils/API"
 
 const db = app.database();
 
@@ -20,7 +21,25 @@ class Trucker extends React.Component {
     active: false,
     bool: true,
     email: "",
-    receivedEmail: false
+    receivedEmail: false,
+  }
+
+  componentDidMount(){
+    {
+      window.navigator.geolocation.getCurrentPosition(
+        position => this.setState({ position: position }),
+        err => console.log(err)
+      )
+    }
+    console.log(this.state.position)
+    API.getAllTrucks().then((res) => {
+      console.log(res)
+      for(let i = 0; i < res.data.length; i++){
+        if(this.state.email === res.data[i].email){
+          this.setState({name: res.data[i].businessName})
+        }
+      }
+    })
   }
 
   update() {
@@ -62,7 +81,7 @@ class Trucker extends React.Component {
   ////// CHECK ID PLACEMENT LATER
   newPost = (id, name, lat, lng) => {
     if (id && name && lat && lng) {
-      db.ref().child("trucks").child(id.replace(".", "")).set({
+      db.ref().child("trucks").child(id.replace(".", "%20")).set({
           name: name,
           lat: lat,
           lng: lng
@@ -102,7 +121,6 @@ class Trucker extends React.Component {
   }
 
   handleAuthChange = (userEmail) => {
-    console.log("callback", userEmail)
     if(!this.state.receivedEmail){
       this.setState({
       email: userEmail,
@@ -143,12 +161,12 @@ class Trucker extends React.Component {
           <div className="text-center">
             <button
               className="redBg text-white updateLocation hvr-grow-shadow"
-              onClick={() => { this.toggleState(); this.newUpdate(this.state.email, "Cyrus' Free Candy Van", this.state.position.coords.latitude, this.state.position.coords.longitude); console.log(this.state); }}
+              onClick={() => { this.toggleState(); this.newUpdate(this.state.email, this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude); console.log(this.state); }}
             >
               Update location
             </button>
             <button
-              onClick={() => {this.newPost(this.state.email, "Cyrus' Free Candy Van", this.state.position.coords.latitude, this.state.position.coords.longitude); console.log(this.state.email) }}
+              onClick={() => {this.newPost(this.state.email, this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude); console.log(this.state.email) }}
             >
             new entry
             </button>
