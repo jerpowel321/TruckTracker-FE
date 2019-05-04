@@ -1,6 +1,6 @@
 import { AuthUserContext, withAuthorization } from '../../Signin/Session';
 import React, { Component } from "react";
-import Nav from "../../../components/admin/navToHome";
+import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API"
 import { transformFileSync } from "@babel/core";
@@ -66,7 +66,7 @@ class Admin extends Component {
     return (
       <div class="brickBackground">
         <Nav
-          currentPage="Open Applications"
+         home="/admin/dashboard"
           signOut={<SignOutButton />}
         />
         <Container >

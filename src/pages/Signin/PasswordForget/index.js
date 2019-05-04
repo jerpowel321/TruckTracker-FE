@@ -8,13 +8,13 @@ const PasswordForgetPage = () => (
   <div className="brickBackground">
     <nav class="navbar navbar-expand-lg navbar-light goldBg redText">
       <img src="https://cors-anywhere.herokuapp.com/https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      <NavLink className="font redText float-right" to="/">Sign In</NavLink>
+      <div className="float-right">
+      <NavLink className="font redText" to="/">Sign In</NavLink>
       </div>
     </nav>
     <div className="d-flex justify-content-center">
-      <div class="card w-50 text-center bg-white signInCard">
-        <div class="card-body bg-white">
+      <div class="signInCard text-center  signInCard">
+        <div class="card-body ">
           <div>
             <h1 className="redText largeTitles">Forgot Password</h1>
             <PasswordForgetForm />
@@ -65,7 +65,7 @@ class PasswordForgetFormBase extends Component {
 
 
       <form onSubmit={this.onSubmit}>
-       <b><label for="email" className="col-sm-5 col-form-label"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
+       <b><label for="email" className="col-sm-5 col-form-label text-white"><i class="fas fa-envelope-square mr-2 text-white"></i>Email Address</label></b>
         <input
           id="email"
           name="email"
@@ -76,7 +76,7 @@ class PasswordForgetFormBase extends Component {
         />
         <div className="text-center">
         <button className="redBg text-white hvr-grow-shadow border border-dark mt-2 mb-2 p-2" disabled={isInvalid} type="submit">
-          <b>Email Me Password Reset Link</b>
+          <b>Password Reset</b>
         </button>
         </div>
 
