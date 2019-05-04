@@ -1,3 +1,4 @@
+import { AuthUserContext, withAuthorization } from '../../Signin/Session';
 import React, { Component } from "react";
 import Nav from "../../../components/admin/navToHome";
 import Container from "../../../components/admin/container";
@@ -122,8 +123,9 @@ class Admin extends Component {
 
 };
 
-export default Admin;
-
+const condition = authUser => !!authUser;
+    
+export default withAuthorization(condition)(Admin);
 
 // {`#exampleModalCenter${truck.id}`}
 
