@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Nav from "../../../components/Nav";
 import API from "../../../utils/API"
 import 'firebase/auth';
+import SignOutButton from '../../Signin/SignOut';
+
 
 class Admin extends Component {
 	state = {
@@ -59,6 +61,7 @@ class Admin extends Component {
 
 				<Nav
 					 home="/trucker/dashboard"
+					 signOut={<SignOutButton />}
 				/>
 				<div className="truckApplication">
 					<form>

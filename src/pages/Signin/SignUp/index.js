@@ -7,7 +7,6 @@ import * as ROUTES from '../../../constants/routes';
 
 const SignUpPage = () => (
   <div>
-    <h1>SignUp</h1>
     <SignUpForm />
   </div>
 );
@@ -36,7 +35,7 @@ class SignUpFormBase extends Component {
       .then(authUser => {
         console.log(authUser)
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.TRUCKER);
       })
       .catch(error => {
         this.setState({ error });
@@ -67,7 +66,9 @@ class SignUpFormBase extends Component {
 
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <div className="whiteBackground">
+      <div className="noMarginContainer">
+      <form className="signUpForm" onSubmit={this.onSubmit}>
         <input
           name="username"
           value={username}
@@ -100,6 +101,8 @@ class SignUpFormBase extends Component {
 
         {error && <p>{error.message}</p>}
       </form>
+      </div>
+      </div>
     );
   }
 }

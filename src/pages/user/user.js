@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Nav from "../../components/Nav";
 import GoogleMapReact from 'google-map-react';
 import * as firebase from "firebase"
+import ResultsCard from "../../components/Results Card"
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -82,6 +83,8 @@ class User extends Component {
       <div className="brickBackground">
         <Nav 
         home="/user/dashboard"
+        firstPage="/"
+        firstPageName="Back"
         />
         <div style={{ height: '50vh', width: '50%', marginLeft: "25%", marginTop: "5%" }}>
           <GoogleMapReact
@@ -105,7 +108,9 @@ class User extends Component {
             
           </GoogleMapReact>
         </div>
-            
+        <div className="resultsContainer">
+        <ResultsCard />
+        </div>
 
       </div>
     );

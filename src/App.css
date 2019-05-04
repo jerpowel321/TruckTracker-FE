@@ -121,3 +121,31 @@
   margin: auto;
   margin-top: 10%;
 }
+.noMarginContainer {
+  width: 70%;
+  margin: auto;
+
+}
+.resultsContainer {
+  padding-top: 40px;
+  width: 70%;
+  margin: auto;
+
+}
+.locationSent {
+  background-color: green;
+}
+
+.signInCard {
+  width: 35%;
+  border-radius: 3px;
+  padding: 20px;
+  margin-top: 40px;
+}
+.logo {
+  height: 100px;
+  border: 2px ridge red;
+  padding: 1;
+  margin-left: auto;
+  margin-right: auto;
+}
