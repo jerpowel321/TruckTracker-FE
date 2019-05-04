@@ -50,7 +50,6 @@ class RegisteredUsers extends Component {
         <div className="brickBackground">
           <Nav 
           home="/admin/dashboard"
-          currentPage="Registered Users"
           signOut={<SignOutButton />}
           />
         <Container>

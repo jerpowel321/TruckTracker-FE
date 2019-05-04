@@ -4,6 +4,7 @@ import API from "../../../utils/API"
 import 'firebase/auth';
 import SignOutButton from '../../Signin/SignOut';
 import { AuthUserContext, withAuthorization } from '../../Signin/Session';
+import { Link, withRouter } from 'react-router-dom';
 
 class TruckerApplication extends Component {
 	state = {
@@ -128,16 +129,10 @@ class TruckerApplication extends Component {
 							</div>
 						</div>
 						<div class="form-row">
-							
-
 							<div class="form-group col-md-6">
 								<label for="inputEmail4">Email</label>
 								<input name="email" type="email" class="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleInputChange} /> 
 							</div>
-							
-							
-							
-							
 							<div class="form-group col-md-6">
 								<label for="inputPhoneNumber">Phone Number</label>
 								<input name="phoneNumber" type="number" class="form-control" id="inputPhoneNumber" placeholder="4155555" onChange={this.handleInputChange} />
@@ -219,11 +214,10 @@ class TruckerApplication extends Component {
 							</div>
 						</div>
 						<div class="text-center">
-							<button type="submit" class="btn redBg text-white hvr-grow-shadow" onClick={this.createNewTruck}>Submit</button>
+							<button type="submit" class="btn redBg text-white hvr-grow-shadow" onClick={this.createNewTruck}><Link to="/trucker/dashboard"> <b className="text-white">Submit</b></Link></button>
 						</div>
 					</form>
 				</div>
-
 			</div>
 		)
 	}

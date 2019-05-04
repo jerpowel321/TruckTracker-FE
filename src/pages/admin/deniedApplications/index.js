@@ -13,7 +13,6 @@ class DeniedApplication extends Component {
       <div className="">
         <Nav
           home="/admin/dashboard"
-          currentPage="Denied Applications"
           signOut={<SignOutButton />}
         />
 

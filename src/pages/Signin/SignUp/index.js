@@ -35,7 +35,7 @@ class SignUpFormBase extends Component {
       .then(authUser => {
         console.log(authUser)
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.TRUCKER);
+        this.props.history.push("trucker/application");
       })
       .catch(error => {
         this.setState({ error });
