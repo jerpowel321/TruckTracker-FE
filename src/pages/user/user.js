@@ -80,7 +80,7 @@ class User extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div className="brickBackground">
+      <div className="beachBackground">
         <Nav 
         home="/user/dashboard"
         firstPage="/"

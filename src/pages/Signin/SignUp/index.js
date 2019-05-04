@@ -67,8 +67,14 @@ class SignUpFormBase extends Component {
 
     return (
       <div className="whiteBackground">
+          <nav class="navbar navbar-expand-lg navbar-light goldBg redText">
+      <img src="https://cors-anywhere.herokuapp.com/https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      </div>
+    </nav>
       <div className="noMarginContainer">
       <form className="signUpForm" onSubmit={this.onSubmit}>
+      <h1 className="redText largeTitles text-center">Sign Up</h1>
         <input
           name="username"
           value={username}
