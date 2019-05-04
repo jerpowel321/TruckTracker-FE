@@ -57,7 +57,7 @@ class TruckerApplication extends Component {
 
 	render() {
 		return (
-			<div className="brickBackground">
+			<div className="test">
 
 				<Nav
 					 home="/trucker/dashboard"
@@ -69,7 +69,7 @@ class TruckerApplication extends Component {
 					<form>
 						<div class="form-row">
 							<div class="form-group col-md-12">
-								<h1 class="text-center font redText">Food Truck Application</h1>
+								<h1 class="text-center largeTitles redText">Food Truck Application</h1>
 							</div>
 						</div>
 						<div class="form-row">
@@ -213,7 +213,7 @@ class TruckerApplication extends Component {
 							</div>
 						</div>
 						<div class="text-center">
-							<button type="submit" class="btn redBg text-white" onClick={this.createNewTruck}>Submit</button>
+							<button type="submit" class="btn redBg text-white hvr-grow-shadow" onClick={this.createNewTruck}>Submit</button>
 						</div>
 					</form>
 				</div>

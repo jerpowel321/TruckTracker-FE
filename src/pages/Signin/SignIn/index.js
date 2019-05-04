@@ -21,16 +21,16 @@ const SignInPage = () =>
         </div>
       </nav>
       <div className="d-flex justify-content-center">
-        <div className="card w-50 bg-light  signInCard">
+        <div className="card bg-light  signInCard">
           <div className="card-body bg-light">
             <div className="" >
               <div className="">
                
                 <h1 className="redText largeTitles text-center mr-5">Sign In</h1>
                 <SignInForm />
-                <PasswordForgetLink />
-                <SignUpLink />
-                <button className="bg-warning p-2 hvr-grow-shadow w-25"><NavLink className=" redText" to="/user/dashboard">I am a User</NavLink></button>
+                <div className="text-center">
+                <button className="bg-warning p-2 hvr-grow-shadow p-2"><NavLink className=" redText" to="/user/dashboard"><b>I am a User</b></NavLink></button>
+                </div>
               </div>
             </div>
           </div>
@@ -78,31 +78,40 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
+      <div>
       <form className="mt-3" onSubmit={this.onSubmit}>
-       <h1 className="">Trucker & Admin</h1>
-        <b><label for="email" className="col-sm-4 col-form-label"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
+       <h2 className="font5 redText">Trucker & Admin</h2>
+        <b><label for="email" className="col-sm-5 col-form-label"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
         <input
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Enter Email Address"
-          id="email"
+          id="focusedInput"
         /> <br></br>
-        <b><label for="password" className="col-sm-4 col-form-label"><i class="fas fa-lock mr-2"></i>Password</label></b>
+        <b><label for="password" className="col-sm-5 col-form-label"><i class="fas fa-lock mr-2"></i>Password</label></b>
         <input
+          id="focusedInput"
           name="password"
           value={password}
           onChange={this.onChange}
           type="password"
           placeholder="Enter Password"
-          id="password"
+          // id="password"
         /><br></br>
-        <button className="redBg w-25 text-white p-2 hvr-grow-shadow m-2" disabled={isInvalid} type="submit">
-          Sign In
+        <div>
+        <PasswordForgetLink />
+        <button className="redBg w-25 text-white p-2 hvr-grow-shadow ml-5 mt-2" disabled={isInvalid} type="submit">
+        <b>Sign In</b>
         </button>
+        <SignUpLink />
+        </div>
         {error && <p>{error.message}</p>}
       </form>
+
+  
+    </div>
     );
   }
 }

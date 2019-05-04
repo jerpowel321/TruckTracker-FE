@@ -15,7 +15,7 @@ const PasswordForgetPage = () => (
       <div class="card w-50 text-center bg-white signInCard">
         <div class="card-body bg-white">
           <div>
-            <h1 className="redText font">PasswordForget</h1>
+            <h1 className="redText largeTitles">Forgot Password</h1>
             <PasswordForgetForm />
           </div>
         </div>
@@ -64,16 +64,20 @@ class PasswordForgetFormBase extends Component {
 
 
       <form onSubmit={this.onSubmit}>
+       <b><label for="email" className="col-sm-5 col-form-label"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
         <input
+          id="email"
           name="email"
           value={this.state.email}
           onChange={this.onChange}
           type="text"
-          placeholder="Email Address"
+          placeholder=""
         />
-        <button disabled={isInvalid} type="submit">
-          Reset My Password
+        <div className="text-center">
+        <button className="redBg text-white hvr-grow-shadow border border-dark mt-2 mb-2 p-1" disabled={isInvalid} type="submit">
+          <b>Email Me Password Reset Link</b>
         </button>
+        </div>
 
         {error && <p>{error.message}</p>}
       </form>
@@ -83,7 +87,7 @@ class PasswordForgetFormBase extends Component {
 }
 
 const PasswordForgetLink = () => (
-  <p >
+  <p className="mr-5">
     <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
   </p>
 );

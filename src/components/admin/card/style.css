@@ -1,4 +1,4 @@
-.card {
+.adminDashboard .card {
 	width: 18rem;	
 }
 .font {
@@ -53,8 +53,6 @@ i:hover {
 .largeTitles {
 	font-size: 50px;
 	font-family: 'Luckiest Guy', cursive;
+	text-shadow: 2px 2px black;
 }
 
-h3 {
-	font-size: 50px;
-}

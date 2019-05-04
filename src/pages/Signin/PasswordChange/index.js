@@ -42,6 +42,7 @@ class PasswordChangeForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
+      <b><label for="password" className="col-sm-6 col-form-label"><i class="fas fa-lock mr-2"></i>Change Password</label></b>
         <input
           name="passwordOne"
           value={passwordOne}
@@ -49,6 +50,8 @@ class PasswordChangeForm extends Component {
           type="password"
           placeholder="New Password"
         />
+        <div className="col-sm-6 "></div>
+        <div className="col-sm-6 ">
         <input
           name="passwordTwo"
           value={passwordTwo}
@@ -56,9 +59,12 @@ class PasswordChangeForm extends Component {
           type="password"
           placeholder="Confirm New Password"
         />
-        <button disabled={isInvalid} type="submit">
-          Reset My Password
+        </div><br></br>
+        <div className="text-center">
+        <button className="redBg text-white hvr-grow-shadow border border-dark p-2 mt-2" disabled={isInvalid} type="submit">
+         <b> Reset My Password</b>
         </button>
+        </div>
 
         {error && <p>{error.message}</p>}
       </form>
