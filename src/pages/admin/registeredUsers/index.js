@@ -3,7 +3,7 @@ import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API"
 import * as firebase from "firebase"
-
+import SignOutButton from '../../Signin/SignOut';
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -50,6 +50,7 @@ class Admin extends Component {
           <Nav 
           home="/admin/dashboard"
           currentPage="Registered Users"
+          signOut={<SignOutButton />}
           />
         <Container>
           <h1>{this.state.userData.length}</h1>

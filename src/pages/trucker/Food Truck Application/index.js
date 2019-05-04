@@ -128,10 +128,16 @@ class TruckerApplication extends Component {
 							</div>
 						</div>
 						<div class="form-row">
+							
+
 							<div class="form-group col-md-6">
 								<label for="inputEmail4">Email</label>
-								<input name="email" type="email" class="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleInputChange} />
+								<input name="email" type="email" class="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleInputChange} /> 
 							</div>
+							
+							
+							
+							
 							<div class="form-group col-md-6">
 								<label for="inputPhoneNumber">Phone Number</label>
 								<input name="phoneNumber" type="number" class="form-control" id="inputPhoneNumber" placeholder="4155555" onChange={this.handleInputChange} />
