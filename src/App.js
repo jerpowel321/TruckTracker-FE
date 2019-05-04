@@ -17,12 +17,10 @@ import Trucker from "./pages/trucker";
 import TruckerApplication from "./pages/trucker/Food Truck Application";
 
 // Auth section
-import Navigation from './pages/Signin/Navigation';
 
 import SignUpPage from './pages/Signin/SignUp';
 import SignInPage from './pages/Signin/SignIn';
 import PasswordForgetPage from './pages/Signin/PasswordForget';
-import HomePage from './pages/Signin/Home';
 import AccountPage from './pages/Signin/Account';
 
 // CONSTANTS
@@ -35,7 +33,7 @@ const App = () => (
   
   <Router>
     <div>
-      <Navigation />
+      {/* <Navigation /> */}
 
       
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
@@ -44,7 +42,6 @@ const App = () => (
         path={ROUTES.PASSWORD_FORGET}
         component={PasswordForgetPage}
       />
-      <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.ACCOUNT} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={Admin} />
      

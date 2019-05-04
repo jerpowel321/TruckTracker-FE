@@ -24,6 +24,7 @@ function Nav(props) {
          </li>
        </ul>
        <a className="navbar-brand font redText mr-5">Logo</a>
+            {props.signOut}
        <div className="font mr-5 redtText">{props.currentPage}</div>
      </div>
    </nav>

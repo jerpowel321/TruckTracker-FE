@@ -25,12 +25,12 @@ const SignInPage = () =>
           <div className="card-body bg-light">
             <div className="" >
               <div className="">
-                <h1 className="font text-center redText ">Trucker & Admin</h1>
-                <h1 className="redText font text-center mr-5">Sign In</h1>
+               
+                <h1 className="redText largeTitles text-center mr-5">Sign In</h1>
                 <SignInForm />
                 <PasswordForgetLink />
                 <SignUpLink />
-                <button className="bg-warning p-2 hvr-grow-shadow"><NavLink className=" redText" to="/user/dashboard">I am a User</NavLink></button>
+                <button className="bg-warning p-2 hvr-grow-shadow w-25"><NavLink className=" redText" to="/user/dashboard">I am a User</NavLink></button>
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@ class SignInFormBase extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.TRUCKER);
       })
       .catch(error => {
         this.setState({ error });
@@ -78,8 +78,9 @@ class SignInFormBase extends Component {
     const isInvalid = password === '' || email === '';
 
     return (
-      <form  onSubmit={this.onSubmit}>
-        <b><label for="email" className="col-sm-4 col-form-label">Email Address</label></b>
+      <form className="mt-3" onSubmit={this.onSubmit}>
+       <h1 className="">Trucker & Admin</h1>
+        <b><label for="email" className="col-sm-4 col-form-label"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
         <input
           name="email"
           value={email}
@@ -88,7 +89,7 @@ class SignInFormBase extends Component {
           placeholder="Enter Email Address"
           id="email"
         /> <br></br>
-        <b><label for="password" className="col-sm-4 col-form-label">Password</label></b>
+        <b><label for="password" className="col-sm-4 col-form-label"><i class="fas fa-lock mr-2"></i>Password</label></b>
         <input
           name="password"
           value={password}
@@ -97,7 +98,7 @@ class SignInFormBase extends Component {
           placeholder="Enter Password"
           id="password"
         /><br></br>
-        <button className="redBg text-white p-2 hvr-grow-shadow m-2" disabled={isInvalid} type="submit">
+        <button className="redBg w-25 text-white p-2 hvr-grow-shadow m-2" disabled={isInvalid} type="submit">
           Sign In
         </button>
         {error && <p>{error.message}</p>}
