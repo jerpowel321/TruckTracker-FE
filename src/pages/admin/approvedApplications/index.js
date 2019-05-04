@@ -1,10 +1,11 @@
+import { AuthUserContext, withAuthorization } from '../../Signin/Session';
 import React, { Component } from "react";
 import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API";
 import SignOutButton from '../../Signin/SignOut';
 
-class Admin extends Component {
+class ApprovedApplication extends Component {
 
   state = {
     truckData: []
@@ -37,5 +38,7 @@ class Admin extends Component {
     }
   
   };
-  
-  export default Admin;
+
+  const condition = authUser => !!authUser;
+    
+export default withAuthorization(condition)(ApprovedApplication);
