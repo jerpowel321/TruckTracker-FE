@@ -18,7 +18,7 @@ if (!firebase.apps.length) {
 }
 const db = firebase.database()
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => <img src="https://api-food-truck.herokuapp.com/assets/images/truck.png" style={{width: "20px"}}></img>;
 
 
 
@@ -45,7 +45,7 @@ class User extends Component {
     console.log("I mounted")
     // const rootRef = db.ref().child("Location")
     // const lngRef = rootRef.child("lng")
-    db.ref().on("value", snap => {
+    db.ref().child("trucks").on("value", snap => {
       console.log("Value change")
       console.log(snap.val())
       let allTrucks = []
