@@ -6,6 +6,7 @@ import app from 'firebase/app';
 // import {geolocated} from 'react-geolocated';
 import Container from "../../components/admin/container"
 import { AuthUserContext, withAuthorization } from '../Signin/Session';
+import SignOutButton from '../Signin/SignOut';
 
 
 var substate
@@ -157,6 +158,9 @@ class Trucker extends React.Component {
           home="/trucker/dashboard"
           firstPage="/trucker/application"
           firstPageName="Application"
+          secondPage="/trucker/account"
+          secondPageName="Account"
+          signOut={<SignOutButton />}
         />
         <div className="brickBackground">
           {/* <input
