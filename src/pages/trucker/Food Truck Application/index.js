@@ -3,9 +3,9 @@ import Nav from "../../../components/Nav";
 import API from "../../../utils/API"
 import 'firebase/auth';
 import SignOutButton from '../../Signin/SignOut';
+import { AuthUserContext, withAuthorization } from '../../Signin/Session';
 
-
-class Admin extends Component {
+class TruckerApplication extends Component {
 	state = {
 		businessName: "",
 		website: "",
@@ -61,6 +61,8 @@ class Admin extends Component {
 
 				<Nav
 					 home="/trucker/dashboard"
+					 firstPage="/trucker/account"
+           			firstPageName="Account"
 					 signOut={<SignOutButton />}
 				/>
 				<div className="truckApplication">
@@ -222,4 +224,6 @@ class Admin extends Component {
 
 };
 
-export default Admin;
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(TruckerApplication);
