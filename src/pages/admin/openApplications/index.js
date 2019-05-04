@@ -4,7 +4,7 @@ import Nav from "../../../components/admin/navToHome";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API"
 import { transformFileSync } from "@babel/core";
-
+import SignOutButton from '../../Signin/SignOut';
 // Cyrus Page Dont Touch
 
 class Admin extends Component {
@@ -67,6 +67,7 @@ class Admin extends Component {
       <div class="brickBackground">
         <Nav
           currentPage="Open Applications"
+          signOut={<SignOutButton />}
         />
         <Container >
           <h1>Open Applications</h1>

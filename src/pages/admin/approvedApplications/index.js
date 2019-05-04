@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API";
-
+import SignOutButton from '../../Signin/SignOut';
 
 class Admin extends Component {
 
@@ -28,6 +28,7 @@ class Admin extends Component {
           <Nav 
           home="/admin/dashboard"
           currentPage="Approved Applications"
+          signOut={<SignOutButton />}
           />
           <h1>Whats UP</h1>
     
