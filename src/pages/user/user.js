@@ -6,11 +6,11 @@ import ResultsCard from "../../components/Results Card"
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
-    authDomain: "truck-firebase.firebaseapp.com",
-    databaseURL: "https://truck-firebase.firebaseio.com",
-    projectId: "truck-firebase",
-    storageBucket: "truck-firebase.appspot.com",
-    messagingSenderId: "810502901238"
+  authDomain: "truck-firebase.firebaseapp.com",
+  databaseURL: "https://truck-firebase.firebaseio.com",
+  projectId: "truck-firebase",
+  storageBucket: "truck-firebase.appspot.com",
+  messagingSenderId: "810502901238"
 };
 
 if (!firebase.apps.length) {
@@ -18,7 +18,7 @@ if (!firebase.apps.length) {
 }
 const db = firebase.database()
 
-const AnyReactComponent = ({ text }) => <div><img src="https://api-food-truck.herokuapp.com/assets/images/truck.png" style={{width: "20px"}}></img><p style={{fontSize: "8px"}}>{text}</p></div>;
+const AnyReactComponent = ({ text }) => <div><img src="https://api-food-truck.herokuapp.com/assets/images/truck.png" style={{ width: "20px" }}></img><p style={{ fontSize: "8px" }}>{text}</p></div>;
 
 
 
@@ -32,15 +32,15 @@ class User extends Component {
     zoom: 15
   };
 
-    state = {
-      lat: 37.77, 
-      lng: -122.45,
-      trucks: []
-    }
-  
+  state = {
+    lat: 37.77,
+    lng: -122.45,
+    trucks: []
+  }
+
 
   componentDidMount() {
-  
+
     // anyReactComponent();
     console.log("I mounted")
     // const rootRef = db.ref().child("Location")
@@ -50,7 +50,7 @@ class User extends Component {
       console.log(snap.val())
       let allTrucks = []
       let location = snap.val();
-      for(let key in location){
+      for (let key in location) {
         let truck = {
           name: location[key].name,
           lat: location[key].lat,
@@ -81,10 +81,10 @@ class User extends Component {
     return (
       // Important! Always set the container height explicitly
       <div className="beachBackground">
-        <Nav 
-        home="/user/dashboard"
-        firstPage="/"
-        firstPageName="Back"
+        <Nav
+          home="/user/dashboard"
+          firstPage="/"
+          firstPageName="Back"
         />
         <div style={{ height: '50vh', width: '50%', marginLeft: "25%", marginTop: "5%" }}>
           <GoogleMapReact
@@ -92,24 +92,35 @@ class User extends Component {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-          {this.state.trucks.map(truck => (
-            <AnyReactComponent
-            text = {truck.name}
-            lat = {truck.lat}
-            lng = {truck.lng}
-            />
-          ))}
+            {this.state.trucks.map(truck => (
+              <AnyReactComponent
+                text={truck.name}
+                lat={truck.lat}
+                lng={truck.lng}
+              />
+            ))}
             {/* <AnyReactComponent
               lat={this.state.lat}
               lng={this.state.lng}
               text="hi"
             /> */}
 
-            
+
           </GoogleMapReact>
         </div>
         <div className="resultsContainer">
-        <ResultsCard />
+          <div class="card-header font redText goldBg">
+            Food Truck Results
+          </div>
+          <ol  className="bg-light">
+          {this.state.trucks.map(truck => (
+            <li>
+              <h4 className="py-2">{truck.name}</h4>
+              <p>{(truck.lat) + "° Latitude, " + truck.lng + "° Longitude"}</p>
+              </li>
+          ))}
+          </ol>
+
         </div>
 
       </div>
