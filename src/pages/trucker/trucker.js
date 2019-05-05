@@ -13,7 +13,13 @@ const db = app.database();
 
 class Trucker extends React.Component {
 
-
+  static defaultProps = {
+    center: {
+      lat: 37.77,
+      lng: -122.45
+    },
+    zoom: 15
+  };
 
   state = {
     name: "",
@@ -22,9 +28,11 @@ class Trucker extends React.Component {
     bool: true,
     email: "",
     receivedEmail: false,
+    bg: "redBg",
+    buttonText: "Enable Geolocation"
   }
 
-  componentDidMount(){
+  componentDidMount() {
     {
       window.navigator.geolocation.getCurrentPosition(
         position => this.setState({ position: position }),
@@ -34,9 +42,9 @@ class Trucker extends React.Component {
     console.log(this.state.position)
     API.getAllTrucks().then((res) => {
       console.log(res)
-      for(let i = 0; i < res.data.length; i++){
-        if(this.state.email === res.data[i].email){
-          this.setState({name: res.data[i].businessName})
+      for (let i = 0; i < res.data.length; i++) {
+        if (this.state.email === res.data[i].email) {
+          this.setState({ name: res.data[i].businessName })
         }
       }
     })
@@ -82,9 +90,9 @@ class Trucker extends React.Component {
   newPost = (id, name, lat, lng) => {
     if (id && name && lat && lng) {
       db.ref().child("trucks").child(id.replace(".", "%20")).set({
-          name: name,
-          lat: lat,
-          lng: lng
+        name: name,
+        lat: lat,
+        lng: lng
       })
     }
   }
@@ -113,22 +121,26 @@ class Trucker extends React.Component {
   toggleState() {
     if (this.state.active === false) {
       this.setState({ active: true })
+      this.setState({ bg: "btn-success" })
+      this.setState({ buttonText: "Geolocation Enabled" })
     }
     else {
       this.setState({ active: false })
+      this.setState({ bg: "redBg" })
+      this.setState({ buttonText: "Enable Geolocation" })
     }
     console.log(this.state.active)
   }
 
   handleAuthChange = (userEmail) => {
-    if(!this.state.receivedEmail){
+    if (!this.state.receivedEmail) {
       this.setState({
-      email: userEmail,
-      receivedEmail: true
-    })
+        email: userEmail,
+        receivedEmail: true
+      })
     }
-    
-  } 
+
+  }
 
   render() {
 
@@ -147,28 +159,24 @@ class Trucker extends React.Component {
           secondPageName="Account"
           signOut={<SignOutButton />}
         />
+        {/* <div className="brickBackground" style={{marginTop: "-5%"}}> */}
         <div className="brickBackground">
-          {/* <input
-          id="name"
-          onChange={this.handleInputChange}
-        />
-        <button
-          onClick={() => { this.post(this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude) }}
-        >
-          Submit
-            </button> */}
+        <div className="resultsContainer"></div>
+          <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}>
+            <GoogleMapReact
+              bootstrapURLKeys={{ key: "AIzaSyCC9CsEo4ZXBb-6M2d9TfG8DgvcTXXcEo0" }}
+              defaultCenter={this.props.center}
+              defaultZoom={this.props.zoom}
+            >
+            </GoogleMapReact>
+          </div>
 
-          <div className="text-center">
+          <div style={{marginTop: "-5%"}} className="text-center">
             <button
-              className="redBg text-white updateLocation hvr-grow-shadow"
+              className={(this.state.bg) + " text-white updateLocation hvr-grow-shadow"}
               onClick={() => { this.toggleState(); this.newUpdate(this.state.email, this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude); console.log(this.state); }}
             >
-              Update location
-            </button>
-            <button
-              onClick={() => {this.newPost(this.state.email, this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude); console.log(this.state.email) }}
-            >
-            new entry
+              {this.state.buttonText}
             </button>
           </div>
 
@@ -182,7 +190,7 @@ class Trucker extends React.Component {
         </div>
       </div>
     )
-    
+
   }
 }
 
