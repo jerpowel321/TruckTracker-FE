@@ -130,7 +130,6 @@
   padding-top: 40px;
   width: 70%;
   margin: auto;
-
 }
 .locationSent {
   background-color: green;
@@ -143,10 +142,7 @@
   margin-top: 40px;
 }
 .logo {
-  height: 100px;
-  padding: 1;
-  margin-left: auto;
-  margin-right: auto;
+  height: 90px;
 }
 .signInCard p  {
   font-family: 'Roboto', sans-serif;

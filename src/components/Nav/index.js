@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { defaultProps } from "recompose";
 function Nav(props) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light goldBg redText">
+    <nav className="navbar navbar-expand-lg goldBg redText d-flex justify-content-around">
      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
        <span className="navbar-toggler-icon"></span>
      </button>
@@ -23,8 +23,7 @@ function Nav(props) {
            <NavLink className="font mr-3 redText" to={props.thirdPage}>{props.thirdPageName}</NavLink>
          </li>
        </ul>
-       <a className="navbar-brand font redText mr-5">Logo</a>
-           
+       <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
        <div className="font mr-5 redtText">{props.currentPage}</div>
        {props.signOut}
      </div>
