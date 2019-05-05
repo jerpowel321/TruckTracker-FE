@@ -75,7 +75,7 @@ class SignUpFormBase extends Component {
             <h1 className="redText largeTitles text-center">Sign Up</h1>
 
             <br></br>
-            <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-lock mr-2"></i>Password</label></b>
+            <b><label for="username" className="col-sm-5 col-form-label text-white"><i class="fas fa-address-card mr-2"></i>Full Name</label></b>
 
 
             <input
@@ -112,7 +112,7 @@ class SignUpFormBase extends Component {
             />
 
             <br></br>
-            <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-lock mr-2"></i>Password</label></b>
+            <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-user-lock mr-2"></i>Confirm Password</label></b>
 
             <input
               name="passwordTwo"
@@ -121,9 +121,21 @@ class SignUpFormBase extends Component {
               type="password"
               placeholder="Confirm Password"
             />
-            <button disabled={isInvalid} type="submit">Sign Up</button>
+            <br></br>
+            <br></br>
+            <div className="float-right">
+              <button className="btn btn-light btn-md text-monospace" disabled={isInvalid} type="submit"><span class="spinner-grow spinner-grow-sm"></span><strong>Sign Up</strong></button>
+            </div>
+
+
+            <br disabled={!isInvalid}></br>
+            <br disabled={!isInvalid}></br>
+            
 
             {error && <p>{error.message}</p>}
+
+
+            
           </form>
         </div>
       </div>
