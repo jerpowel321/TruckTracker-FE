@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-
+import { NavLink } from "react-router-dom";
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../../constants/routes';
 
@@ -67,12 +67,10 @@ class SignUpFormBase extends Component {
 
     return (
       <div className="whiteBackground">
-          <nav class="navbar navbar-expand-lg navbar-light goldBg redText">
-      <img src="https://cors-anywhere.herokuapp.com/https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-      </div>
+          <nav class="navbar navbar-expand-lg navbar-light goldBg redText d-flex justify-content-around">
+          <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
     </nav>
-      <div className="noMarginContainer">
+      <div className="noMarginContainer signInCard">
       <form className="signUpForm" onSubmit={this.onSubmit}>
       <h1 className="redText largeTitles text-center">Sign Up</h1>
         <input

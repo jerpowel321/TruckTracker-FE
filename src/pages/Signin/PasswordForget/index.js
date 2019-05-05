@@ -5,10 +5,10 @@ import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../../constants/routes';
 
 const PasswordForgetPage = () => (
-  <div className="brickBackground">
-    <nav class="navbar navbar-expand-lg navbar-light goldBg redText">
-      <img src="https://cors-anywhere.herokuapp.com/https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
-      <div className="float-right">
+  <div className="yellowBug">
+    <nav class="navbar navbar-expand-lg goldBg redText d-flex justify-content-end">
+    <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
+    <div className="mr-2">
       <NavLink className="font redText" to="/">Sign In</NavLink>
       </div>
     </nav>
@@ -75,7 +75,7 @@ class PasswordForgetFormBase extends Component {
           placeholder=""
         />
         <div className="text-center">
-        <button className="redBg text-white hvr-grow-shadow border border-dark mt-2 mb-2 p-2" disabled={isInvalid} type="submit">
+        <button className="redBg text-white hvr-grow-shadow border border-dark mt-3 mb-2 p-2" disabled={isInvalid} type="submit">
           <b>Password Reset</b>
         </button>
         </div>

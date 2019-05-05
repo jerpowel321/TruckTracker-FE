@@ -35,7 +35,7 @@
     color: white;
 }
 .whiteBackground{
-    background-image: url("https://i.pinimg.com/originals/62/65/4b/62654bc9be4f20b50928cecb1b2209a8.jpg");
+    background-image: url("https://images.pexels.com/photos/1796731/pexels-photo-1796731.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     background-size: cover;
     background-position: center center;
     min-height: 100vh;
@@ -74,3 +74,10 @@
 
 
 
+.yellowBug{
+    background-image: url("https://images.pexels.com/photos/1498843/pexels-photo-1498843.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    padding-bottom:40px;
+}

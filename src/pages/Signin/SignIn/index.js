@@ -13,12 +13,8 @@ const SignInPage = () =>
 
   (
     <div className="redDoor" >
-      <nav className="navbar navbar-expand-lg navbar-light goldBg redText">
-        <div className="justify-content-center">
+      <nav className="navbar navbar-expand-lg goldBg redText d-flex justify-content-around">
           <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
-        </div>
-        <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
-        </div>
       </nav>
       <div className="d-flex justify-content-center">
         <div className="div  signInCard">
@@ -123,7 +119,7 @@ class SignInFormBase extends Component {
         <div className="col-sm-5 ">
         <button name="button" value="trucker" id="truckerSubmit" className="redBg text-white p-2 hvr-grow-shadow ml-5 mt-2 border-dark float-right" disabled={isInvalid} onClick={this.onSubmitTrucker} type="submit">
         <b>Sign In</b>
-        </button>
+        </button><br></br>
         <p className="text-white text-center float-right mt-1">I'm a Trucker.</p>
         </div>
         <div className="col-sm-5 ">
