@@ -27,6 +27,12 @@ export default {
     getOpenApplications: function (){
         return axios.get(BASEURL + "/api/trucks/open")
     },
+    getApprovedApplications: function (){
+        return axios.get(BASEURL + "/api/trucks/approved")
+    },
+    getDeniedApplications: function (){
+        return axios.get(BASEURL + "/api/trucks/denied")
+    },
 
     getTruckByEmail: function (){
         return axios.get(BASEURL + "/api/trucks/info")
