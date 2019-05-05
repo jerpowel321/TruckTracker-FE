@@ -121,6 +121,9 @@ class SignUpFormBase extends Component {
               type="password"
               placeholder="Confirm Password"
             />
+            
+            {error && <p>{error.message}</p>}
+            
             <br></br>
             <br></br>
             <div className="float-right">
@@ -132,7 +135,7 @@ class SignUpFormBase extends Component {
             <br disabled={!isInvalid}></br>
             
 
-            {error && <p>{error.message}</p>}
+            
 
 
             
