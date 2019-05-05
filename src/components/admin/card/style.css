@@ -11,6 +11,11 @@ font-family: 'Roboto', sans-serif;
 font-size: 25px;
 text-shadow: 1px 1px black;
 }
+.font6 {
+	font-size: 40px;
+	font-family: 'Luckiest Guy', cursive;
+	text-shadow: 2px 2px red;
+	}
 a:hover {
 opacity: 0.6;
 }
