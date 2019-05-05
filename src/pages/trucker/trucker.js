@@ -160,7 +160,7 @@ class Trucker extends React.Component {
           signOut={<SignOutButton />}
         />
         {/* <div className="brickBackground" style={{marginTop: "-5%"}}> */}
-        <div className="brickBackground">
+        <div className="truckerDashboard">
         <div className="resultsContainer"></div>
           <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}>
             <GoogleMapReact

@@ -64,22 +64,30 @@ class PasswordForgetFormBase extends Component {
     return (
 
 
-      <form onSubmit={this.onSubmit}>
-       <b><label for="email" className="col-sm-5 col-form-label text-white"><i class="fas fa-envelope-square mr-2 text-white"></i>Email Address</label></b>
-        <input
+      <form onSubmit={this.onSubmit} className="mt-3">
+      <div className="row">
+      <div className="col-sm-6">
+       <b><label for="email" className="p-1 col-form-label float-right text-white mr-2"><i class="fas fa-envelope-square mr-2 text-white pl-1"></i>Email Address</label></b>
+       </div>
+       <div className="col-sm-4">
+        <input className="mr-2"
           id="email"
           name="email"
           value={this.state.email}
           onChange={this.onChange}
           type="text"
           placeholder=""
-        />
-        <div className="text-center">
-        <button className="redBg text-white hvr-grow-shadow border border-dark mt-3 mb-2 p-2" disabled={isInvalid} type="submit">
+        /> 
+        </div>
+        </div>
+        <div className="row">
+        <div className="col-sm-6"></div>
+        <div className="col-sm-6">
+        <button className="redBg text-white hvr-grow-shadow border border-dark mt-2 mb-4 p-2" disabled={isInvalid} type="submit">
           <b>Password Reset</b>
         </button>
         </div>
-
+        </div>
         {error && <p>{error.message}</p>}
       </form>
 
