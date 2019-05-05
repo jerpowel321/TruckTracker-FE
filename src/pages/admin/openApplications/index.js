@@ -13,7 +13,7 @@ class Admin extends Component {
   }
 
   componentDidMount() {
-    API.getAllTrucks()
+    API.getApprovedApplications()
       .then(res => {
         console.log("data:", res.data)
         this.setState({ truckData: res.data })

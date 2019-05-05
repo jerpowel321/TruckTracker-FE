@@ -11,7 +11,7 @@ class ApprovedApplication extends Component {
     truckData: []
   }
   componentDidMount() {
-    API.getAllTrucks()
+    API.getApprovedApplications()
       .then(res => {
         console.log("data:", res.data)
         this.setState({ truckData: res.data })
@@ -28,7 +28,7 @@ class ApprovedApplication extends Component {
           signOut={<SignOutButton />}
         />
         <Container >
-          <h1>Open Applications</h1>
+          <h1>Approved Applications</h1>
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>
