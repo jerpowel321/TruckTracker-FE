@@ -25,26 +25,13 @@ export default {
         return axios.put(BASEURL + `/api/trucks/${companyId}`, {id: companyId, approved: approved, applicationOpen: applicationOpen})
     },
     getOpenApplications: function (){
-        return axios.get(BASEURL + "/api/trucks/open")
+        return axios.get(BASEURL + "/api/open")
     },
     getApprovedApplications: function (){
-        return axios.get(BASEURL + "/api/trucks/approved")
+        return axios.get(BASEURL + "/api/approved")
     },
     getDeniedApplications: function (){
-        return axios.get(BASEURL + "/api/trucks/denied")
-    },
-
-    getTruckByEmail: function (){
-        return axios.get(BASEURL + "/api/trucks/info")
+        return axios.get(BASEURL + "/api/denied")
     }
-
-
-
-
-
-
-
-    
-    //Cyrus
 
 };
