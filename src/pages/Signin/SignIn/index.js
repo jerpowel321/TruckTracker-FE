@@ -125,7 +125,7 @@ class SignInFormBase extends Component {
         <div className="col-sm-5 ">
         <button name="button" value="admin" id="adminSubmit" className="redBg text-white p-2 hvr-grow-shadow ml-5 mt-2 border-dark" disabled={isInvalid} onClick={this.onSubmitAdmin} type="submit">
         <b>Sign In</b>
-        </button>
+        </button><br></br>
         <p className="text-white ml-5">I'm an Admin.</p>
         </div>
         </div>
