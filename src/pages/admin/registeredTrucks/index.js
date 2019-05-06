@@ -1,4 +1,9 @@
-import { AuthUserContext, withAuthorization } from '../../Signin/Session';
+import { withAuthorization } from '../../Signin/Session';
+import * as ROLES from '../../../constants/roles';
+
+import { compose } from 'recompose';
+
+import { withFirebase } from '../../Signin/Firebase';
 import React, { Component } from "react";
 import Nav from "../../../components/Nav";
 // import Container from "../../../components/admin/container";
@@ -25,7 +30,11 @@ class RegisteredTrucks extends Component {
     }
   
   };
-  
-  const condition = authUser => !!authUser;
-    
-  export default withAuthorization(condition)(RegisteredTrucks);
+
+  const condition = authUser =>
+  authUser && !!authUser.roles[ROLES.ADMIN];
+
+export default compose(
+  withAuthorization(condition),
+  withFirebase,
+)(RegisteredTrucks);
