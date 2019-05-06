@@ -52,7 +52,12 @@ class SignUpFormBase extends Component {
       })
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.ACCOUNT);
+        if (isAdmin) {
+        this.props.history.push(ROUTES.ADMIN);
+      }
+        else {
+          this.props.history.push(ROUTES.ACCOUNT);
+        }
       })
       .catch(error => {
         this.setState({ error });
