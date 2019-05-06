@@ -1,15 +1,9 @@
 
 .adminDashboard {
-    background-image: url("https://images.unsplash.com/photo-1519817914152-22d216bb9170?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60");
+    background-image: url("https://images.pexels.com/photos/2124696/pexels-photo-2124696.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     background-size: cover;
     background-position: center center;
     padding-bottom:40px;
-}
-.adminPage{
-    display: flex;
-    align-items: stretch;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 .brickBackground{
     background-image: url("https://images.pexels.com/photos/207142/pexels-photo-207142.jpeg?cs=srgb&dl=brick-wall-bricks-stone-207142.jpg&fm=jpg");
