@@ -1,12 +1,10 @@
 
   // Initialize Firebase
   
-  const app = require('firebase/app');
-  require('firebase/auth');
-  require('firebase/database');
+  import app from 'firebase/app';
+  import 'firebase/auth';
+  import 'firebase/database';
 
-// import 'firebase/app'
-// import 'firebase/firestore'
 
   
   const config = {

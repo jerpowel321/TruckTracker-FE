@@ -54,7 +54,7 @@ class SignUpFormBase extends Component {
 
 
         this.setState({ ...INITIAL_STATE });
-<<<<<<< HEAD
+
 
         if (isAdmin) {
           this.props.history.push(ROUTES.ADMIN);
@@ -62,14 +62,7 @@ class SignUpFormBase extends Component {
         else {
         this.props.history.push(ROUTES.ACCOUNT);
       }
-=======
-        if (isAdmin) {
-        this.props.history.push(ROUTES.ADMIN);
-      }
-        else {
-          this.props.history.push(ROUTES.ACCOUNT);
-        }
->>>>>>> fbb142100264e704bd326b0a41f60b711698d5dd
+
       })
       .catch(error => {
         this.setState({ error });
