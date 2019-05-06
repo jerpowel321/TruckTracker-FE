@@ -3,6 +3,7 @@ import Nav from "../../components/Nav";
 import GoogleMapReact from 'google-map-react';
 import * as firebase from "firebase"
 import ResultsCard from "../../components/Results Card"
+import API from "./../../utils/API"
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -52,10 +53,6 @@ class User extends Component {
       )
     }
 
-    // anyReactComponent();
-    console.log("I mounted")
-    // const rootRef = db.ref().child("Location")
-    // const lngRef = rootRef.child("lng")
     db.ref().child("trucks").on("value", snap => {
       console.log("Value change")
       console.log(snap.val())
@@ -69,12 +66,21 @@ class User extends Component {
         }
         allTrucks.push(truck)
       }
-
+      
+      API.getAllTrucks().then((res) => {
+        for(let i = 0; i < res.data.length; i++){
+          for(let j = 0; j < allTrucks.length; j++){
+            if(res.data[i].businessName === allTrucks[j].name){
+              allTrucks[j].url = res.data[i].menu
+            }
+          }
+        }
+      })
+      console.log(allTrucks)
       this.setState({
-        // lat: snap.val().location.truck.lat,
-        // lng: snap.val().location.truck.lng,
         trucks: allTrucks
       })
+
 
       console.log(this.state)
     })
@@ -110,13 +116,6 @@ class User extends Component {
                 lng={truck.lng}
               />
             ))}
-            {/* <AnyReactComponent
-              lat={this.state.lat}
-              lng={this.state.lng}
-              text="hi"
-            /> */}
-
-
           </GoogleMapReact>
         </div>
         <div className="resultsContainer">
@@ -125,9 +124,10 @@ class User extends Component {
           </div>
           <ol  className="bg-light">
           {this.state.trucks.map(truck => (
+            
             <li>
               <h4 className="py-2">{truck.name}</h4>
-              <p>{(truck.lat) + "° Latitude, " + truck.lng + "° Longitude"}</p>
+              <a href={truck.url}>Menu Link</a>
               </li>
           ))}
           </ol>
