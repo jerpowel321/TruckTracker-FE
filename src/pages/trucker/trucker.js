@@ -47,7 +47,7 @@ class Trucker extends React.Component {
     API.getAllTrucks().then((res) => {
       console.log(res)
       for (let i = 0; i < res.data.length; i++) {
-        if (this.state.email === res.data[i].email) {
+        if (this.state.email === res.data[i].email && res.data[i].approved === true) {
           this.setState({ name: res.data[i].businessName })
         }
       }
