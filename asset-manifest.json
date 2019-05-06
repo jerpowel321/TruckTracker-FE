@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/WhatTheTruck-FE/static/css/main.9b41784f.chunk.css",
-    "main.js": "/WhatTheTruck-FE/static/js/main.a188ef50.chunk.js",
-    "main.js.map": "/WhatTheTruck-FE/static/js/main.a188ef50.chunk.js.map",
+    "main.css": "/WhatTheTruck-FE/static/css/main.f48a0edf.chunk.css",
+    "main.js": "/WhatTheTruck-FE/static/js/main.34b9934d.chunk.js",
+    "main.js.map": "/WhatTheTruck-FE/static/js/main.34b9934d.chunk.js.map",
     "runtime~main.js": "/WhatTheTruck-FE/static/js/runtime~main.5041ae11.js",
     "runtime~main.js.map": "/WhatTheTruck-FE/static/js/runtime~main.5041ae11.js.map",
-    "static/js/2.ce88c5fe.chunk.js": "/WhatTheTruck-FE/static/js/2.ce88c5fe.chunk.js",
-    "static/js/2.ce88c5fe.chunk.js.map": "/WhatTheTruck-FE/static/js/2.ce88c5fe.chunk.js.map",
+    "static/js/2.d15572bf.chunk.js": "/WhatTheTruck-FE/static/js/2.d15572bf.chunk.js",
+    "static/js/2.d15572bf.chunk.js.map": "/WhatTheTruck-FE/static/js/2.d15572bf.chunk.js.map",
     "index.html": "/WhatTheTruck-FE/index.html",
-    "precache-manifest.2ea1a2723e55195fb5d33700e059730a.js": "/WhatTheTruck-FE/precache-manifest.2ea1a2723e55195fb5d33700e059730a.js",
+    "precache-manifest.0e0048cce7f287608cf1205e6601fb23.js": "/WhatTheTruck-FE/precache-manifest.0e0048cce7f287608cf1205e6601fb23.js",
     "service-worker.js": "/WhatTheTruck-FE/service-worker.js",
-    "static/css/main.9b41784f.chunk.css.map": "/WhatTheTruck-FE/static/css/main.9b41784f.chunk.css.map",
+    "static/css/main.f48a0edf.chunk.css.map": "/WhatTheTruck-FE/static/css/main.f48a0edf.chunk.css.map",
     "static/media/logo.svg": "/WhatTheTruck-FE/static/media/logo.5d5d9eef.svg"
   }
 }
