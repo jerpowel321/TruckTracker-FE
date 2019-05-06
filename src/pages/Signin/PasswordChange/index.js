@@ -42,37 +42,46 @@ class PasswordChangeForm extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-      <div className="row">
-      <div className="col-sm-6">
-      <b><label for="password" className="col-form-label float-right mr-3"><i class="fas fa-lock mr-2 pl-1"></i>Change Password</label></b>
-      </div>
-      <div className="col-sm-5">
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="New Password"
-        />
-        <input className="mt-2"
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm New Password"
-        />
-        </div>
-        </div>
+        <div className="row">
+          <div className="col-sm-6">
+            <b><label for="password" className="col-form-label float-right mr-2"><i class="fas fa-lock mr-2 pl-1"></i>Change Password</label></b>
+          </div>
+          <div className="col-sm-5">
+            <input
+              name="passwordOne"
+              value={passwordOne}
+              onChange={this.onChange}
+              type="password"
+              placeholder="New Password"
+            />
+          </div>
+          </div>
+          <div className="row">
+          <div className="col-sm-6">
+            <b><label for="password" className="col-form-label float-right mr-2 text-white"><i class="fas fa-user-lock mr-2"></i>Confirm Password</label></b>
+            </div>
+            <div className="col-sm-5">
+            <input className="mt-2"
+              name="passwordTwo"
+              value={passwordTwo}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Confirm New Password"
+            />
+            </div>
+          </div>
+       
         <br></br>
         <div className="row">
-        <div className="col-sm-6"></div>
-        <div className="col-sm-6">
-        <button className="redBg text-white hvr-grow-shadow border border-dark p-2" disabled={isInvalid} type="submit">
-         <b> Reset My Password</b>
-        </button>
+          <div className="col-sm-6"></div>
+
+          <div className="col-sm-6">
+            <button className="redBg text-white hvr-grow-shadow border border-dark p-2" disabled={isInvalid} type="submit">
+              <b> Reset My Password</b>
+            </button>
+          </div>
         </div>
-        </div>
-       
+
 
         {error && <p>{error.message}</p>}
       </form>

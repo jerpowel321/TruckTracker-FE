@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-
+import { NavLink } from "react-router-dom";
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../../constants/routes';
@@ -54,6 +54,7 @@ class SignUpFormBase extends Component {
 
 
         this.setState({ ...INITIAL_STATE });
+<<<<<<< HEAD
 
         if (isAdmin) {
           this.props.history.push(ROUTES.ADMIN);
@@ -61,6 +62,14 @@ class SignUpFormBase extends Component {
         else {
         this.props.history.push(ROUTES.ACCOUNT);
       }
+=======
+        if (isAdmin) {
+        this.props.history.push(ROUTES.ADMIN);
+      }
+        else {
+          this.props.history.push(ROUTES.ACCOUNT);
+        }
+>>>>>>> fbb142100264e704bd326b0a41f60b711698d5dd
       })
       .catch(error => {
         this.setState({ error });
@@ -98,8 +107,11 @@ class SignUpFormBase extends Component {
 
     return (
       <div className="whiteBackground">
-        <nav class="navbar navbar-expand-lg navbar-light goldBg redText d-flex justify-content-around">
-          <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
+        <nav class="navbar navbar-expand-lg goldBg redText d-flex justify-content-end">
+          <img className="logo alignLogo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
+          <div className="mr-2">
+      <NavLink className="font redText" to="/">Sign In</NavLink>
+      </div>
         </nav>
         <div className="noMarginContainer signInCard">
           <form className="signUpForm" onSubmit={this.onSubmit}>
@@ -166,7 +178,7 @@ class SignUpFormBase extends Component {
               />
            
 
-            {error && <p className="text-white darkbackground p-1">{error.message}</p>}
+            {error && <p className="text-white darkbackground p-1 mt-3">{error.message}</p>}
 
 
             <br></br>

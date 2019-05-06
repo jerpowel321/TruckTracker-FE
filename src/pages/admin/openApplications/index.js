@@ -32,42 +32,42 @@ class Admin extends Component {
   }
 
   approveApplication(id) {
-    API.updateTruck(id)
-    .then(res => {
-      console.log("apple")
-      let truckData = [...this.state.truckData]
-      truckData.forEach(truck => {
-        if (truck.id === id){
-          truck.approved = true;
-          truck.applicationOpen = false;
-          console.log(truck)
-        }
-      })
-      this.setState({
-        truckData
-      })
-      console.log(truckData)
+    let truckData = [...this.state.truckData]
+    truckData.forEach(truck => {
+      if (truck.id === id){
+        truck.approved = true;
+        truck.applicationOpen = false;
+        console.log(truck)
+        API.updateTruck(truck.id, truck.approved, truck.applicationOpen)
+        .then(res => {
+          console.log("apple")
+          this.setState({
+            truckData
+          })
+          console.log(truckData)
+        })
+      }
     })
   };
 
   closeApplication(id) {
-    API.updateTruck(id)
-      .then(res => {
-        console.log("banana")
-        let truckData = [...this.state.truckData]
-        truckData.forEach(truck => {
-          if (truck.id === id){
-            truck.approved = false;
-            truck.applicationOpen = false;
-            console.log(truck)
-          }
+    let truckData = [...this.state.truckData]
+    truckData.forEach(truck => {
+      if (truck.id === id){
+        truck.approved = false;
+        truck.applicationOpen = false;
+        console.log(truck)
+        API.updateTruck(truck.id, truck.approved, truck.applicationOpen)
+        .then(res => {
+          console.log("apple")
+          this.setState({
+            truckData
+          })
+          console.log(truckData)
         })
-        this.setState({
-          truckData
-        })
-        console.log(truckData)
-      });
-  }
+      }
+    })
+  };
 
 
 
@@ -80,8 +80,9 @@ class Admin extends Component {
           signOut={<SignOutButton />}
         />
         <Container >
-          <h1 className="font6 redText">Open Applications</h1>
+          <h1 className="largeTitles redText text-center">Open Applications</h1>
           {this.state.truckData.map(truck => {
+            if (truck.applicationOpen){
             return (
               <div key={truck.id}>
                 <div className="" data-toggle="modal" data-target={`#exampleModalCenter${truck.id}`}>
@@ -127,6 +128,8 @@ class Admin extends Component {
               </div>
 
             )
+          }
+          
           })}
         </Container>
       </div>

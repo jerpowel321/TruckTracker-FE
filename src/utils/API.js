@@ -23,7 +23,7 @@ export default {
     updateTruck: function (companyId, approved, applicationOpen){
         console.log("im in the utilities")
         console.log(BASEURL + `/api/open/${companyId}`)
-        return axios.put(BASEURL + `/api/open/${companyId}`, {data:{id: companyId, approved: approved, applicationOpen: applicationOpen}})
+        return axios.put(BASEURL + `/api/open/${companyId}`, {id: companyId, approved: approved, applicationOpen: applicationOpen})
     },
     getOpenApplications: function (){
         return axios.get(BASEURL + "/api/open")
