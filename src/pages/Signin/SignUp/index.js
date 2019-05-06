@@ -163,7 +163,7 @@ class SignUpFormBase extends Component {
               />
            
 
-            {error && <p className="text-white darkbackground p-1">{error.message}</p>}
+            {error && <p className="text-white darkbackground p-1 mt-3">{error.message}</p>}
 
 
             <br></br>
