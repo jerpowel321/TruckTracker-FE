@@ -30,14 +30,14 @@ class DeniedApplication extends Component {
   }
   render() {
     return (
-      <div class="brickBackground">
+      <div class="deniedBackground">
         <Nav
           home="/admin/dashboard"
-          currentPage="Denied Applications"
+          // currentPage="Denied Applications"
           signOut={<SignOutButton />}
         />
         <Container >
-        <h1 className="font6 redText">Denied Applications</h1>
+        <h1 className="largeTitles redText text-center">Denied Applications</h1>
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>
