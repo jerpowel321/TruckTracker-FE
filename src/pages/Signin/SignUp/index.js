@@ -145,15 +145,18 @@ class SignUpFormBase extends Component {
               placeholder="Confirm Password"
             />
 
-            <label>
-              Admin:
+<br></br>
+            <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-star mr-2"></i>Admin</label></b>
+
+           
+          
           <input
                 name="isAdmin"
                 type="checkbox"
                 checked={isAdmin}
                 onChange={this.onChangeCheckbox}
               />
-            </label>
+           
 
             {error && <p>{error.message}</p>}
 
@@ -166,9 +169,6 @@ class SignUpFormBase extends Component {
 
             <br disabled={!isInvalid}></br>
             <br disabled={!isInvalid}></br>
-
-
-
 
 
 
