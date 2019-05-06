@@ -21,7 +21,7 @@ const SignInPage = () =>
           <div className="div ">
             <h1 className="redText largeTitles text-center">Looking for food trucks?</h1>
             <div className="text-center">
-              <button className="bg-warning p-2 hvr-grow-shadow p-2 border-dark"><NavLink className=" redText" to="/user/dashboard"><b>Yes! Take me There.</b></NavLink></button>
+              <button className="btn btn-md bg-warning p-2 hvr-grow-shadow p-2 border-dark"><NavLink className=" redText" to="/user/dashboard"><b>Yes! Take me There.</b></NavLink></button>
             </div>
           </div>
         </div>
@@ -51,22 +51,6 @@ class SignInFormBase extends Component {
 
     this.state = { ...INITIAL_STATE };
   }
-
-  // onSubmitTrucker = event => {
-  //   const { email, password } = this.state;
-
-  //   this.props.firebase
-  //     .doSignInWithEmailAndPassword(email, password)
-  //     .then(() => {
-  //       this.setState({ ...INITIAL_STATE });
-  //       this.props.history.push(ROUTES.TRUCKER);
-  //     })
-  //     .catch(error => {
-  //       this.setState({ error });
-  //     });
-
-  //   event.preventDefault();
-  // };
 
   onSubmit = event => {
     const { email, password, isAdmin } = this.state;
@@ -134,25 +118,21 @@ class SignInFormBase extends Component {
             onChange={this.onChangeCheckbox}
           />
 
-          <div>
-            <div className="row mt-2">
-              {/* <div className="col-sm-5 "> */}
-              {/* <button name="button" value="trucker" id="truckerSubmit" className="redBg text-white p-2 hvr-grow-shadow ml-5 mt-2 border-dark float-right" disabled={isInvalid} onClick={this.onSubmitTrucker} type="submit">
-        <b>Sign In</b>
-        </button><br></br> */}
-              {/* <p className="text-white text-center float-right mt-1">I'm a Trucker.</p>
-        </div> */}
-              <div className="col-sm-5 ">
-                <button name="button" value="admin" id="adminSubmit" className="redBg text-white p-2 hvr-grow-shadow ml-5 mt-2 border-dark" disabled={isInvalid} onClick={this.onSubmit} type="submit">
+          <div className="">
+            <div className="row mt-2 ">
+              
+                <button name="button" value="admin" id="adminSubmit" className="btn btn-md redBg text-white p-2 hvr-grow-shadow ml-5 mt-2 border-dark" disabled={isInvalid} onClick={this.onSubmit} type="submit">
                   <b>Sign In</b>
-                </button><br></br>
-                <p className="text-white ml-5">I'm an Admin.</p>
-              </div>
+                </button>
+               
+             
             </div>
           </div>
           {error && <p className="text-white darkbackground p-1"><b>{error.message}</b></p>}
         </form>
 
+        <br></br>
+ 
         <PasswordForgetLink /> <br></br>
         <SignUpLink />
 
