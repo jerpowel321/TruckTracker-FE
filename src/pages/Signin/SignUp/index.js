@@ -51,8 +51,16 @@ class SignUpFormBase extends Component {
           });
       })
       .then(() => {
+
+
         this.setState({ ...INITIAL_STATE });
+
+        if (isAdmin) {
+          this.props.history.push(ROUTES.ADMIN);
+        }
+        else {
         this.props.history.push(ROUTES.ACCOUNT);
+      }
       })
       .catch(error => {
         this.setState({ error });
