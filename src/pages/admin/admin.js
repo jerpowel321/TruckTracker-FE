@@ -21,6 +21,8 @@ class Admin extends Component {
       <div className="adminDashboard">
         <Nav
           home="/admin/dashboard"
+          secondPage="/admin/view/account"
+          secondPageName="Account"
           signOut={<SignOutButton />} />
         <div className="d-flex justify-content-center">
           <div className="adminContainer">

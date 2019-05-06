@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
 import Admin from "./pages/admin";
+import AdminAccount from "./pages/admin/adminAccount";
 import AdminTrucks from "./pages/admin/registeredTrucks";
 import AdminUsers from "./pages/admin/registeredUsers";
 import AdminOpenApp from "./pages/admin/openApplications";
@@ -49,7 +50,7 @@ const App = () => (
       <Switch>
   
 
-   
+      <Route exact path="/admin/view/account" component={AdminAccount} />
         <Route exact path="/admin/view/registered/trucks" component={AdminTrucks} />
         <Route exact path="/admin/view/registered/users" component={AdminUsers} />
         <Route exact path="/admin/view/applications/open" component={AdminOpenApp} />
