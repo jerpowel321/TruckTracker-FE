@@ -59,53 +59,88 @@ class SignUpFormBase extends Component {
     } = this.state;
 
     const isInvalid =
-    passwordOne !== passwordTwo ||
-    passwordOne === '' ||
-    email === '' ||
-    username === '';
+      passwordOne !== passwordTwo ||
+      passwordOne === '' ||
+      email === '' ||
+      username === '';
 
 
     return (
       <div className="whiteBackground">
-          <nav class="navbar navbar-expand-lg navbar-light goldBg redText d-flex justify-content-around">
+        <nav class="navbar navbar-expand-lg navbar-light goldBg redText d-flex justify-content-around">
           <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
-    </nav>
-      <div className="noMarginContainer signInCard">
-      <form className="signUpForm" onSubmit={this.onSubmit}>
-      <h1 className="redText largeTitles text-center">Sign Up</h1>
-        <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">Sign Up</button>
+        </nav>
+        <div className="noMarginContainer signInCard">
+          <form className="signUpForm" onSubmit={this.onSubmit}>
+            <h1 className="redText largeTitles text-center">Sign Up</h1>
 
-        {error && <p>{error.message}</p>}
-      </form>
-      </div>
+            <br></br>
+            <b><label for="username" className="col-sm-5 col-form-label text-white"><i class="fas fa-address-card mr-2"></i>Full Name</label></b>
+
+
+            <input
+              name="username"
+              value={username}
+              onChange={this.onChange}
+              type="text"
+              placeholder="Full Name"
+            />
+
+
+
+            <b><label for="email" className="col-sm-5 col-form-label text-white"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
+
+            <input
+              name="email"
+              value={email}
+              onChange={this.onChange}
+              type="text"
+              placeholder="Email Address"
+            />
+
+
+            <br></br>
+            <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-lock mr-2"></i>Password</label></b>
+
+
+            <input
+              name="passwordOne"
+              value={passwordOne}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Password"
+            />
+
+            <br></br>
+            <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-user-lock mr-2"></i>Confirm Password</label></b>
+
+            <input
+              name="passwordTwo"
+              value={passwordTwo}
+              onChange={this.onChange}
+              type="password"
+              placeholder="Confirm Password"
+            />
+            
+            {error && <p>{error.message}</p>}
+            
+            <br></br>
+            <br></br>
+            <div className="float-right">
+              <button className="btn btn-light btn-md text-monospace" disabled={isInvalid} type="submit"><span class="spinner-grow spinner-grow-sm"></span><strong>Sign Up</strong></button>
+            </div>
+
+
+            <br disabled={!isInvalid}></br>
+            <br disabled={!isInvalid}></br>
+            
+
+            
+
+
+            
+          </form>
+        </div>
       </div>
     );
   }

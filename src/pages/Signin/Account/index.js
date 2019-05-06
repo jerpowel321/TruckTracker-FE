@@ -11,19 +11,21 @@ const AccountPage = () => (
   <AuthUserContext.Consumer>
     {authUser => (
       <div className="snowFloodtruck">
+       
         <Nav
            home="/trucker/dashboard"
            firstPage="/trucker/application"
            firstPageName="Application"
 					 signOut={<SignOutButton />}
 				/>
-        
-        <div className="accountDisplay container mt-5 p-5">
+         <div className=" d-flex justify-content-center">
+        <div className="accountDisplay accountContainer mt-5 p-5">
         <h1 className="largeTitles redText pt-3 text-center ">Account Profile </h1>
-        <p>Email: {authUser.email}</p>
+        <p className="text-center">Email: {authUser.email}</p>
         <PasswordForgetForm />
         <PasswordChangeForm />
         </div>
+      </div>
       </div>
      
     )}
