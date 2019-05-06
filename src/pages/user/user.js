@@ -35,11 +35,22 @@ class User extends Component {
   state = {
     lat: 37.77,
     lng: -122.45,
-    trucks: []
+    trucks: [],
+    currentLocation: {}
   }
 
 
   componentDidMount() {
+
+    {
+      window.navigator.geolocation.getCurrentPosition(
+        position => this.setState({ position: position, currentLocation: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        } }),
+        err => console.log(err)
+      )
+    }
 
     // anyReactComponent();
     console.log("I mounted")
@@ -89,7 +100,7 @@ class User extends Component {
         <div style={{ height: '50vh', width: '50%', marginLeft: "25%", marginTop: "5%" }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: "AIzaSyCC9CsEo4ZXBb-6M2d9TfG8DgvcTXXcEo0" }}
-            defaultCenter={this.props.center}
+            defaultCenter={this.state.currentLocation || this.props.center}
             defaultZoom={this.props.zoom}
           >
             {this.state.trucks.map(truck => (
