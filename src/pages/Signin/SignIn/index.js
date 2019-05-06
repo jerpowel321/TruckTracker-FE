@@ -128,7 +128,7 @@ class SignInFormBase extends Component {
              
             </div>
           </div>
-          {error && <p className="text-white darkbackground p-1"><b>{error.message}</b></p>}
+          {error && <p className="text-white darkbackground p-1 mt-3"><b>{error.message}</b></p>}
         </form>
 
         <br></br>
