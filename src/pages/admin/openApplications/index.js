@@ -64,13 +64,13 @@ class Admin extends Component {
   render() {
     console.log(this.state.truckData)
     return (
-      <div className="brickBackground">
+      <div className="openApplicationsBackground">
         <Nav
          home="/admin/dashboard"
           signOut={<SignOutButton />}
         />
         <Container >
-          <h1 className="font6 text-warning">Open Applications</h1>
+          <h1 className="font6 redText">Open Applications</h1>
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>

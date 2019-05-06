@@ -82,3 +82,17 @@
     min-height: 100vh;
     padding-bottom:40px;
 }
+.openApplicationsBackground{
+    background-image: url("https://images.pexels.com/photos/221357/pexels-photo-221357.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    padding-bottom:40px;
+}
+.approvedApplicationsBackground{
+    background-image: url("https://images.pexels.com/photos/633017/pexels-photo-633017.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    padding-bottom:40px;
+}

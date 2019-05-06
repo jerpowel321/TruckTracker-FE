@@ -28,14 +28,14 @@ class ApprovedApplication extends Component {
   }
   render() {
     return (
-      <div class="brickBackground">
+      <div class="approvedApplicationsBackground">
         <Nav
           home="/admin/dashboard"
           currentPage="Approved Applications"
           signOut={<SignOutButton />}
         />
         <Container >
-          <h1 className="font redText goldBg">Approved Applications</h1>
+          <h1 className="font6 redText">Approved Applications</h1>
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>
@@ -44,7 +44,7 @@ class ApprovedApplication extends Component {
                     <div className="card-header goldBg">
                       <h2 className="font redText">{truck.businessName}</h2>
                     </div>
-                    <div className="card-body signInCard">
+                    <div className="card-body bg-white">
                       <blockquote className="blockquote mb-0">
                         Owner: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
                         Phone: {truck.phone}<br />
