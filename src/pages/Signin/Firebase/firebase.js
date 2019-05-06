@@ -3,6 +3,7 @@
   
   import app from 'firebase/app';
   import 'firebase/auth';
+
   
   const config = {
     apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -15,26 +16,66 @@
 
   class Firebase {
     constructor() {
+      
       if(!app.apps.length){
       app.initializeApp(config);
     }
-
+  
       this.auth = app.auth();
     }
-      // *** Auth API ***
-
-  doCreateUserWithEmailAndPassword = (email, password) =>
-  this.auth.createUserWithEmailAndPassword(email, password);
   
-  doSignInWithEmailAndPassword = (email, password) =>
-  this.auth.signInWithEmailAndPassword(email, password);  
+    // *** Auth API ***
+  
+    doCreateUserWithEmailAndPassword = (email, password) =>
+      this.auth.createUserWithEmailAndPassword(email, password);
+  
+    doSignInWithEmailAndPassword = (email, password) =>
+      this.auth.signInWithEmailAndPassword(email, password);
+  
+    doSignOut = () => this.auth.signOut();
+  
+    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+  
+    doPasswordUpdate = password =>
+      this.auth.currentUser.updatePassword(password);
+  
 
-  doSignOut = () => this.auth.signOut();
+        // *** Merge Auth and DB User API *** //
 
-  doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
+  onAuthUserListener = (next, fallback) =>
+  this.auth.onAuthStateChanged(authUser => {
+    if (authUser) {
+      this.user(authUser.uid)
+        .once('value')
+        .then(snapshot => {
+          var dbUser = snapshot.val();
 
-  doPasswordUpdate = password =>
-    this.auth.currentUser.updatePassword(password);
-}
+          // default empty roles
+          if (!dbUser.roles) {
+            dbUser.roles = {};
+          }
+
+          // merge auth and db user
+          authUser = {
+            uid: authUser.uid,
+            email: authUser.email,
+            ...dbUser,
+          };
+
+          next(authUser);
+        });
+    } else {
+      fallback();
+    }
+  });
+
+
+
+    // *** User API ***
+  
+    user = uid => this.db.ref(`users/${uid}`);
+  
+    users = () => this.db.ref('users');
+  }
   
   export default Firebase;
