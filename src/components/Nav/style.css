@@ -9,23 +9,17 @@ font-size: 30px;
 .nav-wrapper {
 margin-bottom: 100px;
 }
-                                  
-                                            
-                                            
-             
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                    
-                                    
-                                   
 
+.navbar-group {
+    display: flex;
+    flex-grow: 1;
+    flex-basis: 0;
+}
 
+.navbar-group.logo-container {
+    flex-grow: 0;
+}
 
-
-
-
-
+.navbar-group-right {
+    justify-content: flex-end;
+}

@@ -22,10 +22,14 @@ class RegisteredTrucks extends Component {
           home="/admin/dashboard"
           signOut={<SignOutButton />}
         />
-
+        <div className="registeredTrucksBackground">
+        <div className="d-flex justify-content-center">
+        <div className="w-75 bg-white text-center mt-5">
         <Chart />
-
-
+        </div>
+        </div>
+        </div>
+      
       </div>)
     }
   
@@ -38,3 +42,5 @@ export default compose(
   withAuthorization(condition),
   withFirebase,
 )(RegisteredTrucks);
+
+// export default RegisteredTrucks
