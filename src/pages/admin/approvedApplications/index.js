@@ -28,7 +28,7 @@ class ApprovedApplication extends Component {
   }
   render() {
     return (
-      <div class="brickBackground">
+      <div class="approvedApplicationsBackground">
         <Nav
           home="/admin/dashboard"
           currentPage="Approved Applications"
