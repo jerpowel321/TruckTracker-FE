@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/WhatTheTruck-FE/static/css/main.f919ba60.chunk.css",
+    "main.js": "/WhatTheTruck-FE/static/js/main.19ad6b63.chunk.js",
+    "main.js.map": "/WhatTheTruck-FE/static/js/main.19ad6b63.chunk.js.map",
+    "runtime~main.js": "/WhatTheTruck-FE/static/js/runtime~main.5041ae11.js",
+    "runtime~main.js.map": "/WhatTheTruck-FE/static/js/runtime~main.5041ae11.js.map",
+    "static/js/2.9d264279.chunk.js": "/WhatTheTruck-FE/static/js/2.9d264279.chunk.js",
+    "static/js/2.9d264279.chunk.js.map": "/WhatTheTruck-FE/static/js/2.9d264279.chunk.js.map",
+    "index.html": "/WhatTheTruck-FE/index.html",
+    "precache-manifest.be65c725e7133c946e6012406b15e5f2.js": "/WhatTheTruck-FE/precache-manifest.be65c725e7133c946e6012406b15e5f2.js",
+    "service-worker.js": "/WhatTheTruck-FE/service-worker.js",
+    "static/css/main.f919ba60.chunk.css.map": "/WhatTheTruck-FE/static/css/main.f919ba60.chunk.css.map",
+    "static/media/logo.svg": "/WhatTheTruck-FE/static/media/logo.5d5d9eef.svg"
+  }
+}
