@@ -48,3 +48,10 @@ i:hover {
 .adminDashboard .card-body {
 	padding-bottom: 0;
 }
+.alignLogo {
+	margin-right: 40%;
+}
+.navbar {
+	padding-top: 0;
+	padding-bottom: 4;
+}
