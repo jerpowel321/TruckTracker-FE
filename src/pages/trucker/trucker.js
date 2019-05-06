@@ -29,13 +29,17 @@ class Trucker extends React.Component {
     email: "",
     receivedEmail: false,
     bg: "redBg",
-    buttonText: "Enable Geolocation"
+    buttonText: "Enable Geolocation",
+    currentLocation: {}
   }
 
   componentDidMount() {
     {
       window.navigator.geolocation.getCurrentPosition(
-        position => this.setState({ position: position }),
+        position => this.setState({ position: position, currentLocation: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        } }),
         err => console.log(err)
       )
     }
@@ -55,7 +59,7 @@ class Trucker extends React.Component {
     const updater = () => {
       if (this.state.active === true) {
         window.navigator.geolocation.getCurrentPosition(
-          position => this.setState({ position: position }),
+          position => this.setState({ position: position}),
           err => console.log(err)
         )
 
@@ -165,7 +169,7 @@ class Trucker extends React.Component {
           <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: "AIzaSyCC9CsEo4ZXBb-6M2d9TfG8DgvcTXXcEo0" }}
-              defaultCenter={this.props.center}
+              defaultCenter={this.state.currentLocation || this.props.center}
               defaultZoom={this.props.zoom}
             >
             </GoogleMapReact>
