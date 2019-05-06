@@ -16,6 +16,8 @@ const AccountPage = () => (
            home="/trucker/dashboard"
            firstPage="/trucker/application"
            firstPageName="Application"
+           secondPage="/trucker/account"
+           secondPageName="Account"
 					 signOut={<SignOutButton />}
 				/>
          <div className=" d-flex justify-content-center">
