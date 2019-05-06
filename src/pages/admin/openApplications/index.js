@@ -64,7 +64,7 @@ class Admin extends Component {
   render() {
     console.log(this.state.truckData)
     return (
-      <div className="brickBackground">
+      <div className="openApplicationsBackground">
         <Nav
          home="/admin/dashboard"
           signOut={<SignOutButton />}
