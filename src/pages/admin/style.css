@@ -96,3 +96,15 @@
     min-height: 100vh;
     padding-bottom:40px;
 }
+.registeredTrucksBackground{
+    background-image: url("https://images.unsplash.com/photo-1520682887308-96c486ad8fce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80");
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+    padding-bottom:40px;
+}
+
+
+
+
+
