@@ -31,11 +31,11 @@ class ApprovedApplication extends Component {
       <div class="approvedApplicationsBackground">
         <Nav
           home="/admin/dashboard"
-          currentPage="Approved Applications"
+          // currentPage="Approved Applications"
           signOut={<SignOutButton />}
         />
         <Container >
-          <h1 className="font6 redText">Approved Applications</h1>
+          <h1 className="largeTitles redText text-center">Approved Applications</h1>
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>
