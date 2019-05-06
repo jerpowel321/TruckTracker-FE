@@ -80,7 +80,7 @@ class Admin extends Component {
           signOut={<SignOutButton />}
         />
         <Container >
-          <h1 className="font6 redText">Open Applications</h1>
+          <h1 className="largeTitles redText text-center">Open Applications</h1>
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>

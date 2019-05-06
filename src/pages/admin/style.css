@@ -4,9 +4,10 @@
     background-size: cover;
     background-position: center center;
     padding-bottom:40px;
+    min-height: 100vh;
 }
-.brickBackground{
-    background-image: url("https://images.pexels.com/photos/207142/pexels-photo-207142.jpeg?cs=srgb&dl=brick-wall-bricks-stone-207142.jpg&fm=jpg");
+.deniedBackground{
+    background-image: url("https://images.pexels.com/photos/1410484/pexels-photo-1410484.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     background-size: cover;
     background-position: center center;
     min-height: 100vh;
