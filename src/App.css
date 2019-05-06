@@ -101,6 +101,14 @@
   border: 1px solid black;
   justify-content: stretch;
 }
+.adminContainer {
+  background: rgba(255, 255, 255, 0.452);
+  margin-top: 40px;
+  padding: 30px 30px;
+  border: 1px solid black;
+  /* justify-content: stretch; */
+  width: 60%;
+}
 
 .goldBg{
   background-color: #ffc400;
@@ -199,3 +207,4 @@ display: inline-block;
   margin-bottom: 0;
   display: block;
 }
+
