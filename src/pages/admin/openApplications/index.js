@@ -22,21 +22,21 @@ class Admin extends Component {
   }
 
   approveApplication(id) {
-    API.updateTruck(id)
-    .then(res => {
-      console.log("apple")
-      let truckData = [...this.state.truckData]
-      truckData.forEach(truck => {
-        if (truck.id === id){
-          truck.approved = true;
-          truck.applicationOpen = false;
-          console.log(truck)
-        }
-      })
-      this.setState({
-        truckData
-      })
-      console.log(truckData)
+    let truckData = [...this.state.truckData]
+    truckData.forEach(truck => {
+      if (truck.id === id){
+        truck.approved = true;
+        truck.applicationOpen = false;
+        console.log(truck)
+        API.updateTruck(id, truck.approved, truck.applicationOpen)
+        .then(res => {
+          console.log("apple")
+          this.setState({
+            truckData
+          })
+          console.log(truckData)
+        })
+      }
     })
   };
 
