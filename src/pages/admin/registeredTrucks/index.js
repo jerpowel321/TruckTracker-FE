@@ -1,4 +1,4 @@
-// import { withAuthorization } from '../../Signin/Session';
+import { withAuthorization } from '../../Signin/Session';
 import * as ROLES from '../../../constants/roles';
 
 import { compose } from 'recompose';
@@ -35,12 +35,12 @@ class RegisteredTrucks extends Component {
   
   };
 
-  // const condition = authUser =>
-  // authUser && !!authUser.roles[ROLES.ADMIN];
+  const condition = authUser =>
+  authUser && !!authUser.roles[ROLES.ADMIN];
 
-// export default compose(
-//   withAuthorization(condition),
-//   withFirebase,
-// )(RegisteredTrucks);
+export default compose(
+  withAuthorization(condition),
+  withFirebase,
+)(RegisteredTrucks);
 
-export default RegisteredTrucks
+// export default RegisteredTrucks
