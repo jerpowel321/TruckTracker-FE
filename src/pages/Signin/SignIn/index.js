@@ -67,21 +67,21 @@ class SignInFormBase extends Component {
     event.preventDefault();
   };
 
-  // onSubmitAdmin = event => {
-  //   const { email, password } = this.state;
+  onSubmitAdmin = event => {
+    const { email, password } = this.state;
 
-  //   this.props.firebase
-  //     .doSignInWithEmailAndPassword(email, password)
-  //     .then(() => {
-  //       this.setState({ ...INITIAL_STATE });
-  //       this.props.history.push(ROUTES.ADMIN);
-  //     })
-  //     .catch(error => {
-  //       this.setState({ error });
-  //     });
+    this.props.firebase
+      .doSignInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ ...INITIAL_STATE });
+        this.props.history.push(ROUTES.ADMIN);
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
 
-  //   event.preventDefault();
-  // };
+    event.preventDefault();
+  };
 
 
   onChange = event => {
