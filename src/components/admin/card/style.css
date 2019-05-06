@@ -8,14 +8,19 @@ text-shadow: 2px 2px rgb(240, 188, 16);
 }
 .font5 {
 font-family: 'Roboto', sans-serif;
-font-size: 25px;
+font-size: 24px;
 text-shadow: 1px 1px black;
 }
+.font6 {
+	font-size: 40px;
+	font-family: 'Luckiest Guy', cursive;
+	text-shadow: 2px 2px red;
+	}
 a:hover {
 opacity: 0.6;
 }
 .card {
-box-shadow: 3px 5px black;
+box-shadow: 2px 2px black;
 margin-left: 10px;
 margin-right: 10px;
 margin-bottom: 20px
@@ -31,21 +36,6 @@ margin-left: 7px;
 	width: 75px;
 	margin-top: 40px;
 }
-.truckImg {
-	width: 150px;
-}
-.openImg {
-	width: 100px;
-	padding-top:20px;
-}
-.approvedImg {
-	width: 100px;
-	padding-top: 20px;
-}
-.deniedImg {
-	width: 100px;
-	padding-top: 20px;
-}
 i:hover {
 	 color: gold
 }
@@ -55,4 +45,6 @@ i:hover {
 	font-family: 'Luckiest Guy', cursive;
 	text-shadow: 2px 2px black;
 }
-
+.adminDashboard .card-body {
+	padding-bottom: 0;
+}

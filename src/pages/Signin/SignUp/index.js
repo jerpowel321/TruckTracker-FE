@@ -158,7 +158,8 @@ class SignUpFormBase extends Component {
               />
            
 
-            {error && <p>{error.message}</p>}
+            {error && <p className="text-white darkbackground p-1">{error.message}</p>}
+
 
             <br></br>
             <br></br>

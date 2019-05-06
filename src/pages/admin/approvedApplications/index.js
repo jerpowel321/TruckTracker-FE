@@ -28,24 +28,24 @@ class ApprovedApplication extends Component {
   }
   render() {
     return (
-      <div class="brickBackground">
+      <div class="approvedApplicationsBackground">
         <Nav
           home="/admin/dashboard"
           currentPage="Approved Applications"
           signOut={<SignOutButton />}
         />
         <Container >
-          <h1>Approved Applications</h1>
+          <h1 className="font6 redText">Approved Applications</h1>
           {this.state.truckData.map(truck => {
             return (
               <div key={truck.id}>
                 <div className="" data-toggle="modal" data-target={`#exampleModalCenter${truck.id}`}>
-                  <div class="card w-100 text-white">
-                    <div class="card-header bg-dark">
-                      <h2>{truck.businessName}</h2>
+                  <div className="card w-100 text-muted">
+                    <div className="card-header goldBg">
+                      <h2 className="font redText">{truck.businessName}</h2>
                     </div>
-                    <div class="card-body bg-secondary">
-                      <blockquote class="blockquote mb-0">
+                    <div className="card-body bg-white">
+                      <blockquote className="blockquote mb-0">
                         Owner: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
                         Phone: {truck.phone}<br />
                         Email: {truck.email}

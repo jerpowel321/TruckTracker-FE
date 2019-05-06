@@ -5,7 +5,7 @@ import "./style.css";
 function Card(props) {
 	return (
 		<div>
-			<div className="card" >
+			<div className="card h-100 border-dark" >
 			<div className="text-center">
 				<img className={`${props.imageClass} card-img-top `} src={props.image}/>
 				</div>	
