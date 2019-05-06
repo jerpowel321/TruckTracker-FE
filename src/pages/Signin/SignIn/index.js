@@ -130,7 +130,7 @@ class SignInFormBase extends Component {
         </div>
         </div>
         </div>
-        {error && <p>{error.message}</p>}
+        {error && <p className="text-white darkbackground p-1"><b>{error.message}</b></p>}
       </form>
       
       <PasswordForgetLink /> <br></br>
