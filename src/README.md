@@ -1,68 +1,84 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![TruckTracker logo](/public/TruckTrackerLogo.png "TruckTracker Image")
+=================================================================
+Our third project for our full-stack coding bootcamp, TruckTracker is a Food Truck locator application that provides users with the location and business information of Food Trucks near them. Food Trucks can also create an account and submit a business application. Once approved by an administrator, the Food Truck can log-in to the application and update their current location with a press of a button. Users will be able to view the truck's real-time location on a google map. 
 
-## Available Scripts
 
-In the project directory, you can run:
+## Decoupled Application
 
-### `npm start`
+This is a decoupled application. We have an SQL server that only serves to create, update, and render JSON Data deployed on Heroku found [here](https://api-food-truck.herokuapp.com/). 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Our react app is hosted on an entirely different server found [here](https://deployedwtt.herokuapp.com/). We built to make it easier for us in the future to build the front end later using react native or another method.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
 
-### `npm test`
+## 🔑 How to Use the App:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The application is intuitive and requires little to no prior knowledge before being ready to use.
 
-### `npm run build`
+Follow the steps below if you are a Food Truck Business:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Create a trucker profile and log in. User data is stored in firebase database using high order context a secure sign-up/sign-in strategy.
+   
+2. Navigate to the application dashboard and submit the business information in its entirety. 
+   
+3. Once the application has been approved by an administrator, your account may now navigate to the home page and click on the button to update the trucks geolocation. 
+   
+Follow the stups below if you are an Individual looking for Food Trucks near you.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## 📁 Deployment Instructions
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This app has been deployed to Heroku, and the link can be found [here](https://deployedwtt.herokuapp.com/ "live link").
 
-### `npm run eject`
+## 🔧 Technologies Used  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
++ **HTML5** and **CSS3** for page content and styling.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
++ **React** for templating and generating HTML content, served up through our routes from our server.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
++ **Bootstrap** as a CSS framework for applying styles and using components.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
++ **Google Fonts** for unique font application.
 
-## Learn More
++ **Font Awesome** for Icons.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
++ **JavaScript** for the app's logic.
+  
++ **Node.JS** for the app's server environment.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
++ **NPM** for installation of the packages required by the app:
+  + **axios**
+  + **react-chart.js-2**
+  + **express**
+  + **firebase** 
+  + **google-map-react**
+  + **hover.css**
+  + **mysql2**
+  + **react-router-dom**
+  + **react-scrips**
+  + **recompose**
+  + **sequelize**
 
-### Code Splitting
+  
++ **MySQL** for database creation and storing persistent data.
++ **Firebase** for database creation and storing real-time data.
+  
++ **Heroku** for live deployment and hosting.
+  
++ **Chart.js** used to visualy display the number of registered Food Trucks in our Sql database by cusine type.
+  
++ The app follows the **MVC (Model, View, Controller)** architecture paradigm:
+  
+![mvc pic](/public/mvc1.PNG "MVC architecture") ![mvc pic](/public/mvc2.png "MVC architecture")
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
 
-### Analyzing the Bundle Size
+## 🌟 Acknowledgements
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+We would like to thank our instructor Jerome and our awesome TA's Sajeel, Jacob, and Jimmy for their guidance and support. 
+    
+## 🔗 Authors 
 
-### Making a Progressive Web App
++ Melanie Marsollier—https://github.com/Mel-Marsollier
++ Jennifer Powell—https://github.com/jerpowel321
++ Noah Glasser—https://github.com/NBGlasser
++ Cyrus Ghadiri—https://github.com/ctghadiri
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
