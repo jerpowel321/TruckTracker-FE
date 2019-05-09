@@ -55,3 +55,19 @@ i:hover {
 	padding-top: 0;
 	padding-bottom: 4;
 }
+@media only screen and (max-width: 600px) {
+	.largeTitles {
+	   font-size: 25px;
+	 }
+	label, input{
+		width:100%;
+		font-size: 12px;
+	}
+	.btn {
+		padding: 0;
+	}
+	a {
+		font-size: 12px;
+		padding: 0;
+	}
+   }
