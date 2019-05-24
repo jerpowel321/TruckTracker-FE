@@ -208,3 +208,7 @@ display: inline-block;
   display: block;
 }
 
+#menuimg {
+  width: 25px;
+}
+

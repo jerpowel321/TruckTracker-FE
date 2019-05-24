@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASEURL = "https://cors-anywhere.herokuapp.com/https://api-food-truck.herokuapp.com";
+const BASEURL = "https://cors-anywhere.herokuapp.com/https://trucktrackerapi.herokuapp.com/";
 
 export default {
     // Queries Heroku App API
