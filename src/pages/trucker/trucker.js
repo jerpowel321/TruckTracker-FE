@@ -33,16 +33,22 @@ class Trucker extends React.Component {
     currentLocation: {}
   }
 
+  
   componentDidMount() {
     {
       window.navigator.geolocation.getCurrentPosition(
-        position => this.setState({ position: position, currentLocation: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        } }),
+        position => this.setState({
+          position: position, currentLocation: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }
+        }),
         err => console.log(err)
       )
     }
+
+    
+
     console.log(this.state.position)
     API.getAllTrucks().then((res) => {
       console.log(res)
@@ -59,7 +65,7 @@ class Trucker extends React.Component {
     const updater = () => {
       if (this.state.active === true) {
         window.navigator.geolocation.getCurrentPosition(
-          position => this.setState({ position: position}),
+          position => this.setState({ position: position }),
           err => console.log(err)
         )
 
@@ -147,6 +153,17 @@ class Trucker extends React.Component {
   }
 
   render() {
+    {
+      var heatMapData = {    
+        positions: [
+          {lat: 55.5, lng: 34.56},
+          {lat: 34.7, lng: 28.4},
+        ],
+        options: {   
+          radius: 20,   
+          opacity: 0.6,
+      }}
+    }
 
     return (
       <div>
@@ -165,17 +182,19 @@ class Trucker extends React.Component {
         />
         {/* <div className="brickBackground" style={{marginTop: "-5%"}}> */}
         <div className="truckerDashboard">
-        <div className="resultsContainer"></div>
+          <div className="resultsContainer"></div>
           <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: "AIzaSyCC9CsEo4ZXBb-6M2d9TfG8DgvcTXXcEo0" }}
               defaultCenter={this.state.currentLocation || this.props.center}
               defaultZoom={this.props.zoom}
+              heatmapLibrary={true}
+              heatmap={heatMapData}
             >
             </GoogleMapReact>
           </div>
 
-          <div style={{marginTop: "-5%"}} className="text-center">
+          <div style={{ marginTop: "-5%" }} className="text-center">
             <button
               className={(this.state.bg) + " text-white updateLocation hvr-grow-shadow"}
               onClick={() => { this.toggleState(); this.newUpdate(this.state.email, this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude); console.log(this.state); }}
