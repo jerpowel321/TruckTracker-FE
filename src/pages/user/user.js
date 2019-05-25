@@ -137,19 +137,6 @@ class User extends Component {
           <div className="card-header font redText goldBg">
             Food Truck Results
           </div>
-<<<<<<< HEAD
-          <ol  className="bg-light">
-          {console.log(this.state.trucks, this.state.urls[0], "url")}
-          {this.state.trucks.map((truck, index) => {
-            
-            return (<li key={truck.name}>
-             
-              <h4 className="py-2">{truck.name}</h4>
-              <a href={`${this.state.urls[index]}`}>Menu Link</a>
-              </li>)
-              
-          })}
-=======
           <ol className="bg-light pt-3 pb-3">
             {this.state.trucks.map(truck => (
 
@@ -164,7 +151,6 @@ class User extends Component {
                 <p><i class="fa-lg fas fa-pencil-alt mr-2"></i>Click <a>Here</a> to write a review!</p>
               </li>
             ))}
->>>>>>> 8d846033895a1a96345b2fdb70400e4ebfb17b7f
           </ol>
 
         </div>
