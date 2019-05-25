@@ -18,8 +18,11 @@ if (!firebase.apps.length) {
   firebase.initializeApp(config);
 }
 const db = firebase.database()
+const connectedRef = db.ref(".info/connected");
+const connectionsRef = db.ref("userConnects");
 
-const AnyReactComponent = ({ text }) => <div><img src="https://api-food-truck.herokuapp.com/assets/images/truck.png" style={{ width: "20px" }}></img><p style={{ fontSize: "8px" }}>{text}</p></div>;
+
+const AnyReactComponent = ({ text }) => <div title={text}><img src="https://api-food-truck.herokuapp.com/assets/images/truck.png" style={{ width: "20px" }}></img><p style={{ fontSize: "8px" }}></p></div>;
 
 
 
@@ -37,7 +40,8 @@ class User extends Component {
     lat: 37.77,
     lng: -122.45,
     trucks: [],
-    currentLocation: {}
+    currentLocation: {},
+    urls: []
   }
 
 
@@ -58,7 +62,8 @@ class User extends Component {
     db.ref().child("trucks").on("value", snap => {
       console.log("Value change")
       console.log(snap.val())
-      let allTrucks = []
+      let allTrucks = [];
+      let urls = [];
       let location = snap.val();
       for (let key in location) {
         let truck = {
@@ -74,25 +79,32 @@ class User extends Component {
           for (let j = 0; j < allTrucks.length; j++) {
             if (res.data[i].businessName === allTrucks[j].name) {
               allTrucks[j].url = res.data[i].menu
+              urls.push(res.data[i].menu)
+              allTrucks[j].id = res.data[i].id
             }
           }
         }
       })
       console.log(allTrucks)
       this.setState({
-        trucks: allTrucks
+        trucks: allTrucks,
+        urls: urls
       })
 
 
       console.log(this.state)
     })
 
-    // db.ref().set({
-    //   location:{
-    //     lat: 37.77, 
-    //     lng: -122.45
-    //   }
-    // })
+    connectedRef.on("value", snap => {
+      let latlng = {
+        lat: this.state.currentLocation.lat,
+        lng: this.state.currentLocation.lng
+      }
+      if (snap.val()) {
+        var con = connectionsRef.push(latlng);
+        con.onDisconnect().remove();
+      }
+    })
   }
 
 
@@ -113,6 +125,7 @@ class User extends Component {
           >
             {this.state.trucks.map(truck => (
               <AnyReactComponent
+                key={truck.name}
                 text={truck.name}
                 lat={truck.lat}
                 lng={truck.lng}
@@ -124,6 +137,7 @@ class User extends Component {
           <div className="card-header font redText goldBg">
             Food Truck Results
           </div>
+
           <ol className="bg-light pt-3 pb-3">
             {this.state.trucks.map(truck => (
 
