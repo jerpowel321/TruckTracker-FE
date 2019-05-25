@@ -49,10 +49,12 @@ class User extends Component {
 
     {
       window.navigator.geolocation.getCurrentPosition(
-        position => this.setState({ position: position, currentLocation: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        } }),
+        position => this.setState({
+          position: position, currentLocation: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }
+        }),
         err => console.log(err)
       )
     }
@@ -71,11 +73,11 @@ class User extends Component {
         }
         allTrucks.push(truck)
       }
-      
+
       API.getAllTrucks().then((res) => {
-        for(let i = 0; i < res.data.length; i++){
-          for(let j = 0; j < allTrucks.length; j++){
-            if(res.data[i].businessName === allTrucks[j].name){
+        for (let i = 0; i < res.data.length; i++) {
+          for (let j = 0; j < allTrucks.length; j++) {
+            if (res.data[i].businessName === allTrucks[j].name) {
               allTrucks[j].url = res.data[i].menu
               urls.push(res.data[i].menu)
               allTrucks[j].id = res.data[i].id
@@ -135,6 +137,7 @@ class User extends Component {
           <div className="card-header font redText goldBg">
             Food Truck Results
           </div>
+<<<<<<< HEAD
           <ol  className="bg-light">
           {console.log(this.state.trucks, this.state.urls[0], "url")}
           {this.state.trucks.map((truck, index) => {
@@ -146,6 +149,22 @@ class User extends Component {
               </li>)
               
           })}
+=======
+          <ol className="bg-light pt-3 pb-3">
+            {this.state.trucks.map(truck => (
+
+              <li>
+                <h4 className="py-2">{truck.name}</h4>
+                <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:</p>
+                <p><i className="fa-lg far fa-clock mr-1"></i> Hours of Operation:</p>
+                <p><i className="fa-lg fas fa-phone mr-1"></i> Number:</p>
+                <p><i className="fa-lg fas fa-hourglass-half mr-2"></i> Wait Time:</p>
+                <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
+                <p><i className="fa-lg fas fa-comment-alt mr-2"></i>Reviews</p>
+                <p><i class="fa-lg fas fa-pencil-alt mr-2"></i>Click <a>Here</a> to write a review!</p>
+              </li>
+            ))}
+>>>>>>> 8d846033895a1a96345b2fdb70400e4ebfb17b7f
           </ol>
 
         </div>
