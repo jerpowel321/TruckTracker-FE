@@ -1,6 +1,7 @@
 import API from "./../../utils/API"
 import Nav from "../../components/Nav";
-import {ReviewButton} from "../../components/Review"
+import { ReviewButton } from "../../components/Review"
+import Stars from "../../components/Stars";
 
 import * as firebase from "firebase"
 import GoogleMapReact from 'google-map-react';
@@ -42,7 +43,7 @@ class User extends Component {
     reviews: []
   };
 
-  viewReviews (id){
+  viewReviews(id) {
     API.viewReview(id)
       .then(res => {
         console.log("data:", res.data)
@@ -52,7 +53,7 @@ class User extends Component {
       })
       .catch(err => console.log(err));
 
-    }
+  }
 
   componentDidMount() {
 
@@ -151,7 +152,14 @@ class User extends Component {
                       <p><i className="fa-lg fas fa-hourglass-half mr-2" /> Wait Time:</p>
                       <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
                       <p onClick={() => this.viewReviews(truck.name)}><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
-
+                      {this.state.reviews.map(review => (
+                        <div>
+                          <p>{review.username}</p>
+                          <Stars rating={review.rating} />
+                          <p>{review.rating}</p>
+                          <p>{review.comment}</p>
+                        </div>
+                      ))}
                       <ReviewButton truckName={truck.name} />
                     </li>
                   </div>
