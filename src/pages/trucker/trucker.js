@@ -8,6 +8,23 @@ import Container from "../../components/admin/container"
 import { AuthUserContext, withAuthorization } from '../Signin/Session';
 import SignOutButton from '../Signin/SignOut';
 import API from "./../../utils/API"
+import * as firebase from "firebase"
+
+var config = {
+  apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
+  authDomain: "truck-firebase.firebaseapp.com",
+  databaseURL: "https://truck-firebase.firebaseio.com",
+  projectId: "truck-firebase",
+  storageBucket: "truck-firebase.appspot.com",
+  messagingSenderId: "810502901238"
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
+const database = firebase.database()
+const connectedRef = database.ref(".info/connected");
+const connectionsRef = database.ref("userConnects");
 
 const db = app.database();
 
@@ -30,19 +47,39 @@ class Trucker extends React.Component {
     receivedEmail: false,
     bg: "redBg",
     buttonText: "Enable Geolocation",
-    currentLocation: {}
+    currentLocation: {},
+    userLocations: []
   }
 
+  
   componentDidMount() {
     {
       window.navigator.geolocation.getCurrentPosition(
-        position => this.setState({ position: position, currentLocation: {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        } }),
+        position => this.setState({
+          position: position, currentLocation: {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }
+        }),
         err => console.log(err)
       )
     }
+
+    connectionsRef.on("value", snap => {
+      let allUsers = []
+      let locations = snap.val()
+      for(let key in locations){
+        let user = {
+          lat: locations[key].lat,
+          lng: locations[key].lng
+        }
+        allUsers.push(user)
+      }
+      this.setState({
+        userLocations: allUsers
+      })
+    })
+
     console.log(this.state.position)
     API.getAllTrucks().then((res) => {
       console.log(res)
@@ -59,7 +96,7 @@ class Trucker extends React.Component {
     const updater = () => {
       if (this.state.active === true) {
         window.navigator.geolocation.getCurrentPosition(
-          position => this.setState({ position: position}),
+          position => this.setState({ position: position }),
           err => console.log(err)
         )
 
@@ -147,6 +184,14 @@ class Trucker extends React.Component {
   }
 
   render() {
+    {
+      var heatMapData = {    
+        positions: this.state.userLocations,
+        options: {   
+          radius: 20,   
+          opacity: 0.6,
+      }}
+    }
 
     return (
       <div>
@@ -165,17 +210,19 @@ class Trucker extends React.Component {
         />
         {/* <div className="brickBackground" style={{marginTop: "-5%"}}> */}
         <div className="truckerDashboard">
-        <div className="resultsContainer"></div>
+          <div className="resultsContainer"></div>
           <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}>
             <GoogleMapReact
               bootstrapURLKeys={{ key: "AIzaSyCC9CsEo4ZXBb-6M2d9TfG8DgvcTXXcEo0" }}
               defaultCenter={this.state.currentLocation || this.props.center}
               defaultZoom={this.props.zoom}
+              heatmapLibrary={true}
+              heatmap={heatMapData}
             >
             </GoogleMapReact>
           </div>
 
-          <div style={{marginTop: "-5%"}} className="text-center">
+          <div style={{ marginTop: "-5%" }} className="text-center">
             <button
               className={(this.state.bg) + " text-white updateLocation hvr-grow-shadow"}
               onClick={() => { this.toggleState(); this.newUpdate(this.state.email, this.state.name, this.state.position.coords.latitude, this.state.position.coords.longitude); console.log(this.state); }}
