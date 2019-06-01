@@ -39,8 +39,20 @@ class User extends Component {
     lng: -122.45,
     trucks: [],
     currentLocation: {},
+    reviews: []
   };
 
+  viewReviews (id){
+    API.viewReview(id)
+      .then(res => {
+        console.log("data:", res.data)
+        this.setState({ reviews: res.data })
+        console.log("The reviews set state is updated")
+        console.log(this.state.reviews)
+      })
+      .catch(err => console.log(err));
+
+    }
 
   componentDidMount() {
 
@@ -97,6 +109,31 @@ class User extends Component {
   }
 
   render() {
+
+
+    
+    // API.saveReview({
+		// 	truckName,
+		// 	userName,
+		// 	rating,
+		// 	comment,
+		// })
+		// 	.then(({ data }) => {
+		// 		if (data.errors) {
+		// 			console.log(data.errors);
+		// 			const errorMap = {};
+		// 			for (const error of data.errors) {
+		// 				errorMap[error.path] = error;
+		// 			}
+		// 			setErrors(errorMap);
+		// 		} else {
+		// 			console.log(data);
+		// 			setUserName('');
+		// 			setRating(0);
+		// 			setComment('');
+		// 			setIsShown(false);
+		// 		}
+		// 	});
     return (
       // Important! Always set the container height explicitly
       <div className="beachBackground">
@@ -138,7 +175,7 @@ class User extends Component {
                       <p><i className="fa-lg fas fa-phone mr-1" /> Number:</p>
                       <p><i className="fa-lg fas fa-hourglass-half mr-2" /> Wait Time:</p>
                       <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
-                      <p><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
+                      <p onClick={() => this.viewReviews(truck.name)}><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
 
                       <ReviewButton truckName={truck.name} />
                     </li>

@@ -3,6 +3,9 @@ import Stars from "../Stars";
 
 import React, { useCallback, useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
+import { useDropzone } from 'react-dropzone'
+
+
 
 function ReviewModal({ isShown, setIsShown, truckName }) {
 	const [userName, setUserName] = useState('');
@@ -51,8 +54,8 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 				<form className="formReview">
 					<div className="form-group">
 						<label>
-							<b>Your Name</b>	
-		 					<input type="text" className="form-control" placeholder="Type your name" onChange={onUserNameChange} value={userName} />
+							<b>Your Name</b>
+							<input type="text" className="form-control" placeholder="Type your name" onChange={onUserNameChange} value={userName} />
 						</label>
 						<InputValidationError error={errors.userName} />
 						<div >{} </div>
@@ -60,16 +63,27 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 					<div className="form-group">
 						<label >
 							<b>Rating        1-Poor 2-Fair 3-Average 4-Good 5-Excellent</b>
-		 					<Stars onChange={onRatingChange} rating={rating} />
+							<Stars onChange={onRatingChange} rating={rating} />
 						</label>
 						<InputValidationError error={errors.rating} />
 					</div>
 					<div className="form-group">
 						<label>
 							<b>Comment</b>
-		 					<textarea className="form-control" rows="3" onChange={onCommentChange} value={comment} />
+							<textarea className="form-control" rows="3" onChange={onCommentChange} value={comment} />
 						</label>
 						<InputValidationError error={errors.comment} />
+					</div>
+					<div className="form-group" >
+					<label>
+					<b>Images</b>
+					</label>
+						<p className="text-center">Feel free to add some tasty Food Truck food photos below! </p>
+					
+					<div className="dropZone">
+					
+						<MyDropzone />
+					</div>
 					</div>
 				</form>
 			</Modal.Body>
@@ -85,7 +99,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 	);
 };
 
-function InputValidationError({error}) {
+function InputValidationError({ error }) {
 	if (error == null) {
 		return null;
 	}
@@ -95,6 +109,27 @@ function InputValidationError({error}) {
 			{error.message}
 		</div>
 	);
+}
+
+function MyDropzone() {
+	const onDrop = useCallback(acceptedFiles => {
+		// Do something with the files
+		console.log("Photo is selected")
+		console.log(acceptedFiles)
+	}, [])
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+
+	return (
+		<div {...getRootProps()}>
+			<input className="imageInputArea" {...getInputProps()} />
+			{
+				isDragActive ?
+					<p>Drop the files here ...</p> :
+					<p className="text-center pt-3">Drag and drop some files here, or click to select files <br></br><span>(Only *.jpeg and *.png images will be accepted)</span><br /> <br /> <br /></p>
+					
+			}
+		</div>
+	)
 }
 
 export function ReviewButton({ truckName }) {
