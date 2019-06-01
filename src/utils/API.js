@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASEURL = "https://cors-anywhere.herokuapp.com/https://trucktrackerapi.herokuapp.com/";
+const BASEURL = "https://cors-anywhere.herokuapp.com/trucktrackerapi.herokuapp.com";
 
 export default {
     // Queries Heroku App API
@@ -17,6 +17,9 @@ export default {
         return axios.delete(BASEURL + "/api/trucks/", { data: { businessName: company } })
     },
 
+    saveReview(review) {
+        return axios.post(BASEURL + "/api/reviews", review)
+    },
     //Jennifer
 
     //Cyrus

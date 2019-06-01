@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import Nav from "../../components/Nav";
-import GoogleMapReact from 'google-map-react';
-import * as firebase from "firebase"
-import ResultsCard from "../../components/Results Card"
 import API from "./../../utils/API"
+import Nav from "../../components/Nav";
+import ReviewModal from "../../components/Review"
+
+import * as firebase from "firebase"
+import GoogleMapReact from 'google-map-react';
+import React, { Component } from 'react';
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -23,7 +24,6 @@ const AnyReactComponent = ({ text }) => <div><img src="https://api-food-truck.he
 
 
 
-
 class User extends Component {
   static defaultProps = {
     center: {
@@ -37,8 +37,8 @@ class User extends Component {
     lat: 37.77,
     lng: -122.45,
     trucks: [],
-    currentLocation: {}
-  }
+    currentLocation: {},
+  };
 
 
   componentDidMount() {
@@ -95,7 +95,6 @@ class User extends Component {
     // })
   }
 
-
   render() {
     return (
       // Important! Always set the container height explicitly
@@ -125,19 +124,33 @@ class User extends Component {
             Food Truck Results
           </div>
           <ol className="bg-light pt-3 pb-3">
-            {this.state.trucks.map(truck => (
+            {this.state.trucks.map((truck, index) => {
+              console.log(truck);
+              if (truck.name) {
+                const modalID = `truck-modal-${index}`;
+                return (
+                  <div key={truck.name}>
+                    <li>
+                      <h4 className="py-2">{truck.name}</h4>
+                      <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:</p>
+                      <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation:</p>
+                      <p><i className="fa-lg fas fa-phone mr-1" /> Number:</p>
+                      <p><i className="fa-lg fas fa-hourglass-half mr-2" /> Wait Time:</p>
+                      <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
+                      <p><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
 
-              <li>
-                <h4 className="py-2">{truck.name}</h4>
-                <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:</p>
-                <p><i className="fa-lg far fa-clock mr-1"></i> Hours of Operation:</p>
-                <p><i className="fa-lg fas fa-phone mr-1"></i> Number:</p>
-                <p><i className="fa-lg fas fa-hourglass-half mr-2"></i> Wait Time:</p>
-                <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
-                <p><i className="fa-lg fas fa-comment-alt mr-2"></i>Reviews</p>
-                <p><i class="fa-lg fas fa-pencil-alt mr-2"></i>Click <a>Here</a> to write a review!</p>
-              </li>
-            ))}
+
+                      <div className="" data-toggle="modal" data-target={`#${modalID}`}>
+                        <p><i className="fa-lg fas fa-pencil-alt mr-2" />Click Here to write a review!</p>
+                      </div>
+                      
+                      <ReviewModal id={modalID} truckName={truck.name} />
+                    </li>
+                  </div>
+
+                )
+              }
+            })}
           </ol>
 
         </div>
@@ -148,3 +161,4 @@ class User extends Component {
 }
 
 export default User;
+
