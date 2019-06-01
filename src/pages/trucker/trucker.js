@@ -8,6 +8,23 @@ import Container from "../../components/admin/container"
 import { AuthUserContext, withAuthorization } from '../Signin/Session';
 import SignOutButton from '../Signin/SignOut';
 import API from "./../../utils/API"
+import * as firebase from "firebase"
+
+var config = {
+  apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
+  authDomain: "truck-firebase.firebaseapp.com",
+  databaseURL: "https://truck-firebase.firebaseio.com",
+  projectId: "truck-firebase",
+  storageBucket: "truck-firebase.appspot.com",
+  messagingSenderId: "810502901238"
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
+const database = firebase.database()
+const connectedRef = database.ref(".info/connected");
+const connectionsRef = database.ref("userConnects");
 
 const db = app.database();
 
@@ -30,7 +47,8 @@ class Trucker extends React.Component {
     receivedEmail: false,
     bg: "redBg",
     buttonText: "Enable Geolocation",
-    currentLocation: {}
+    currentLocation: {},
+    userLocations: []
   }
 
   
@@ -47,7 +65,20 @@ class Trucker extends React.Component {
       )
     }
 
-    
+    connectionsRef.on("value", snap => {
+      let allUsers = []
+      let locations = snap.val()
+      for(let key in locations){
+        let user = {
+          lat: locations[key].lat,
+          lng: locations[key].lng
+        }
+        allUsers.push(user)
+      }
+      this.setState({
+        userLocations: allUsers
+      })
+    })
 
     console.log(this.state.position)
     API.getAllTrucks().then((res) => {
@@ -155,10 +186,7 @@ class Trucker extends React.Component {
   render() {
     {
       var heatMapData = {    
-        positions: [
-          {lat: 55.5, lng: 34.56},
-          {lat: 34.7, lng: 28.4},
-        ],
+        positions: this.state.userLocations,
         options: {   
           radius: 20,   
           opacity: 0.6,
