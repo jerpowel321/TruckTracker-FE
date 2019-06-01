@@ -4,7 +4,35 @@ import Stars from "../Stars";
 import React, { useCallback, useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone'
+import Dropzone from 'react-dropzone'
+import HandleImageUploads from "../Dropzone"
+import axios from 'axios'
 
+// function handleUploadImages( images){
+// 	// uploads is an array that would hold all the post methods for each image to be uploaded, then we'd use axios.all()
+// 	const uploads = images.map(image => {
+// 		// our formdata
+// 		const formData = new FormData();
+// 		formData.append("file", image);
+// 		formData.append("tags", '{TAGS}'); // Add tags for the images - {Array}
+// 		formData.append("upload_preset", "{cg1d4ckz}"); // Replace the preset name with your own
+// 		formData.append("api_key", "{448248782925833}"); // Replace API key with your own Cloudinary API key
+// 		formData.append("timestamp", (Date.now() / 1000) | 0);
+
+// 		// Replace cloudinary upload URL with yours
+// 		return axios.post(
+// 			"https://api.cloudinary.com/v1_1/dbpqzyaat/image/upload",
+// 			formData, 
+// 			{ headers: { "X-Requested-With": "XMLHttpRequest" }})
+// 			.then(response => console.log(response.data))
+// 	});
+
+// 	// We would use axios `.all()` method to perform concurrent image upload to cloudinary.
+// 	axios.all(uploads).then(() => {
+// 		// ... do anything after successful upload. You can setState() or save the data
+// 		console.log('Images have all being uploaded')
+// 	});
+// }
 
 
 function ReviewModal({ isShown, setIsShown, truckName }) {
@@ -45,6 +73,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 	const onCommentChange = useCallback(event => setComment(event.target.value), [setComment]);
 	const onRatingChange = useCallback(value => setRating(value), [setRating]);
 
+	
 	return (
 		<Modal show={isShown} onHide={closeDialog}>
 			<Modal.Header closeButton>
@@ -79,11 +108,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 					<b>Images</b>
 					</label>
 						<p className="text-center">Feel free to add some tasty Food Truck food photos below! </p>
-					
-					<div className="dropZone">
-					
-						<MyDropzone />
-					</div>
+					<HandleImageUploads />
 					</div>
 				</form>
 			</Modal.Body>
@@ -111,26 +136,28 @@ function InputValidationError({ error }) {
 	);
 }
 
-function MyDropzone() {
-	const onDrop = useCallback(acceptedFiles => {
-		// Do something with the files
-		console.log("Photo is selected")
-		console.log(acceptedFiles)
-	}, [])
-	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+// function MyDropzone() {
+// 	const onDrop = useCallback(acceptedFiles => {
+// 		// Do something with the files
+// 		console.log("Photo is selected")
+// 		console.log(acceptedFiles)
+// 	}, [])
+// 	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-	return (
-		<div {...getRootProps()}>
-			<input className="imageInputArea" {...getInputProps()} />
-			{
-				isDragActive ?
-					<p>Drop the files here ...</p> :
-					<p className="text-center pt-3">Drag and drop some files here, or click to select files <br></br><span>(Only *.jpeg and *.png images will be accepted)</span><br /> <br /> <br /></p>
+// 	return (
+// 		<div {...getRootProps()}>
+// 			<input className="imageInputArea" {...getInputProps()} />
+// 			{
+// 				isDragActive ?
+// 					<p>Drop the files here ...</p> :
+// 					<p className="text-center pt-3">Drag and drop some files here, or click to select files <br></br><span>(Only *.jpeg and *.png images will be accepted)</span><br /> <br /> <br /></p>
 					
-			}
-		</div>
-	)
-}
+// 			}
+// 		</div>
+// 	)
+// }
+
+
 
 export function ReviewButton({ truckName }) {
 	const [isShown, setIsShown] = useState(false);

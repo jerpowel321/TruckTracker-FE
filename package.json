@@ -23,7 +23,8 @@
     "react-scripts": "3.0.0",
     "react-star-rating-component": "^1.4.1",
     "react-star-ratings": "^2.3.0",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "superagent": "^5.0.5"
   },
   "scripts": {
     "start": "react-scripts start",

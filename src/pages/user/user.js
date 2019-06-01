@@ -109,16 +109,16 @@ class User extends Component {
       console.log(this.state)
     })
 
-    connectedRef.on("value", snap => {
-      let latlng = {
-        lat: this.state.currentLocation.lat,
-        lng: this.state.currentLocation.lng
-      }
-      if (snap.val()) {
-        var con = connectionsRef.push(latlng);
-        con.onDisconnect().remove();
-      }
-    })
+    // connectedRef.on("value", snap => {
+    //   let latlng = {
+    //     lat: this.state.currentLocation.lat,
+    //     lng: this.state.currentLocation.lng
+    //   }
+    //   if (snap.val()) {
+    //     var con = connectionsRef.push(latlng);
+    //     con.onDisconnect().remove();
+    //   }
+    // })
   }
 
   render() {
