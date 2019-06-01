@@ -109,31 +109,6 @@ class User extends Component {
   }
 
   render() {
-
-
-    
-    // API.saveReview({
-		// 	truckName,
-		// 	userName,
-		// 	rating,
-		// 	comment,
-		// })
-		// 	.then(({ data }) => {
-		// 		if (data.errors) {
-		// 			console.log(data.errors);
-		// 			const errorMap = {};
-		// 			for (const error of data.errors) {
-		// 				errorMap[error.path] = error;
-		// 			}
-		// 			setErrors(errorMap);
-		// 		} else {
-		// 			console.log(data);
-		// 			setUserName('');
-		// 			setRating(0);
-		// 			setComment('');
-		// 			setIsShown(false);
-		// 		}
-		// 	});
     return (
       // Important! Always set the container height explicitly
       <div className="beachBackground">
