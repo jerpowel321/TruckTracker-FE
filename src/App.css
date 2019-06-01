@@ -211,4 +211,15 @@ display: inline-block;
 #menuimg {
   width: 25px;
 }
-
+.formReview label {
+  display: block;
+}
+.stars {
+  font-size: 30px;
+}
+.dropZone {
+  background: rgb(242, 242, 242);
+  border:2px dashed rgb(205, 205, 205);
+  height: 120px;
+  color: gray;
+}

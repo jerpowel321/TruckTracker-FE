@@ -25,6 +25,7 @@ class TruckerApplication extends Component {
 	}
 
 	createNewTruck = (event) => {
+		console.log("Inside Create new truck!!--------------------")
 		event.preventDefault();
 		const newTruck = {
 			businessName: this.state.companyName,
@@ -44,7 +45,7 @@ class TruckerApplication extends Component {
 		}
 		console.log(newTruck)
 		API.saveTruck(newTruck)
-			.then(res => console.log(res)
+			.then(res => console.log(res + "THIS IS THE RESPONSEEEEE")
 			
 			);
 	}
@@ -70,26 +71,26 @@ class TruckerApplication extends Component {
 				/>
 				<div className="truckApplication">
 					<form>
-						<div class="form-row">
-							<div class="form-group col-md-12">
-								<h1 class="text-center largeTitles redText">Food Truck Application</h1>
+						<div className="form-row">
+							<div className="form-group col-md-12">
+								<h1 className="text-center largeTitles redText">Food Truck Application</h1>
 							</div>
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
+						<div className="form-row">
+							<div className="form-group col-md-6">
 								<label for="companyName">Company Name</label>
-								<input name="companyName" type="text" class="form-control" id="companyName" placeholder="Koja Kitchen" onChange={this.handleInputChange} />
+								<input name="companyName" type="text" className="form-control" id="companyName" placeholder="Koja Kitchen" onChange={this.handleInputChange} />
 							</div>
-							<div class="form-group col-md-6">
+							<div className="form-group col-md-6">
 								<label for="website">Website</label>
-								<input name="website" type="text" class="form-control" id="inputMiddleName" placeholder="" onChange={this.handleInputChange} />
+								<input name="website" type="text" className="form-control" id="inputMiddleName" placeholder="" onChange={this.handleInputChange} />
 							</div>
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
+						<div className="form-row">
+							<div className="form-group col-md-6">
 								<label for="inputCuisineType">Type of Cuisine</label>
-								<select name="cuisine" id="inputCuisineType" class="form-control" onChange={this.handleInputChange} >
-									<option selected>Select type</option>
+								<select name="cuisine" id="inputCuisineType" className="form-control" onChange={this.handleInputChange} >
+									<option select>Select type</option>
 									<option value="American">American</option>
 									<option value="Cajun">Cajun</option>
 									<option value="Chinese">Chinese</option>
@@ -111,51 +112,51 @@ class TruckerApplication extends Component {
 									<option value="Other">Other</option>
 								</select>
 							</div>
-							<div class="form-group col-md-6">
+							<div className="form-group col-md-6">
 								<label for="inputMenuLink">Menu Link</label>
-								<input name="menu" type="text" class="form-control" id="inputMenuLink" placeholder="" onChange={this.handleInputChange} />
+								<input name="menu" type="text" className="form-control" id="inputMenuLink" placeholder="" onChange={this.handleInputChange} />
 							</div>
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-5">
+						<div className="form-row">
+							<div className="form-group col-md-5">
 								<label for="inputFirstName"> Contact First Name</label>
-								<input name="firstName" type="text" class="form-control" id="inputFirstName" placeholder="William" onChange={this.handleInputChange} />
+								<input name="firstName" type="text" className="form-control" id="inputFirstName" placeholder="William" onChange={this.handleInputChange} />
 							</div>
-							<div class="form-group col-md-2">
+							<div className="form-group col-md-2">
 								<label for="inputMiddleName">Middle Initial</label>
-								<input name="middleInitial" type="text" class="form-control" id="inputMiddleName" placeholder="B." onChange={this.handleInputChange} />
+								<input name="middleInitial" type="text" className="form-control" id="inputMiddleName" placeholder="B." onChange={this.handleInputChange} />
 							</div>
-							<div class="form-group col-md-5">
+							<div className="form-group col-md-5">
 								<label for="inputLastName">Last Name</label>
-								<input name="lastName" type="text" class="form-control" id="inputLastName" placeholder="Pitt" onChange={this.handleInputChange} />
+								<input name="lastName" type="text" className="form-control" id="inputLastName" placeholder="Pitt" onChange={this.handleInputChange} />
 							</div>
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
+						<div className="form-row">
+							<div className="form-group col-md-6">
 								<label for="inputEmail4">Email</label>
-								<input name="email" type="email" class="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleInputChange} /> 
+								<input name="email" type="email" className="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleInputChange} /> 
 							</div>
-							<div class="form-group col-md-6">
+							<div className="form-group col-md-6">
 								<label for="inputPhoneNumber">Phone Number</label>
-								<input name="phoneNumber" type="number" class="form-control" id="inputPhoneNumber" placeholder="4155555" onChange={this.handleInputChange} />
+								<input name="phoneNumber" type="number" className="form-control" id="inputPhoneNumber" placeholder="4155555" onChange={this.handleInputChange} />
 							</div>
 						</div>
-						<div class="form-group">
+						<div className="form-group">
 							<label for="inputAddress">Address</label>
-							<input name="address1" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" onChange={this.handleInputChange} />
+							<input name="address1" type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" onChange={this.handleInputChange} />
 						</div>
-						<div class="form-group">
+						<div className="form-group">
 							<label for="inputAddress2">Address 2</label>
-							<input name="address2" type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" onChange={this.handleInputChange} />
+							<input name="address2" type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" onChange={this.handleInputChange} />
 						</div>
-						<div class="form-row">
-							<div class="form-group col-md-6">
+						<div className="form-row">
+							<div className="form-group col-md-6">
 								<label for="inputCity">City</label>
-								<input name="city" type="text" class="form-control" id="inputCity" onChange={this.handleInputChange} />
+								<input name="city" type="text" className="form-control" id="inputCity" onChange={this.handleInputChange} />
 							</div>
-							<div class="form-group col-md-4">
+							<div className="form-group col-md-4">
 								<label for="inputState">State</label>
-								<select name="state" id="inputState" class="form-control" onChange={this.handleInputChange} >
+								<select name="state" id="inputState" className="form-control" onChange={this.handleInputChange} >
 									<option selected>Choose a State</option>
 									<option value="AL">Alabama</option>
 									<option value="AK">Alaska</option>
@@ -210,13 +211,13 @@ class TruckerApplication extends Component {
 									<option value="WY">Wyoming</option>
 								</select>
 							</div>
-							<div class="form-group col-md-2">
+							<div className="form-group col-md-2">
 								<label for="inputZip">Zip</label>
-								<input name="zip" type="text" class="form-control" id="inputZip" onChange={this.handleInputChange} />
+								<input name="zip" type="text" className="form-control" id="inputZip" onChange={this.handleInputChange} />
 							</div>
 						</div>
-						<div class="text-center">
-							<button type="submit" class="btn redBg text-white hvr-grow-shadow" onClick={this.createNewTruck}><Link to="/trucker/dashboard"> <b className="text-white">Submit</b></Link></button>
+						<div className="text-center">
+							<button type="submit" className="btn redBg text-white hvr-grow-shadow" onClick={this.createNewTruck}><Link to="/trucker/dashboard"> <b className="text-white">Submit</b></Link></button>
 						</div>
 					</form>
 				</div>

@@ -1,9 +1,12 @@
-import React, { Component } from 'react';
-import Nav from "../../components/Nav";
-import GoogleMapReact from 'google-map-react';
-import * as firebase from "firebase"
-import ResultsCard from "../../components/Results Card"
 import API from "./../../utils/API"
+import Nav from "../../components/Nav";
+import { ReviewButton } from "../../components/Review"
+import Stars from "../../components/Stars";
+
+import * as firebase from "firebase"
+import GoogleMapReact from 'google-map-react';
+import React, { Component } from 'react';
+
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -26,7 +29,6 @@ const AnyReactComponent = ({ text }) => <div title={text}><img src="https://api-
 
 
 
-
 class User extends Component {
   static defaultProps = {
     center: {
@@ -41,9 +43,21 @@ class User extends Component {
     lng: -122.45,
     trucks: [],
     currentLocation: {},
+    reviews: [],
     urls: []
   }
 
+  viewReviews(id) {
+    API.viewReview(id)
+      .then(res => {
+        console.log("data:", res.data)
+        this.setState({ reviews: res.data })
+        console.log("The reviews set state is updated")
+        console.log(this.state.reviews)
+      })
+      .catch(err => console.log(err));
+
+  }
 
   componentDidMount() {
 
@@ -107,7 +121,6 @@ class User extends Component {
     })
   }
 
-
   render() {
     return (
       // Important! Always set the container height explicitly
@@ -139,19 +152,35 @@ class User extends Component {
           </div>
 
           <ol className="bg-light pt-3 pb-3">
-            {this.state.trucks.map(truck => (
+            {this.state.trucks.map((truck, index) => {
+              console.log(truck);
+              if (truck.name) {
+                const modalID = `truck-modal-${index}`;
+                return (
+                  <div key={truck.name}>
+                    <li>
+                      <h4 className="py-2 ">{truck.name}</h4>
+                      <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:</p>
+                      <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation:</p>
+                      <p><i className="fa-lg fas fa-phone mr-1" /> Number:</p>
+                      <p><i className="fa-lg fas fa-hourglass-half mr-2" /> Wait Time:</p>
+                      <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
+                      <p onClick={() => this.viewReviews(truck.name)}><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
+                      {this.state.reviews.map(review => (
+                        <div>
+                          <p>{review.username}</p>
+                          <Stars rating={review.rating} />
+                          <p>{review.rating}</p>
+                          <p>{review.comment}</p>
+                        </div>
+                      ))}
+                      <ReviewButton truckName={truck.name} />
+                    </li>
+                  </div>
 
-              <li>
-                <h4 className="py-2">{truck.name}</h4>
-                <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:</p>
-                <p><i className="fa-lg far fa-clock mr-1"></i> Hours of Operation:</p>
-                <p><i className="fa-lg fas fa-phone mr-1"></i> Number:</p>
-                <p><i className="fa-lg fas fa-hourglass-half mr-2"></i> Wait Time:</p>
-                <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
-                <p><i className="fa-lg fas fa-comment-alt mr-2"></i>Reviews</p>
-                <p><i class="fa-lg fas fa-pencil-alt mr-2"></i>Click <a>Here</a> to write a review!</p>
-              </li>
-            ))}
+                )
+              }
+            })}
           </ol>
 
         </div>
@@ -162,3 +191,4 @@ class User extends Component {
 }
 
 export default User;
+
