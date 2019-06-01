@@ -1,10 +1,11 @@
 import API from "./../../utils/API"
 import Nav from "../../components/Nav";
-import ReviewModal from "../../components/Review"
+import {ReviewButton} from "../../components/Review"
 
 import * as firebase from "firebase"
 import GoogleMapReact from 'google-map-react';
 import React, { Component } from 'react';
+
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -131,7 +132,7 @@ class User extends Component {
                 return (
                   <div key={truck.name}>
                     <li>
-                      <h4 className="py-2">{truck.name}</h4>
+                      <h4 className="py-2 ">{truck.name}</h4>
                       <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:</p>
                       <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation:</p>
                       <p><i className="fa-lg fas fa-phone mr-1" /> Number:</p>
@@ -139,12 +140,7 @@ class User extends Component {
                       <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
                       <p><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
 
-
-                      <div className="" data-toggle="modal" data-target={`#${modalID}`}>
-                        <p><i className="fa-lg fas fa-pencil-alt mr-2" />Click Here to write a review!</p>
-                      </div>
-                      
-                      <ReviewModal id={modalID} truckName={truck.name} />
+                      <ReviewButton truckName={truck.name} />
                     </li>
                   </div>
 

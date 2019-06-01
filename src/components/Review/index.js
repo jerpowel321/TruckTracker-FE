@@ -2,74 +2,114 @@ import API from "./../../utils/API"
 import Stars from "../Stars";
 
 import React, { useCallback, useState } from "react";
+import { Button, Modal } from 'react-bootstrap';
 
-function ReviewModal(props) {
-	const { id, truckName } = props;
-
-	const [username, setUsername] = useState('');
+function ReviewModal({ isShown, setIsShown, truckName }) {
+	const [userName, setUserName] = useState('');
 	const [rating, setRating] = useState(0);
 	const [comment, setComment] = useState('');
+	const [errors, setErrors] = useState({});
 
-	const onSumbit = useCallback(() => {
+	const submit = useCallback((event) => {
+		setErrors({});
+
 		API.saveReview({
 			truckName,
-			// username,
+			userName,
 			rating,
-			comments: comment,
+			comment,
 		})
-			.then(res => {
-				console.log(res);
-				setUsername('');
-				setRating(0);
-				setComment('');
+			.then(({ data }) => {
+				if (data.errors) {
+					console.log(data.errors);
+					const errorMap = {};
+					for (const error of data.errors) {
+						errorMap[error.path] = error;
+					}
+					setErrors(errorMap);
+				} else {
+					console.log(data);
+					setUserName('');
+					setRating(0);
+					setComment('');
+					setIsShown(false);
+				}
 			});
-	}, [truckName, username, rating, comment]);
+	}, [truckName, userName, rating, comment]);
 
+	const closeDialog = useCallback(() => setIsShown(false), [setIsShown]);
+	const onUserNameChange = useCallback(event => setUserName(event.target.value), [setUserName]);
 	const onCommentChange = useCallback(event => setComment(event.target.value), [setComment]);
-
-	console.log(`username: ${username}, rating: ${rating}, comment: ${comment}`);
+	const onRatingChange = useCallback(value => setRating(value), [setRating]);
 
 	return (
-		<div className="modal fade" id={id} tabIndex="-1" role="dialog" aria-hidden="true">
-			<div className="modal-dialog modal-dialog-centered" role="document">
-				<div className="modal-content">
-					<div className="modal-header">
-						<h5 className="modal-title text-center">{truckName}</h5>
-						<button type="button" className="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+		<Modal show={isShown} onHide={closeDialog}>
+			<Modal.Header closeButton>
+				<Modal.Title className="redText font">{truckName}</Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
+				<form className="formReview">
+					<div className="form-group">
+						<label>
+							<b>Your Name</b>	
+		 					<input type="text" className="form-control" placeholder="Type your name" onChange={onUserNameChange} value={userName} />
+						</label>
+						<InputValidationError error={errors.userName} />
+						<div >{} </div>
 					</div>
-					<div className="modal-body">
-						<div>
-							<form>
-								<div className="form-group">
-									<label>
-										Your name
-										<input type="text" className="form-control" placeholder="Type your name" onChange={event => setUsername(event.target.value)} value={username} />
-									</label>
-								</div>
-								<div className="form-group">
-									<label>
-										Rating
-										<Stars onChange={rating => setRating(rating)} />
-									</label>
-								</div>
-								<div className="form-group">
-									<label>
-										Comment
-										<textarea className="form-control" rows="3" onChange={onCommentChange} value={comment} />
-									</label>
-								</div>
-							</form>
-						</div>
+					<div className="form-group">
+						<label >
+							<b>Rating        1-Poor 2-Fair 3-Average 4-Good 5-Excellent</b>
+		 					<Stars onChange={onRatingChange} rating={rating} />
+						</label>
+						<InputValidationError error={errors.rating} />
 					</div>
-					<div className="modal-footer">
-						<button type="button" className="btn btn-primary approve" data-dismiss="modal" onClick={onSumbit}>Submit</button>
-						<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+					<div className="form-group">
+						<label>
+							<b>Comment</b>
+		 					<textarea className="form-control" rows="3" onChange={onCommentChange} value={comment} />
+						</label>
+						<InputValidationError error={errors.comment} />
 					</div>
-				</div>
-			</div>
-		</div>);
+				</form>
+			</Modal.Body>
+			<Modal.Footer>
+				<Button variant="primary" onClick={submit}>
+					Submit
+        </Button>
+				<Button variant="secondary" onClick={closeDialog}>
+					Close
+        </Button>
+			</Modal.Footer>
+		</Modal>
+	);
 };
+
+function InputValidationError({error}) {
+	if (error == null) {
+		return null;
+	}
+
+	return (
+		<div className="text-danger" role="alert">
+			{error.message}
+		</div>
+	);
+}
+
+export function ReviewButton({ truckName }) {
+	const [isShown, setIsShown] = useState(false);
+
+	const onClick = useCallback(() => setIsShown(true), [setIsShown]);
+
+	return (
+		<>
+			<div onClick={onClick}>
+				<p><i className="fa-lg fas fa-pencil-alt mr-2" />Click Here to write a review!</p>
+			</div>
+			<ReviewModal isShown={isShown} setIsShown={setIsShown} truckName={truckName} />
+		</>
+	);
+}
 
 export default ReviewModal;

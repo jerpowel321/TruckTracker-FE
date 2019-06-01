@@ -211,3 +211,9 @@ display: inline-block;
 #menuimg {
   width: 25px;
 }
+.formReview label {
+  display: block;
+}
+.stars {
+  font-size: 30px;
+}
