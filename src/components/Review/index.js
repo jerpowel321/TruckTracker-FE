@@ -3,10 +3,8 @@ import Stars from "../Stars";
 
 import React, { useCallback, useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
-import { useDropzone } from 'react-dropzone'
-import Dropzone from 'react-dropzone'
 import HandleImageUploads from "../Dropzone"
-import axios from 'axios'
+
 
 
 function ReviewModal({ isShown, setIsShown, truckName }) {
@@ -14,17 +12,20 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 	const [rating, setRating] = useState(0);
 	const [comment, setComment] = useState('');
 	const [errors, setErrors] = useState({});
-	// const [userImages, setuserImages] = useState([]);
+	const [userImages, setUserImages] = useState([]);
 
 	const submit = useCallback((event) => {
 		setErrors({});
+
+		console.log('if we sent it, the urls would be');
+		console.log(userImages);
 
 		API.saveReview({
 			truckName,
 			userName,
 			rating,
 			comment,
-			// userImages
+			userImages
 		})
 			.then(({ data }) => {
 				if (data.errors) {
@@ -40,10 +41,22 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 					setRating(0);
 					setComment('');
 					setIsShown(false);
-					// setUserImages([])
+					setUserImages([]);
 				}
 			});
-	}, [truckName, userName, rating, comment]);
+	}, [
+		comment,
+		rating,
+		setComment,
+		setErrors,
+		setIsShown,
+		setRating,
+		setUserImages,
+		setUserName,
+		truckName,
+		userImages,
+		userName,
+	]);
 
 	const closeDialog = useCallback(() => setIsShown(false), [setIsShown]);
 	const onUserNameChange = useCallback(event => setUserName(event.target.value), [setUserName]);
@@ -85,7 +98,11 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 					<b>Images</b>
 					</label>
 						<p className="text-center">Feel free to add some tasty Food Truck food photos below! </p>
-					<HandleImageUploads  />
+					<HandleImageUploads  
+						url='https://api.cloudinary.com/v1_1/dbpqzyaat/image/upload'
+						preset='i5aglck3'
+						setUserImages={setUserImages}
+					/>
 					</div>
 				</form>
 			</Modal.Body>
@@ -112,27 +129,6 @@ function InputValidationError({ error }) {
 		</div>
 	);
 }
-
-// function MyDropzone() {
-// 	const onDrop = useCallback(acceptedFiles => {
-// 		// Do something with the files
-// 		console.log("Photo is selected")
-// 		console.log(acceptedFiles)
-// 	}, [])
-// 	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
-
-// 	return (
-// 		<div {...getRootProps()}>
-// 			<input className="imageInputArea" {...getInputProps()} />
-// 			{
-// 				isDragActive ?
-// 					<p>Drop the files here ...</p> :
-// 					<p className="text-center pt-3">Drag and drop some files here, or click to select files <br></br><span>(Only *.jpeg and *.png images will be accepted)</span><br /> <br /> <br /></p>
-					
-// 			}
-// 		</div>
-// 	)
-// }
 
 
 
