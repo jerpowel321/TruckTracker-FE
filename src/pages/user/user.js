@@ -7,6 +7,12 @@ import * as firebase from "firebase"
 import GoogleMapReact from 'google-map-react';
 import React, { Component } from 'react';
 
+import Geocode from "react-geocode";
+ 
+Geocode.setApiKey("AIzaSyAebySY2-ib0pM0xXsMX3pC2dQkmW7n9fw");
+ 
+Geocode.enableDebug();
+
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -47,6 +53,24 @@ class User extends Component {
     urls: []
   }
 
+  getGeolocation(allTrucks){
+    for (let i = 0; i < allTrucks.length; i++){
+      Geocode.fromLatLng(allTrucks[i].lat, allTrucks[i].lng).then(
+        response => {
+          let address = response.results[0].formatted_address;
+          console.log(address)
+          allTrucks[i].address = address
+        },
+        error => {
+          console.error(error);
+        }
+        
+      );
+    }
+    
+    console.log("THIS SHOULD BE ALL THE INDIVIDUAL ADDRESSES" + JSON.stringify(allTrucks))
+  }
+
   viewReviews(id) {
     API.viewReview(id)
       .then(res => {
@@ -83,10 +107,29 @@ class User extends Component {
         let truck = {
           name: location[key].name,
           lat: location[key].lat,
-          lng: location[key].lng
+          lng: location[key].lng,
+          address: ""
         }
         allTrucks.push(truck)
+        console.log("alltrucks: " + JSON.stringify(allTrucks))
       }
+      
+        for (let i = 0; i < allTrucks.length; i++){
+          Geocode.fromLatLng(allTrucks[i].lat, allTrucks[i].lng).then(
+            response => {
+              let address = response.results[0].formatted_address;
+              console.log(address)
+              allTrucks[i].address = address
+            },
+            error => {
+              console.error(error);
+            }
+            
+          );
+        }
+        
+        console.log("THIS SHOULD BE ALL THE INDIVIDUAL ADDRESSES" + JSON.stringify(allTrucks))
+          
 
       API.getAllTrucks().then((res) => {
         for (let i = 0; i < res.data.length; i++) {
@@ -109,18 +152,18 @@ class User extends Component {
       console.log(this.state)
     })
 
-    connectedRef.on("value", snap => {
-      let latlng = {
-        lat: this.state.currentLocation.lat,
-        lng: this.state.currentLocation.lng
-      }
-      if (snap.val()) {
-        var con = connectionsRef.push(latlng);
-        con.onDisconnect().remove();
-      }
-    })
+    // connectedRef.on("value", snap => {
+    //   let latlng = {
+    //     lat: this.state.currentLocation.lat,
+    //     lng: this.state.currentLocation.lng
+    //   }
+    //   if (snap.val()) {
+    //     var con = connectionsRef.push(latlng);
+    //     con.onDisconnect().remove();
+    //   }
+    // })
   }
-
+  
   render() {
     return (
       // Important! Always set the container height explicitly
@@ -153,14 +196,14 @@ class User extends Component {
 
           <ol className="bg-light pt-3 pb-3">
             {this.state.trucks.map((truck, index) => {
-              console.log(truck);
+              // console.log(truck);
               if (truck.name) {
                 const modalID = `truck-modal-${index}`;
                 return (
                   <div key={truck.name}>
                     <li>
                       <h4 className="py-2 ">{truck.name}</h4>
-                      <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:</p>
+                      <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:{truck.address}</p>
                       <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation:</p>
                       <p><i className="fa-lg fas fa-phone mr-1" /> Number:</p>
                       <p><i className="fa-lg fas fa-hourglass-half mr-2" /> Wait Time:</p>
@@ -177,9 +220,45 @@ class User extends Component {
                       <ReviewButton truckName={truck.name} />
                     </li>
                   </div>
-
+                  
                 )
               }
+              else{
+                let addressArray = []
+                Geocode.fromLatLng(truck.lat, truck.lng).then(
+                  response => {
+                    let address = response.results[0].formatted_address;
+                    addressArray.push(address)
+                  },
+                  error => {
+                    console.error(error);
+                  }
+                );
+                return (
+                  <div key={truck.name}>
+                    <li>
+                      <h4 className="py-2 ">{truck.name}</h4>
+                      <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address: {truck.address}</p>
+                      <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation:</p>
+                      <p><i className="fa-lg fas fa-phone mr-1" /> Number:</p>
+                      <p><i className="fa-lg fas fa-hourglass-half mr-2" /> Wait Time:</p>
+                      <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
+                      <p onClick={() => this.viewReviews(truck.name)}><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
+                      {this.state.reviews.map(review => (
+                        <div>
+                          <p>{review.username}</p>
+                          <Stars rating={review.rating} />
+                          <p>{review.rating}</p>
+                          <p>{review.comment}</p>
+                        </div>
+                      ))}
+                      <ReviewButton truckName={truck.name} />
+                    </li>
+                  </div>
+                  
+                )
+              }
+              {console.log(this.state)}
             })}
           </ol>
 
