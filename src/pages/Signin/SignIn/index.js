@@ -30,9 +30,10 @@ const SignInPage = () =>
         <div className="div  signInCard">
           <div className="div ">
             <h1 className="redText largeTitles text-center mr-5">Sign In</h1>
-            <SignInForm />
             <SignInGoogle />
             <SignInFacebook />
+            <SignInForm />
+            
 
           </div>
         </div>
@@ -91,6 +92,13 @@ class SignInFormBase extends Component {
 
     return (
       <div>
+
+        <i class="fab fa-google"></i>
+        <i class="fab fa-facebook-square"></i>
+
+        <hr class="hr-text" data-content="OR"></hr>
+
+
         <form className="mt-3" >
           <b><label for="email" className="col-sm-5 col-form-label text-white"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
           <input
@@ -122,19 +130,19 @@ class SignInFormBase extends Component {
 
           <div className="">
             <div className="row mt-2 ">
-              
-                <button name="button" value="admin" id="adminSubmit" className="btn btn-md redBg text-white p-2 hvr-grow-shadow ml-5 mt-2 border-dark" disabled={isInvalid} onClick={this.onSubmit} type="submit">
-                  <b>Sign In</b>
-                </button>
-               
-             
+
+              <button name="button" value="admin" id="adminSubmit" className="btn btn-md redBg text-white p-2 hvr-grow-shadow ml-5 mt-2 border-dark" disabled={isInvalid} onClick={this.onSubmit} type="submit">
+                <b>Sign In</b>
+              </button>
+
+
             </div>
           </div>
           {error && <p className="text-white darkbackground p-1 mt-3"><b>{error.message}</b></p>}
         </form>
 
         <br></br>
- 
+
         <PasswordForgetLink /> <br></br>
         <SignUpLink />
 
