@@ -6,11 +6,12 @@ import Stars from "../../components/Stars";
 import * as firebase from "firebase"
 import GoogleMapReact from 'google-map-react';
 import React, { Component } from 'react';
-
+import "./style.css";
 import Geocode from "react-geocode";
- 
+import { Accordion, Card, Button } from 'react-bootstrap'
+
 Geocode.setApiKey("AIzaSyAebySY2-ib0pM0xXsMX3pC2dQkmW7n9fw");
- 
+
 Geocode.enableDebug();
 
 
@@ -50,11 +51,16 @@ class User extends Component {
     trucks: [],
     currentLocation: {},
     reviews: [],
-    urls: []
+    urls: [],
+    website: [],
+    cuisine: [],
+    menu: [],
+    phone: [],
+    images: [],
   }
 
-  getGeolocation(allTrucks){
-    for (let i = 0; i < allTrucks.length; i++){
+  getGeolocation(allTrucks) {
+    for (let i = 0; i < allTrucks.length; i++) {
       Geocode.fromLatLng(allTrucks[i].lat, allTrucks[i].lng).then(
         response => {
           let address = response.results[0].formatted_address;
@@ -64,19 +70,18 @@ class User extends Component {
         error => {
           console.error(error);
         }
-        
+
       );
     }
-    
+
     console.log("THIS SHOULD BE ALL THE INDIVIDUAL ADDRESSES" + JSON.stringify(allTrucks))
   }
 
   viewReviews(id) {
     API.viewReview(id)
       .then(res => {
-        console.log("data:", res.data)
         this.setState({ reviews: res.data })
-        console.log("The reviews set state is updated")
+        console.log("The reviews set state is updated -------------------------->")
         console.log(this.state.reviews)
       })
       .catch(err => console.log(err));
@@ -108,43 +113,51 @@ class User extends Component {
           name: location[key].name,
           lat: location[key].lat,
           lng: location[key].lng,
-          address: ""
+          address: "",
+          website: "",
+          cuisine: "",
+          menu: "",
+          phone: "",
         }
         allTrucks.push(truck)
         console.log("alltrucks: " + JSON.stringify(allTrucks))
       }
-      
-        for (let i = 0; i < allTrucks.length; i++){
-          Geocode.fromLatLng(allTrucks[i].lat, allTrucks[i].lng).then(
-            response => {
-              let address = response.results[0].formatted_address;
-              console.log(address)
-              allTrucks[i].address = address
-            },
-            error => {
-              console.error(error);
-            }
-            
-          );
-        }
-        
-        console.log("THIS SHOULD BE ALL THE INDIVIDUAL ADDRESSES" + JSON.stringify(allTrucks))
-          
+
+      for (let i = 0; i < allTrucks.length; i++) {
+        Geocode.fromLatLng(allTrucks[i].lat, allTrucks[i].lng).then(
+          response => {
+            let address = response.results[0].formatted_address;
+            console.log(address)
+            allTrucks[i].address = address
+          },
+          error => {
+            console.error(error);
+          }
+
+        );
+      }
+
+      console.log("THIS SHOULD BE ALL THE INDIVIDUAL ADDRESSES" + JSON.stringify(allTrucks))
+
 
       API.getAllTrucks().then((res) => {
+        console.log("This is all the data that is retrieved");
+        console.log(res.data)
         for (let i = 0; i < res.data.length; i++) {
           for (let j = 0; j < allTrucks.length; j++) {
-            console.log("This is all the data that is retrieved")
-            console.log(res.data)
             if (res.data[i].businessName === allTrucks[j].name) {
               allTrucks[j].url = res.data[i].menu
               urls.push(res.data[i].menu)
               allTrucks[j].id = res.data[i].id
+              allTrucks[j].website = res.data[i].website
+              allTrucks[j].cuisine = res.data[i].cuisine
+              allTrucks[j].menu = res.data[i].menu
+              allTrucks[j].phone = res.data[i].phone
             }
           }
         }
       })
-      console.log(allTrucks)
+      console.log(allTrucks, "This is consolelogging all trucks")
       this.setState({
         trucks: allTrucks,
         urls: urls
@@ -165,7 +178,7 @@ class User extends Component {
     //   }
     // })
   }
-  
+
   render() {
     return (
       // Important! Always set the container height explicitly
@@ -198,69 +211,47 @@ class User extends Component {
 
           <ol className="bg-light pt-3 pb-3">
             {this.state.trucks.map((truck, index) => {
-              // console.log(truck);
+              console.log("This should console log each truck");
+              console.log(truck);
               if (truck.name) {
                 const modalID = `truck-modal-${index}`;
                 return (
                   <div key={truck.name}>
                     <li>
                       <h4 className="py-2 ">{truck.name}</h4>
+                      <img src={truck.images} />
                       <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:{truck.address}</p>
-                      <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation:</p>
-                      <p><i className="fa-lg fas fa-phone mr-1" /> Number:</p>
+                      <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation: 9am-6pm</p>
+                      <p><i className="fa-lg fas fa-phone mr-1" /> Number: {truck.phone}</p>
                       <p><i className="fa-lg fas fa-hourglass-half mr-2" /> Wait Time:</p>
                       <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
-                      <p onClick={() => this.viewReviews(truck.name)}><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
-                      {this.state.reviews.map(review => (
-                        <div>
-                          <p>{review.username}</p>
-                          <Stars rating={review.rating} />
-                          <p>{review.rating}</p>
-                          <p>{review.comment}</p>
-                        </div>
-                      ))}
+                      <Accordion>
+                        <Card className="reviewCard">
+                          <Card.Header className="reviewHeader">
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.viewReviews(truck.name)}>
+                              <p><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
+                            </Accordion.Toggle>
+                          </Card.Header>
+                          <Accordion.Collapse eventKey="0">
+                            <Card.Body className="reviewBody">
+                              {this.state.reviews.filter(review => review.truckName === truck.name).map(review => (
+                                <div className="review">
+                                  <h4 className="pt-2 text-center">{review.userName}</h4>
+                                  <Stars rating={review.rating} />
+                                  <p className="pl-2 pr-2 pb-1">{review.comment}</p>
+                                </div>
+                              ))}
+                            </Card.Body>
+                          </Accordion.Collapse>
+                        </Card>
+                      </Accordion>
                       <ReviewButton truckName={truck.name} />
+
                     </li>
                   </div>
-                  
+
                 )
               }
-              else{
-                let addressArray = []
-                Geocode.fromLatLng(truck.lat, truck.lng).then(
-                  response => {
-                    let address = response.results[0].formatted_address;
-                    addressArray.push(address)
-                  },
-                  error => {
-                    console.error(error);
-                  }
-                );
-                return (
-                  <div key={truck.name}>
-                    <li>
-                      <h4 className="py-2 ">{truck.name}</h4>
-                      <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address: {truck.address}</p>
-                      <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation:</p>
-                      <p><i className="fa-lg fas fa-phone mr-1" /> Number:</p>
-                      <p><i className="fa-lg fas fa-hourglass-half mr-2" /> Wait Time:</p>
-                      <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
-                      <p onClick={() => this.viewReviews(truck.name)}><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
-                      {this.state.reviews.map(review => (
-                        <div>
-                          <p>{review.username}</p>
-                          <Stars rating={review.rating} />
-                          <p>{review.rating}</p>
-                          <p>{review.comment}</p>
-                        </div>
-                      ))}
-                      <ReviewButton truckName={truck.name} />
-                    </li>
-                  </div>
-                  
-                )
-              }
-              {console.log(this.state)}
             })}
           </ol>
 

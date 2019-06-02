@@ -3,13 +3,7 @@ import Dropzone from 'react-dropzone';
 import request from 'superagent';
 
 
-const CLOUDINARY_UPLOAD_PRESET = 'i5aglck3';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/dbpqzyaat/image/upload';
-
-
 export default class ImageUpload extends React.Component {
-
-
 	constructor(props) {
 		super(props);
 
@@ -18,7 +12,6 @@ export default class ImageUpload extends React.Component {
 			uploadedFileUrls: []
 		};
 	}
-
 
 	onImageDrop(files) {
 		this.setState({
@@ -29,22 +22,23 @@ export default class ImageUpload extends React.Component {
 		this.handleImageUpload(files[0]);
 	}
 
-
 	handleImageUpload(file) {
-		let upload = request.post(CLOUDINARY_UPLOAD_URL )
-			.field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+		console.log(this.props);
+		let upload = request.post(this.props.url)
+			.field('upload_preset', this.props.preset)
 			.field('file', file);
 
 		upload.end((err, response) => {
 			if (err) {
 				console.error(err);
+				return;
 			}
-
 			if (response.body.secure_url !== '') {
 				this.setState({
-					uploadedFileCloudinaryUrl: response.body.secure_url
+					uploadedFileCloudinaryUrl: response.body.secure_url,
 				});
 				this.state.uploadedFileUrls.push(response.body.secure_url)
+				this.props.setUserImages && this.props.setUserImages(this.state.uploadedFileUrls);
 				console.log("This is the file cloudinaryUrl")
 				console.log(this.state.uploadedFileCloudinaryUrl)
 				console.log("This should have all the file URLs stored")
@@ -53,10 +47,10 @@ export default class ImageUpload extends React.Component {
 		});
 	}
 
-	render()  
-	{ return (
+	render() {
+		return (
 			<div>
-      <div className="FileUpload bgBlue">
+      <div className="FileUpload">
       <div>
         {this.state.uploadedFileCloudinaryUrl === '' ? null :
         <div className="text-center bgGrey">
@@ -66,20 +60,14 @@ export default class ImageUpload extends React.Component {
       </div>
     </div>
 			<Dropzone
-				
 				onDrop={this.onImageDrop.bind(this)}
 				accept="image/*"
 				multiple={false}>
 				{({ getRootProps, getInputProps }) => {
 					return (
-						<div
-							{...getRootProps()}
-						>
+						<div {...getRootProps()}>
 							<input {...getInputProps()} />
-							{
 								<p className="text-center dropZone pt-2">Drag and drop some files here, or click to select files<br /><br /><br /><br/><br/></p>
-								
-							}
 						</div>
 					)
 				}}
