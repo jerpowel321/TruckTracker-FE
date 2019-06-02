@@ -8,38 +8,13 @@ import Dropzone from 'react-dropzone'
 import HandleImageUploads from "../Dropzone"
 import axios from 'axios'
 
-// function handleUploadImages( images){
-// 	// uploads is an array that would hold all the post methods for each image to be uploaded, then we'd use axios.all()
-// 	const uploads = images.map(image => {
-// 		// our formdata
-// 		const formData = new FormData();
-// 		formData.append("file", image);
-// 		formData.append("tags", '{TAGS}'); // Add tags for the images - {Array}
-// 		formData.append("upload_preset", "{cg1d4ckz}"); // Replace the preset name with your own
-// 		formData.append("api_key", "{448248782925833}"); // Replace API key with your own Cloudinary API key
-// 		formData.append("timestamp", (Date.now() / 1000) | 0);
-
-// 		// Replace cloudinary upload URL with yours
-// 		return axios.post(
-// 			"https://api.cloudinary.com/v1_1/dbpqzyaat/image/upload",
-// 			formData, 
-// 			{ headers: { "X-Requested-With": "XMLHttpRequest" }})
-// 			.then(response => console.log(response.data))
-// 	});
-
-// 	// We would use axios `.all()` method to perform concurrent image upload to cloudinary.
-// 	axios.all(uploads).then(() => {
-// 		// ... do anything after successful upload. You can setState() or save the data
-// 		console.log('Images have all being uploaded')
-// 	});
-// }
-
 
 function ReviewModal({ isShown, setIsShown, truckName }) {
 	const [userName, setUserName] = useState('');
 	const [rating, setRating] = useState(0);
 	const [comment, setComment] = useState('');
 	const [errors, setErrors] = useState({});
+	// const [userImages, setuserImages] = useState([]);
 
 	const submit = useCallback((event) => {
 		setErrors({});
@@ -49,6 +24,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 			userName,
 			rating,
 			comment,
+			// userImages
 		})
 			.then(({ data }) => {
 				if (data.errors) {
@@ -64,6 +40,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 					setRating(0);
 					setComment('');
 					setIsShown(false);
+					// setUserImages([])
 				}
 			});
 	}, [truckName, userName, rating, comment]);
@@ -72,7 +49,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 	const onUserNameChange = useCallback(event => setUserName(event.target.value), [setUserName]);
 	const onCommentChange = useCallback(event => setComment(event.target.value), [setComment]);
 	const onRatingChange = useCallback(value => setRating(value), [setRating]);
-
+	// const onUserImagesChange = useCallback(event => setUserImages(event.target.value), [setUserImages]);
 	
 	return (
 		<Modal show={isShown} onHide={closeDialog}>
@@ -108,7 +85,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 					<b>Images</b>
 					</label>
 						<p className="text-center">Feel free to add some tasty Food Truck food photos below! </p>
-					<HandleImageUploads />
+					<HandleImageUploads  />
 					</div>
 				</form>
 			</Modal.Body>

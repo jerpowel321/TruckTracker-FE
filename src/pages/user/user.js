@@ -91,6 +91,8 @@ class User extends Component {
       API.getAllTrucks().then((res) => {
         for (let i = 0; i < res.data.length; i++) {
           for (let j = 0; j < allTrucks.length; j++) {
+            console.log("This is all the data that is retrieved")
+            console.log(res.data)
             if (res.data[i].businessName === allTrucks[j].name) {
               allTrucks[j].url = res.data[i].menu
               urls.push(res.data[i].menu)

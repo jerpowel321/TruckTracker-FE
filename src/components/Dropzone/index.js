@@ -14,7 +14,8 @@ export default class ImageUpload extends React.Component {
 		super(props);
 
 		this.state = {
-			uploadedFileCloudinaryUrl: ''
+			uploadedFileCloudinaryUrl: '',
+			uploadedFileUrls: []
 		};
 	}
 
@@ -23,7 +24,8 @@ export default class ImageUpload extends React.Component {
 		this.setState({
 			uploadedFile: files[0]
 		});
-
+		console.log("this should be the file name")
+		console.log(this.state.uploadedFile)
 		this.handleImageUpload(files[0]);
 	}
 
@@ -42,6 +44,11 @@ export default class ImageUpload extends React.Component {
 				this.setState({
 					uploadedFileCloudinaryUrl: response.body.secure_url
 				});
+				this.state.uploadedFileUrls.push(response.body.secure_url)
+				console.log("This is the file cloudinaryUrl")
+				console.log(this.state.uploadedFileCloudinaryUrl)
+				console.log("This should have all the file URLs stored")
+				console.log(this.state.uploadedFileUrls)
 			}
 		});
 	}
