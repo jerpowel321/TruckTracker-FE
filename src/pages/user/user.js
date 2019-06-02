@@ -6,7 +6,7 @@ import Stars from "../../components/Stars";
 import * as firebase from "firebase"
 import GoogleMapReact from 'google-map-react';
 import React, { Component } from 'react';
-
+import Moment from 'react-moment';
 import Geocode from "react-geocode";
  
 Geocode.setApiKey("AIzaSyAebySY2-ib0pM0xXsMX3pC2dQkmW7n9fw");
@@ -43,6 +43,7 @@ class User extends Component {
     },
     zoom: 15
   };
+
 
   state = {
     lat: 37.77,
@@ -97,6 +98,19 @@ class User extends Component {
       )
     }
 
+    function compare(a, b) {
+      let disA = a.distance
+      let disB = b.distance
+      
+      let comparison = 0;
+      if (disA > disB) {
+        comparison = -1;
+      } else if (disA < disB) {
+        comparison = 1;
+      }
+      return comparison;
+    }
+
     db.ref().child("trucks").on("value", snap => {
       console.log("Value change")
       console.log(snap.val())
@@ -108,7 +122,8 @@ class User extends Component {
           name: location[key].name,
           lat: location[key].lat,
           lng: location[key].lng,
-          address: ""
+          address: "",
+          distance: 0
         }
         allTrucks.push(truck)
         console.log("alltrucks: " + JSON.stringify(allTrucks))
@@ -144,26 +159,38 @@ class User extends Component {
           }
         }
       })
+
+      if(this.state.currentLocation) {
+        for(let i = 0; i < allTrucks.length; i++){
+          let distance = (Math.abs(allTrucks[i].lat) - Math.abs(this.state.lat)) + (Math.abs(allTrucks[i].lng) - Math.abs(this.state.lng))
+          allTrucks[i].distance = distance
+        }
+      }
+
+      allTrucks = allTrucks.sort(compare)
+
       console.log(allTrucks)
       this.setState({
         trucks: allTrucks,
         urls: urls
       })
-
+      let time = Moment()
+      this.setState({time: time})
+      
 
       console.log(this.state)
     })
 
-    // connectedRef.on("value", snap => {
-    //   let latlng = {
-    //     lat: this.state.currentLocation.lat,
-    //     lng: this.state.currentLocation.lng
-    //   }
-    //   if (snap.val()) {
-    //     var con = connectionsRef.push(latlng);
-    //     con.onDisconnect().remove();
-    //   }
-    // })
+    connectedRef.on("value", snap => {
+      let latlng = {
+        lat: this.state.currentLocation.lat,
+        lng: this.state.currentLocation.lng
+      }
+      if (snap.val()) {
+        var con = connectionsRef.push(latlng);
+        con.onDisconnect().remove();
+      }
+    })
   }
   
   render() {
@@ -260,7 +287,6 @@ class User extends Component {
                   
                 )
               }
-              {console.log(this.state)}
             })}
           </ol>
 
