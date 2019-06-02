@@ -33,7 +33,7 @@ const SignInPage = () =>
             <SignInGoogle />
             <SignInFacebook />
             <SignInForm />
-            
+
 
           </div>
         </div>
@@ -93,7 +93,7 @@ class SignInFormBase extends Component {
     return (
       <div>
 
-        <i class="fab fa-google"></i>
+
         <i class="fab fa-facebook-square"></i>
 
         <hr class="hr-text" data-content="OR"></hr>
@@ -188,7 +188,19 @@ class SignInGoogleBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Google</button>
+
+        <div className="card" style={{width: '10rem'}} >
+        {/* <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}> */}
+          <i className="fab fa-google fa-4x text-primary"></i>
+          <div class="card-body">
+          <p class="card-text">Sign In with Google</p>
+          
+          </div>
+          
+        </div>
+
+
+       
 
         {error && <p>{error.message}</p>}
       </form>
