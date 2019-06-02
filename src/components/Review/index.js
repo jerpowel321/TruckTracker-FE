@@ -4,7 +4,9 @@ import Stars from "../Stars";
 import React, { useCallback, useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone'
-
+import Dropzone from 'react-dropzone'
+import HandleImageUploads from "../Dropzone"
+import axios from 'axios'
 
 
 function ReviewModal({ isShown, setIsShown, truckName }) {
@@ -12,6 +14,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 	const [rating, setRating] = useState(0);
 	const [comment, setComment] = useState('');
 	const [errors, setErrors] = useState({});
+	// const [userImages, setuserImages] = useState([]);
 
 	const submit = useCallback((event) => {
 		setErrors({});
@@ -21,6 +24,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 			userName,
 			rating,
 			comment,
+			// userImages
 		})
 			.then(({ data }) => {
 				if (data.errors) {
@@ -36,6 +40,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 					setRating(0);
 					setComment('');
 					setIsShown(false);
+					// setUserImages([])
 				}
 			});
 	}, [truckName, userName, rating, comment]);
@@ -44,7 +49,8 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 	const onUserNameChange = useCallback(event => setUserName(event.target.value), [setUserName]);
 	const onCommentChange = useCallback(event => setComment(event.target.value), [setComment]);
 	const onRatingChange = useCallback(value => setRating(value), [setRating]);
-
+	// const onUserImagesChange = useCallback(event => setUserImages(event.target.value), [setUserImages]);
+	
 	return (
 		<Modal show={isShown} onHide={closeDialog}>
 			<Modal.Header closeButton>
@@ -79,11 +85,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 					<b>Images</b>
 					</label>
 						<p className="text-center">Feel free to add some tasty Food Truck food photos below! </p>
-					
-					<div className="dropZone">
-					
-						<MyDropzone />
-					</div>
+					<HandleImageUploads  />
 					</div>
 				</form>
 			</Modal.Body>
@@ -111,26 +113,28 @@ function InputValidationError({ error }) {
 	);
 }
 
-function MyDropzone() {
-	const onDrop = useCallback(acceptedFiles => {
-		// Do something with the files
-		console.log("Photo is selected")
-		console.log(acceptedFiles)
-	}, [])
-	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
+// function MyDropzone() {
+// 	const onDrop = useCallback(acceptedFiles => {
+// 		// Do something with the files
+// 		console.log("Photo is selected")
+// 		console.log(acceptedFiles)
+// 	}, [])
+// 	const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
-	return (
-		<div {...getRootProps()}>
-			<input className="imageInputArea" {...getInputProps()} />
-			{
-				isDragActive ?
-					<p>Drop the files here ...</p> :
-					<p className="text-center pt-3">Drag and drop some files here, or click to select files <br></br><span>(Only *.jpeg and *.png images will be accepted)</span><br /> <br /> <br /></p>
+// 	return (
+// 		<div {...getRootProps()}>
+// 			<input className="imageInputArea" {...getInputProps()} />
+// 			{
+// 				isDragActive ?
+// 					<p>Drop the files here ...</p> :
+// 					<p className="text-center pt-3">Drag and drop some files here, or click to select files <br></br><span>(Only *.jpeg and *.png images will be accepted)</span><br /> <br /> <br /></p>
 					
-			}
-		</div>
-	)
-}
+// 			}
+// 		</div>
+// 	)
+// }
+
+
 
 export function ReviewButton({ truckName }) {
 	const [isShown, setIsShown] = useState(false);

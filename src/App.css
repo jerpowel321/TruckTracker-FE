@@ -220,6 +220,12 @@ display: inline-block;
 .dropZone {
   background: rgb(242, 242, 242);
   border:2px dashed rgb(205, 205, 205);
-  height: 120px;
   color: gray;
+}
+.FileUpload img {
+width: 50%
+
+}
+.bgGrey{
+  background-color: rgb(242, 242, 242);
 }
