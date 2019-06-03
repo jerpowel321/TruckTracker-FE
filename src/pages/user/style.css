@@ -12,18 +12,20 @@
       align-items: stretch;
       display: flex;
   }
-.reviewHeader {
+.reviewHeader, .imagesHeader, .businessInfoHeader{
     background:rgba(255,255,255,0);
     margin: 0;
     padding: 0;
     height: 40px;
 }
-.reviewBody {
+.reviewBody, .imagesBody, .businessInfoBody{
     background:rgba(255,255,255,0);
     margin: 0;
     padding: 0;
+    height: 310px;
+    overflow: auto;
 }
-.reviewCard {
+.reviewCard, .imagesCard, .businessInfoCard{
     background-color: #f8f9fa;
     margin: 0;
     padding: 0;
@@ -35,3 +37,34 @@
   .Accordion .card {
     margin:0;
   }
+
+  .imagesCard img {
+     height: 200px;
+     margin: 10px;
+  }
+  .reviewCard .reviewHeader{
+      border:0;
+  }
+  .imagesCard .imagesHeader{
+    border:0;
+}
+.imagesBody {
+    display:flex;
+    flex-wrap: wrap;
+}
+.writeReview {
+    color: #007bff;
+    display: inline-block
+}
+.writeReview:hover {
+    color: darkblue;
+}
+.beige {
+    color:#CE5B78;
+}
+.orange {
+    color: #E08119;
+}
+.purple {
+    color: #6B5B95;
+}

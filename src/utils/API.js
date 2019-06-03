@@ -23,6 +23,10 @@ export default {
     viewReview(id) {
         return axios.get(BASEURL + `/api/reviews/${id}`)
     },
+    
+    viewAllReviews() {
+        return axios.get(BASEURL + `/api/reviews`)
+    },
     //Jennifer
 
     //Cyrus

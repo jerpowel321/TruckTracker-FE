@@ -1,6 +1,6 @@
 import API from "./../../utils/API"
 import Nav from "../../components/Nav";
-import { ReviewButton } from "../../components/Review"
+import { ReviewButton } from "../../components/Review";
 import Stars from "../../components/Stars";
 
 import * as firebase from "firebase"
@@ -9,7 +9,8 @@ import React, { Component } from 'react';
 import Moment from 'react-moment';
 import "./style.css";
 import Geocode from "react-geocode";
-import { Accordion, Card, Button } from 'react-bootstrap'
+import { Accordion, Card, Button } from 'react-bootstrap';
+
 
 Geocode.setApiKey("AIzaSyAebySY2-ib0pM0xXsMX3pC2dQkmW7n9fw");
 
@@ -37,6 +38,9 @@ const AnyReactComponent = ({ text }) => <div title={text}><img src="https://api-
 
 
 
+
+
+
 class User extends Component {
   static defaultProps = {
     center: {
@@ -50,15 +54,12 @@ class User extends Component {
   state = {
     lat: 37.77,
     lng: -122.45,
-    trucks: [],
+    trucks: [], //To view trucker information from firebase
     currentLocation: {},
-    reviews: [],
+    reviews: [], //To view reviews for a specific truck
     urls: [],
-    website: [],
-    cuisine: [],
-    menu: [],
-    phone: [],
-    images: [],
+    allReviews: [], //To view reviews for all trucks, used for displaying images
+    sqltrucks: [], //To get sql database trucker information
   }
 
   getGeolocation(allTrucks) {
@@ -83,11 +84,26 @@ class User extends Component {
     API.viewReview(id)
       .then(res => {
         this.setState({ reviews: res.data })
-        console.log("The reviews set state is updated -------------------------->")
-        console.log(this.state.reviews)
       })
       .catch(err => console.log(err));
 
+  }
+
+  getImages() {
+    API.viewAllReviews().then((res) => {
+      this.setState({ allReviews: res.data })
+    })
+      .catch(err => console.log(err));
+  }
+
+  gettruckInfo(){
+    API.getAllTrucks().then((res) => {
+      this.setState({ sqltrucks: res.data})
+      console.log("This is the current sql trucks info")
+      console.log(this.state.sqltrucks)
+
+    })
+    .catch(err => console.log(err));
   }
 
   componentDidMount() {
@@ -107,7 +123,7 @@ class User extends Component {
     function compare(a, b) {
       let disA = a.distance
       let disB = b.distance
-      
+
       let comparison = 0;
       if (disA > disB) {
         comparison = -1;
@@ -130,10 +146,6 @@ class User extends Component {
           lng: location[key].lng,
           address: "",
           distance: 0,
-          website: "",
-          cuisine: "",
-          menu: "",
-          phone: "",
         }
         allTrucks.push(truck)
         console.log("alltrucks: " + JSON.stringify(allTrucks))
@@ -155,27 +167,8 @@ class User extends Component {
 
       console.log("THIS SHOULD BE ALL THE INDIVIDUAL ADDRESSES" + JSON.stringify(allTrucks))
 
-
-      API.getAllTrucks().then((res) => {
-        console.log("This is all the data that is retrieved");
-        console.log(res.data)
-        for (let i = 0; i < res.data.length; i++) {
-          for (let j = 0; j < allTrucks.length; j++) {
-            if (res.data[i].businessName === allTrucks[j].name) {
-              allTrucks[j].url = res.data[i].menu
-              urls.push(res.data[i].menu)
-              allTrucks[j].id = res.data[i].id
-              allTrucks[j].website = res.data[i].website
-              allTrucks[j].cuisine = res.data[i].cuisine
-              allTrucks[j].menu = res.data[i].menu
-              allTrucks[j].phone = res.data[i].phone
-            }
-          }
-        }
-      })
-
-      if(this.state.currentLocation) {
-        for(let i = 0; i < allTrucks.length; i++){
+      if (this.state.currentLocation) {
+        for (let i = 0; i < allTrucks.length; i++) {
           let distance = (Math.abs(allTrucks[i].lat) - Math.abs(this.state.lat)) + (Math.abs(allTrucks[i].lng) - Math.abs(this.state.lng))
           allTrucks[i].distance = distance
         }
@@ -190,7 +183,12 @@ class User extends Component {
         urls: urls
       })
 
-      console.log(this.state)
+      // console.log(this.state)
+
+      console.log ("--------------this.state.trucks----------------------------")
+      console.log (this.state.trucks)
+      console.log ("--------------this.state.sqltrucks----------------------------")
+      console.log (this.state.sqltrucks)
     })
 
     connectedRef.on("value", snap => {
@@ -237,20 +235,55 @@ class User extends Component {
 
           <ol className="bg-light pt-3 pb-3">
             {this.state.trucks.map((truck, index) => {
-              console.log("This should console log each truck");
-              console.log(truck);
+              // console.log("This should console log each truck");
+              // console.log(truck);
               if (truck.name) {
                 const modalID = `truck-modal-${index}`;
                 return (
                   <div key={truck.name}>
                     <li>
                       <h4 className="py-2 ">{truck.name}</h4>
-                      <img src={truck.images} />
-                      <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:{truck.address}</p>
-                      <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation: 9am-6pm</p>
-                      <p><i className="fa-lg fas fa-phone mr-1" /> Number: {truck.phone}</p>
-                      <p><i className="fa-lg fas fa-hourglass-half mr-2" /> Wait Time:</p>
-                      <p><img id="menuimg" src="https://www.sccpre.cat/mypng/detail/164-1647640_restaurant-menu-comments-food-search-icon-png.png" /> <a href={truck.url}>Menu</a></p>
+                      <Accordion>
+                        <Card className="businessInfoCard w-100">
+                          <Card.Header className="businessInfoHeader">
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.gettruckInfo(truck.name)}>
+                              <p><i class="fa-lg fas fa-info-circle mr-2"></i>Business Info</p>
+                            </Accordion.Toggle>
+                          </Card.Header>
+                          <Accordion.Collapse eventKey="0">
+                            <Card.Body className="businessInfoBody">
+                                {this.state.sqltrucks.filter(sqltrucks => sqltrucks.businessName === truck.name).map(sqltrucks => (
+                                  <div className="businessInfo pl-5">
+                                    <p className="pt-4"><i class="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> NEEDS TO HAVE ADDRESS</p>
+                                    
+                                   
+                                  {sqltrucks.cuisine
+                                    ? <p><i className="fa-lg fas fa-utensils mr-2 purple"></i><span className="font-weight-bold mr-2">Cuisine:</span>{sqltrucks.cuisine}</p>
+                                    : null
+                                  }
+                                  {sqltrucks.phone
+                                    ? <p><i className="fa-lg fas fa-phone mr-1 text-info" /> <span className="font-weight-bold mr-2">Number:</span>{sqltrucks.phone}</p>
+                                    : null
+                                  }
+                                  
+                                    <p><i className="fa-lg far fa-clock mr-1 beige" /> <span className="font-weight-bold mr-1">Hours of Operation:</span> 9am-6pm</p>
+                                    <p><i className="fa-lg fas fa-hourglass-half mr-2 orange" /> <span className="font-weight-bold mr-1">Wait Time:</span> 20mins</p>
+                                    {sqltrucks.website
+                                    ? <p><i className="fa-lg fab fa-internet-explorer pr-2 text-success"></i><span className="font-weight-bold mr-2">Website:</span><a href={sqltrucks.website}>{sqltrucks.website}</a></p>
+                                    : null
+                                  }
+                                  {sqltrucks.menu
+                                    ?  <p><img className="pr-1 purple" id="menuimg" src="https://cdn2.iconfinder.com/data/icons/food-restaurant-1/128/flat-56-512.png" /><span className="font-weight-bold mr-2">Menu:</span> <a href={sqltrucks.menu}>{sqltrucks.menu}</a></p>
+                                    : null
+                                  }
+                                    
+                                   
+                                  </div>
+                                ))}
+                            </Card.Body>
+                          </Accordion.Collapse>
+                        </Card>
+                      </Accordion>
                       <Accordion>
                         <Card className="reviewCard">
                           <Card.Header className="reviewHeader">
@@ -259,12 +292,34 @@ class User extends Component {
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
-                            <Card.Body className="reviewBody">
-                              {this.state.reviews.filter(review => review.truckName === truck.name).map(review => (
-                                <div className="review">
-                                  <h4 className="pt-2 text-center">{review.userName}</h4>
-                                  <Stars rating={review.rating} />
-                                  <p className="pl-2 pr-2 pb-1">{review.comment}</p>
+                            <Card.Body className="reviewBody pl-2">
+                                {this.state.reviews.filter(review => review.truckName === truck.name).map(review => (
+                                  <div className="review">
+                                    <h4 className="pt-2 text-center">{review.userName}</h4>
+                                    <Stars rating={review.rating} />
+                                    <p className="pl-2 pr-2 pb-1">{review.comment}</p>
+                                  </div>
+                                ))}
+                            </Card.Body>
+                          </Accordion.Collapse>
+                        </Card>
+                      </Accordion>
+                      <Accordion>
+                        <Card className="imagesCard">
+                          <Card.Header className="imagesHeader">
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.getImages(truck.name)}>
+                              <p><i class="fa-lg far fa-images mr-2"></i>Images</p>
+                            </Accordion.Toggle>
+                          </Card.Header>
+                          <Accordion.Collapse eventKey="0">
+                            <Card.Body className="imagesBody pl-2">
+                              {this.state.allReviews.filter(review => review.truckName === truck.name).map(review => (
+                                <div>
+                                  
+                                  {review.userImages[0]
+                                    ? <img src={review.userImages[0]} />
+                                    : null
+                                  }
                                 </div>
                               ))}
                             </Card.Body>
