@@ -57,7 +57,6 @@ class User extends Component {
     trucks: [], //To view trucker information from firebase
     currentLocation: {},
     reviews: [], //To view reviews for a specific truck
-    urls: [],
     allReviews: [], //To view reviews for all trucks, used for displaying images
     sqltrucks: [], //To get sql database trucker information
   }
@@ -137,7 +136,6 @@ class User extends Component {
       console.log("Value change")
       console.log(snap.val())
       let allTrucks = [];
-      let urls = [];
       let location = snap.val();
       for (let key in location) {
         let truck = {
@@ -180,7 +178,6 @@ class User extends Component {
 
       this.setState({
         trucks: allTrucks,
-        urls: urls
       })
 
 
@@ -257,6 +254,10 @@ class User extends Component {
                             <Card.Body className="businessInfoBody">
                                 {this.state.sqltrucks.filter(sqltrucks => sqltrucks.businessName === truck.name).map(sqltrucks => (
                                   <div className="businessInfo pl-5">
+                                    {/* {!sqltrucks.businessName
+                                    ?  <p>Oh no, looks like this business does not have any. Be the first one!</p>
+                                    : null
+                                  } */}
                                     <p className="pt-4"><i class="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> NEEDS TO HAVE ADDRESS</p>
                                     
                                    
@@ -301,6 +302,7 @@ class User extends Component {
                                     <h4 className="pt-2 text-center">{review.userName}</h4>
                                     <Stars rating={review.rating} />
                                     <p className="pl-2 pr-2 pb-1">{review.comment}</p>
+                                    
                                   </div>
                                 ))}
                             </Card.Body>
