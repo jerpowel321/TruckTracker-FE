@@ -189,9 +189,6 @@ class User extends Component {
         trucks: allTrucks,
         urls: urls
       })
-      let time = Moment()
-      this.setState({time: time})
-      
 
       console.log(this.state)
     })
@@ -203,7 +200,7 @@ class User extends Component {
       }
       if (snap.val()) {
         var con = connectionsRef.push(latlng);
-        con.onDisconnect().remove();
+        con.onDisconnect().update({disco: Math.floor(Date.now() / 60000)});
       }
     })
   }
