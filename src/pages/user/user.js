@@ -37,6 +37,9 @@ const AnyReactComponent = ({ text }) => <div title={text}><img src="https://api-
 
 
 
+
+
+
 class User extends Component {
   static defaultProps = {
     center: {
@@ -59,6 +62,7 @@ class User extends Component {
     menu: [],
     phone: [],
     images: [],
+    allReviews: []
   }
 
   getGeolocation(allTrucks) {
@@ -90,6 +94,26 @@ class User extends Component {
 
   }
 
+  getImages() {
+    API.viewAllReviews().then((res) => {
+      console.log(res.data)
+      this.setState({ allReviews: res.data })
+      console.log("The ALL Reviews set state is updated -------------------------->")
+      console.log(this.state.allReviews)
+    })
+      .catch(err => console.log(err));
+  }
+
+  // images({ children }) {
+  //   if (children == null || !children.length) {
+  //     return null;
+  //   }
+
+  //   return (
+  //     <img className="bg-dark" src={children} />
+  //   );
+  // }
+
   componentDidMount() {
 
     {
@@ -107,7 +131,7 @@ class User extends Component {
     function compare(a, b) {
       let disA = a.distance
       let disB = b.distance
-      
+
       let comparison = 0;
       if (disA > disB) {
         comparison = -1;
@@ -174,8 +198,10 @@ class User extends Component {
         }
       })
 
-      if(this.state.currentLocation) {
-        for(let i = 0; i < allTrucks.length; i++){
+
+
+      if (this.state.currentLocation) {
+        for (let i = 0; i < allTrucks.length; i++) {
           let distance = (Math.abs(allTrucks[i].lat) - Math.abs(this.state.lat)) + (Math.abs(allTrucks[i].lng) - Math.abs(this.state.lng))
           allTrucks[i].distance = distance
         }
@@ -191,6 +217,9 @@ class User extends Component {
       })
 
       console.log(this.state)
+
+
+
     })
 
     connectedRef.on("value", snap => {
@@ -245,6 +274,12 @@ class User extends Component {
                   <div key={truck.name}>
                     <li>
                       <h4 className="py-2 ">{truck.name}</h4>
+                      {/* <button className="btn-primary btn" onClick={() => this.getImages()}>View Images</button>
+                      {this.state.allReviews.filter(image=> allReviews.truckName === truck.name.map(image=> (
+                      <div>
+                        {allReviews.userImages[0]}
+                      </div>  
+                      )))} */}
                       <img src={truck.images} />
                       <p><img id="menuimg" src="https://png.pngtree.com/svg/20160810/a8bca7b49c.svg"></img> Address:{truck.address}</p>
                       <p><i className="fa-lg far fa-clock mr-1" /> Hours of Operation: 9am-6pm</p>
@@ -271,6 +306,30 @@ class User extends Component {
                           </Accordion.Collapse>
                         </Card>
                       </Accordion>
+                      <Accordion>
+                        <Card className="imagesCard">
+                          <Card.Header className="imagesHeader">
+                            <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.getImages(truck.name)}>
+                              <p><i className="fa-lg fas fa-comment-alt mr-2" />Images</p>
+                            </Accordion.Toggle>
+                          </Card.Header>
+                          <Accordion.Collapse eventKey="0">
+                            <Card.Body className="imagesBody">
+                              {this.state.allReviews.filter(review => review.truckName === truck.name).map(review => (
+                                <div>
+                                  {review.userImages[0]
+                                    ? <img src={review.userImages[0]} />
+                                    : null
+                                  }
+                                </div>
+                              ))}
+                            </Card.Body>
+                          </Accordion.Collapse>
+                        </Card>
+                      </Accordion>
+
+
+
                       <ReviewButton truckName={truck.name} />
 
                     </li>

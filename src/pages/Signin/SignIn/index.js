@@ -30,11 +30,13 @@ const SignInPage = () =>
         <div className="div  signInCard">
           <div className="div ">
             <h1 className="redText largeTitles text-center mr-5">Sign In</h1>
-            <SignInGoogle />
+            
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+            <SignInGoogle /> 
             <SignInFacebook />
+            </div>
+
             <SignInForm />
-
-
           </div>
         </div>
       </div>
@@ -191,7 +193,7 @@ class SignInGoogleBase extends Component {
 
         <div className="card darkbackground" style={{ width: '7rem' }} >
           {/* <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}> */}
-          <i className="fab fa-google fa-4x text-primary mx-4" onClick={this.onSubmit} ></i>
+          <i className="fab fa-google fa-4x text-primary mx-4 hvr-grow-shadow" onClick={this.onSubmit} ></i>
           {/* <div className="card-body" style={{ height: '4rem' }}> */}
             <b><p className="card-text text-center text-white">Sign In with Google</p></b>
           {/* </div> */}
@@ -242,7 +244,7 @@ class SignInFacebookBase extends Component {
       <form onSubmit={this.onSubmit}>
 
         <div className="card darkbackground" style={{ width: '7rem' }} >
-          <i className="fab fa-facebook-square fa-4x text-primary mx-4" onClick={this.onSubmit} ></i>
+          <i className="fab fa-facebook-square fa-4x text-primary mx-4 hvr-grow-shadow" onClick={this.onSubmit} ></i>
             <b><p className="card-text text-center text-white">Sign In with Facebook</p></b>
         </div>
 
