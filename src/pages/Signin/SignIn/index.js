@@ -94,7 +94,7 @@ class SignInFormBase extends Component {
       <div>
 
 
-        <i class="fab fa-facebook-square"></i>
+        
 
         <hr class="hr-text" data-content="OR"></hr>
 
@@ -189,18 +189,13 @@ class SignInGoogleBase extends Component {
     return (
       <form onSubmit={this.onSubmit}>
 
-        <div className="card" style={{width: '10rem'}} >
-        {/* <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}> */}
-          <i className="fab fa-google fa-4x text-primary"></i>
-          <div class="card-body">
-          <p class="card-text">Sign In with Google</p>
-          
-          </div>
-          
+        <div className="card darkbackground" style={{ width: '7rem' }} >
+          {/* <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}> */}
+          <i className="fab fa-google fa-4x text-primary mx-4" onClick={this.onSubmit} ></i>
+          {/* <div className="card-body" style={{ height: '4rem' }}> */}
+            <b><p className="card-text text-center text-white">Sign In with Google</p></b>
+          {/* </div> */}
         </div>
-
-
-       
 
         {error && <p>{error.message}</p>}
       </form>
@@ -242,13 +237,20 @@ class SignInFacebookBase extends Component {
   render() {
     const { error } = this.state;
 
+
     return (
       <form onSubmit={this.onSubmit}>
-        <button type="submit">Sign In with Facebook</button>
+
+        <div className="card darkbackground" style={{ width: '7rem' }} >
+          <i className="fab fa-facebook-square fa-4x text-primary mx-4" onClick={this.onSubmit} ></i>
+            <b><p className="card-text text-center text-white">Sign In with Facebook</p></b>
+        </div>
 
         {error && <p>{error.message}</p>}
       </form>
     );
+
+
   }
 }
 
