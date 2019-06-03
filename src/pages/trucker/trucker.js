@@ -69,6 +69,11 @@ class Trucker extends React.Component {
       let allUsers = []
       let locations = snap.val()
       for(let key in locations){
+        if((locations[key].disco + 15) < Math.floor(Date.now() / 60000)){
+          console.log(locations[key])
+          console.log(Math.floor(Date.now() / 60000))
+          database.ref("userConnects").child(locations[key]).delete()
+        }
         let user = {
           lat: locations[key].lat,
           lng: locations[key].lng
@@ -89,6 +94,7 @@ class Trucker extends React.Component {
         }
       }
     })
+    
   }
 
   update() {

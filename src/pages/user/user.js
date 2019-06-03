@@ -183,15 +183,12 @@ class User extends Component {
         urls: urls
       })
 
-
       // console.log(this.state)
 
       console.log ("--------------this.state.trucks----------------------------")
       console.log (this.state.trucks)
       console.log ("--------------this.state.sqltrucks----------------------------")
       console.log (this.state.sqltrucks)
-      
-
     })
 
     connectedRef.on("value", snap => {
@@ -201,7 +198,7 @@ class User extends Component {
       }
       if (snap.val()) {
         var con = connectionsRef.push(latlng);
-        con.onDisconnect().remove();
+        con.onDisconnect().update({disco: Math.floor(Date.now() / 60000)});
       }
     })
   }
