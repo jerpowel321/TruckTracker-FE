@@ -12,7 +12,7 @@ class Stars extends React.Component {
 
     return (
       <div className="text-center">
-        <h4 className="mt-2">{rating} Stars</h4>
+        {rating === 1 ? <h6 className="mt-2">{rating} Star</h6> : <h6 className="mt-2">{rating} Stars</h6> }
         <div className="redText stars">
         <StarRatingComponent
           name="rate1"
