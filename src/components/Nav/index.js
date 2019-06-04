@@ -29,7 +29,7 @@ function Nav(props) {
           <NavItem to={props.thirdPage}>{props.thirdPageName}</NavItem>
         </ul>
         <div className="navbar-group logo-container">
-          <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
+          <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" alt="TruckTracker Logo" />
         </div>
         <div className="navbar-group navbar-group-right">
           <div className="font mr-5 redtText">{props.currentPage}</div>

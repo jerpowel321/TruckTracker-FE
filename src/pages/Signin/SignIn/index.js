@@ -14,7 +14,7 @@ const SignInPage = () =>
   (
     <div className="redDoor" >
       <nav className="navbar navbar-expand-lg goldBg redText d-flex justify-content-around">
-        <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" />
+        <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" alt="TruckTracker Logo" />
       </nav>
       <div className="d-flex justify-content-center">
         <div className="div  signInCard">

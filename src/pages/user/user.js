@@ -274,9 +274,43 @@ class User extends Component {
                                     ? <p><i className="fa-lg fas fa-phone mr-1 text-info" /> <span className="font-weight-bold mr-2">Number:</span>{sqltrucks.phone}</p>
                                     : null
                                   }
-
-                                  <p><i className="fa-lg far fa-clock mr-1 beige" /> <span className="font-weight-bold mr-1">Hours of Operation:</span> 9am-6pm</p>
-                                  <p><i className="fa-lg fas fa-hourglass-half mr-2 orange" /> <span className="font-weight-bold mr-1">Wait Time:</span> 20mins</p>
+                                  {sqltrucks.monday || sqltrucks.tuesday || sqltrucks.wednesday || sqltrucks.thursday || sqltrucks.friday || sqltrucks.saturday || sqltrucks.sunday
+                                    ? <p><i className="fa-lg far fa-clock mr-1 beige" /> <span className="font-weight-bold mr-2">Hours of Operation:</span></p>
+                                    : null
+                                  }
+                                  
+                                  {sqltrucks.monday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Monday:</span>{sqltrucks.monday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.tuesday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Tuesday:</span>{sqltrucks.tuesday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.wednesday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Wednesday:</span>{sqltrucks.wednesday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.thursday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Thursday:</span>{sqltrucks.thursday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.friday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Friday:</span>{sqltrucks.friday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.saturday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Saturday:</span>{sqltrucks.saturday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.sunday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Sunday:</span>{sqltrucks.sunday}</p>
+                                    : null
+                                  }
+                                  {sqltrucks.wait
+                                    ? <p><i className="fa-lg fas fa-hourglass-half mr-2 orange" /> <span className="font-weight-bold mr-2">Current Wait Time:</span>{sqltrucks.wait}</p>
+                                    : null
+                                  }
                                   {sqltrucks.website
                                     ? <p><i className="fa-lg fab fa-internet-explorer pr-2 text-success"></i>
                                       <span className="font-weight-bold mr-2">Website:</span>
@@ -312,7 +346,6 @@ class User extends Component {
                                   <h4 className="pt-3 text-center">{review.userName}</h4>
                                   <Stars rating={review.rating} />
                                   <p className="pl-3 pr-3 ">{review.comment}</p>
-
                                 </div>
                               ))}
                             </Card.Body>
@@ -366,7 +399,7 @@ function ReviewImages({reviews, truckName}) {
   }
 
   if (images.length === 0) {
-    return <div>No images available for this business.</div>;
+    return <div className="pt-1 pb-2 pl-5">No images currently available for this business.</div>;
   }
 
   return images.map(image => <img src={image} />);

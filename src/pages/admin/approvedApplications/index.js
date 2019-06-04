@@ -63,9 +63,9 @@ class ApprovedApplication extends Component {
                         </button>
                       </div>
                       <div className="modal-body">
-                        Website: <a href={`${truck.website}`} target="_blank">Link</a><br />
+                        Website: <a href={`${truck.website}`} target="_blank" rel="noopener noreferrer">Link</a><br />
                         Cuisine: {truck.cuisine}<br />
-                        Menu: <a href={`${truck.menu}`} target="_blank">Link</a><br />
+                        Menu: <a href={`${truck.menu}`} target="_blank" rel="noopener noreferrer">Link</a><br />
                         Owner: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
                         Email: {truck.email}<br />
                         Phone: {truck.phone}<br />

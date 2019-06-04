@@ -10,7 +10,7 @@ import { withFirebase } from '../../Signin/Firebase';
 import React, { Component } from "react";
 import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
-import API from "../../../utils/API"
+// import API from "../../../utils/API"
 import * as firebase from "firebase"
 import SignOutButton from '../../Signin/SignOut';
 

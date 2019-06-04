@@ -7,24 +7,19 @@ import HandleImageUploads from "../Dropzone"
 
 
 function ReviewModal({ isShown, setIsShown, truckName }) {
-	const [userName, setUserName] = useState('');
-	const [rating, setRating] = useState(0);
-	const [comment, setComment] = useState('');
-	const [errors, setErrors] = useState({});
-	const [userImages, setUserImages] = useState([]);
+	// const [businessOwner, setbusinessOwner] = useState(true);
+	// const [errors, setErrors] = useState({});
+	const [ownerImages, setUserImages] = useState([]);
 
 	const submit = useCallback((event) => {
-		setErrors({});
+		// setErrors({});
 
 		console.log('if we sent it, the urls would be');
-		console.log(userImages);
+		console.log(ownerImages);
 
-		API.saveReview({
+		API.saveOwnerImages({
 			truckName,
-			userName,
-			rating,
-			comment,
-			userImages
+            ownerImages,
 		})
 			.then(({ data }) => {
 				if (data.errors) {
@@ -33,34 +28,23 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 					for (const error of data.errors) {
 						errorMap[error.path] = error;
 					}
-					setErrors(errorMap);
+					// setErrors(errorMap);
 				} else {
 					console.log(data);
-					setUserName('');
-					setRating(0);
-					setComment('');
 					setIsShown(false);
 					setUserImages([]);
 				}
 			});
 	}, [
-		comment,
-		rating,
-		setComment,
-		setErrors,
+		// setErrors,
 		setIsShown,
-		setRating,
 		setUserImages,
-		setUserName,
 		truckName,
-		userImages,
-		userName,
+		ownerImages,
+		// businessOwner,
 	]);
 
 	const closeDialog = useCallback(() => setIsShown(false), [setIsShown]);
-	const onUserNameChange = useCallback(event => setUserName(event.target.value), [setUserName]);
-	const onCommentChange = useCallback(event => setComment(event.target.value), [setComment]);
-	const onRatingChange = useCallback(value => setRating(value), [setRating]);
 	// const onUserImagesChange = useCallback(event => setUserImages(event.target.value), [setUserImages]);
 	
 	return (
@@ -69,8 +53,7 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 				<Modal.Title className="redText font">Image Upload Form</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<form className="">
-					
+				<form className="businessImageUploadForm">
 					<div className="form-group" >
 					<HandleImageUploads  
 						url='https://api.cloudinary.com/v1_1/dbpqzyaat/image/upload'
@@ -92,23 +75,8 @@ function ReviewModal({ isShown, setIsShown, truckName }) {
 	);
 };
 
-// function InputValidationError({ error }) {
-// 	if (error == null) {
-// 		return null;
-// 	}
-
-// 	return (
-// 		<div className="text-danger" role="alert">
-// 			{error.message}
-// 		</div>
-// 	);
-// }
-
-
-
-export function ReviewButton({ truckName }) {
+export function ImageUploadButton({ truckName }) {
 	const [isShown, setIsShown] = useState(false);
-
 	const onClick = useCallback(() => setIsShown(true), [setIsShown]);
 
 	return (
