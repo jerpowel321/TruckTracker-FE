@@ -52,11 +52,12 @@
     padding-bottom:40px;
 }
 .beachBackground{
-    background-image: url("https://images.pexels.com/photos/417003/pexels-photo-417003.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    /* background-image: url("https://images.pexels.com/photos/417003/pexels-photo-417003.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
     background-size: cover;
     background-position: center center;
     min-height: 100vh;
     padding-bottom:40px;
+    background-color: skyblue;
 }
 
 .redDoor{

@@ -33,10 +33,13 @@ export default {
     //Jennifer
 
     //Cyrus
-    updateTruck: function (companyId, approved, applicationOpen){
+    updateTruck: function (businessId, approved, applicationOpen){
         console.log("im in the utilities")
-        console.log(BASEURL + `/api/open/${companyId}`)
-        return axios.put(BASEURL + `/api/open/${companyId}`, {id: companyId, approved: approved, applicationOpen: applicationOpen})
+        console.log(BASEURL + `/api/open/${businessId}`)
+        console.log( approved);
+        console.log(applicationOpen);
+        console.log(businessId)
+        return axios.put(BASEURL + `/api/open/${businessId}`, {id: businessId, approved: approved, applicationOpen: applicationOpen})
     },
     getOpenApplications: function (){
         return axios.get(BASEURL + "/api/open")

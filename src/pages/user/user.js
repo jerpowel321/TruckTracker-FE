@@ -57,7 +57,7 @@ class User extends Component {
     trucks: [], //To view trucker information from firebase
     currentLocation: {},
     reviews: [], //To view reviews for a specific truck
-    allReviews: [], //To view reviews for all trucks, used for displaying images
+    allReviews: null, //To view reviews for all trucks, used for displaying images
     sqltrucks: [], //To get sql database trucker information
   }
 
@@ -357,16 +357,8 @@ class User extends Component {
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
-                            <Card.Body className="imagesBody pl-2">
-                              {this.state.allReviews.filter(review => review.truckName === truck.name).map(review => (
-                                <div>
-                                  
-                                  {review.userImages[0]
-                                    ? <img src={review.userImages[0]} />
-                                    : null
-                                  }
-                                </div>
-                              ))}
+                          <Card.Body className="imagesBody pl-2 pr-5">
+                              <ReviewImages reviews={this.state.allReviews} truckName={truck.name} />
                             </Card.Body>
                           </Accordion.Collapse>
                         </Card>
