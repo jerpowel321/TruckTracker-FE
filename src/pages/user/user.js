@@ -57,7 +57,7 @@ class User extends Component {
     trucks: [], //To view trucker information from firebase
     currentLocation: {},
     reviews: [], //To view reviews for a specific truck
-    allReviews: null, //To view reviews for all trucks, used for displaying images
+    allReviews: [], //To view reviews for all trucks, used for displaying images
     sqltrucks: [], //To get sql database trucker information
   }
 
@@ -95,14 +95,14 @@ class User extends Component {
       .catch(err => console.log(err));
   }
 
-  gettruckInfo() {
+  gettruckInfo(){
     API.getAllTrucks().then((res) => {
-      this.setState({ sqltrucks: res.data })
+      this.setState({ sqltrucks: res.data})
       console.log("This is the current sql trucks info")
       console.log(this.state.sqltrucks)
 
     })
-      .catch(err => console.log(err));
+    .catch(err => console.log(err));
   }
 
   componentDidMount() {
@@ -125,9 +125,9 @@ class User extends Component {
 
       let comparison = 0;
       if (disA > disB) {
-        comparison = -1;
-      } else if (disA < disB) {
         comparison = 1;
+      } else if (disA < disB) {
+        comparison = -1;
       }
       return comparison;
     }
@@ -151,9 +151,10 @@ class User extends Component {
 
       for (let i = 0; i < allTrucks.length; i++) {
         Geocode.fromLatLng(allTrucks[i].lat, allTrucks[i].lng).then(
+          console.log("HELLO"),
           response => {
             let address = response.results[0].formatted_address;
-            console.log(address)
+            console.log(allTrucks[i].name + address)
             allTrucks[i].address = address
           },
           error => {
@@ -175,20 +176,20 @@ class User extends Component {
       allTrucks = allTrucks.sort(compare)
 
       console.log(allTrucks)
-
+      
       this.setState({
         trucks: allTrucks,
       })
-
+      
       console.log(this.state)
 
 
       // console.log(this.state)
 
-      console.log("--------------this.state.trucks----------------------------")
-      console.log(this.state.trucks)
-      console.log("--------------this.state.sqltrucks----------------------------")
-      console.log(this.state.sqltrucks)
+      console.log ("--------------this.state.trucks----------------------------")
+      console.log (this.state.trucks)
+      console.log ("--------------this.state.sqltrucks----------------------------")
+      console.log (this.state.sqltrucks)
     })
 
     connectedRef.on("value", snap => {
@@ -198,7 +199,6 @@ class User extends Component {
         lng: this.state.currentLocation.lng
       }
       if (snap.val()) {
-
         var con = connectionsRef.child(update).set({
           lat: latlng.lat,
           lng: latlng.lng
@@ -250,22 +250,22 @@ class User extends Component {
                       <h4 className="py-2 ">{truck.name}</h4>
                       <Accordion>
                         <Card className="businessInfoCard w-100">
-                          <Card.Header className="businessInfoHeader ">
+                          <Card.Header className="businessInfoHeader">
                             <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.gettruckInfo(truck.name)}>
-                              <p><i class="fa-lg fas fa-info-circle mr-2"></i>Business Info</p>
+                              <p><i className="fa-lg fas fa-info-circle mr-2"></i>Business Info</p>
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
                             <Card.Body className="businessInfoBody">
-                              {this.state.sqltrucks.filter(sqltrucks => sqltrucks.businessName === truck.name).map(sqltrucks => (
-                                <div className="businessInfo pl-5">
-                                  {/* {!sqltrucks.businessName
+                                {this.state.sqltrucks.filter(sqltrucks => sqltrucks.businessName === truck.name).map(sqltrucks => (
+                                  <div className="businessInfo pl-5">
+                                    {/* {!sqltrucks.businessName
                                     ?  <p>Oh no, looks like this business does not have any. Be the first one!</p>
                                     : null
                                   } */}
-                                  <p className="pt-4"><i class="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> NEEDS TO HAVE ADDRESS</p>
-
-
+                                    <p className="pt-4"><i className="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> NEEDS TO HAVE ADDRESS</p>
+                                    
+                                   
                                   {sqltrucks.cuisine
                                     ? <p><i className="fa-lg fas fa-utensils mr-2 purple"></i><span className="font-weight-bold mr-2">Cuisine:</span>{sqltrucks.cuisine}</p>
                                     : null
@@ -318,16 +318,13 @@ class User extends Component {
                                     : null
                                   }
                                   {sqltrucks.menu
-                                    ? <p><img className="pr-1 purple" id="menuimg" src="https://cdn2.iconfinder.com/data/icons/food-restaurant-1/128/flat-56-512.png" />
-                                      <span className="font-weight-bold mr-2">Menu:</span>
-                                      <a href={sqltrucks.menu} target="_blank">{sqltrucks.menu}</a>
-                                    </p>
+                                    ?  <p><img className="pr-1 purple" id="menuimg" src="https://cdn2.iconfinder.com/data/icons/food-restaurant-1/128/flat-56-512.png" /><span className="font-weight-bold mr-2">Menu:</span> <a href={sqltrucks.menu}>{sqltrucks.menu}</a></p>
                                     : null
                                   }
-
-
-                                </div>
-                              ))}
+                                    
+                                   
+                                  </div>
+                                ))}
                             </Card.Body>
                           </Accordion.Collapse>
                         </Card>
@@ -356,12 +353,20 @@ class User extends Component {
                         <Card className="imagesCard">
                           <Card.Header className="imagesHeader">
                             <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.getImages(truck.name)}>
-                              <p><i class="fa-lg far fa-images mr-2"></i>Images</p>
+                              <p><i className="fa-lg far fa-images mr-2"></i>Images</p>
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
-                            <Card.Body className="imagesBody pl-2 pr-5">
-                              <ReviewImages reviews={this.state.allReviews} truckName={truck.name} />
+                            <Card.Body className="imagesBody pl-2">
+                              {this.state.allReviews.filter(review => review.truckName === truck.name).map(review => (
+                                <div>
+                                  
+                                  {review.userImages[0]
+                                    ? <img src={review.userImages[0]} />
+                                    : null
+                                  }
+                                </div>
+                              ))}
                             </Card.Body>
                           </Accordion.Collapse>
                         </Card>
