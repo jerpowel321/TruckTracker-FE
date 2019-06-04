@@ -9,8 +9,16 @@ import { AuthUserContext, withAuthorization } from '../Signin/Session';
 import SignOutButton from '../Signin/SignOut';
 import API from "./../../utils/API"
 import * as firebase from "firebase"
+<<<<<<< HEAD
 import { ReviewButton } from "../../components/TruckerImage";
 
+=======
+import Geocode from "react-geocode";
+
+Geocode.setApiKey("AIzaSyAebySY2-ib0pM0xXsMX3pC2dQkmW7n9fw");
+
+Geocode.enableDebug();
+>>>>>>> 2a013f80c3e61cad59fca55b6300b0b592c4823f
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -51,8 +59,12 @@ class Trucker extends React.Component {
     buttonText: "Enable Geolocation",
     currentLocation: {},
     userLocations: [],
+<<<<<<< HEAD
     userImages: [],
 
+=======
+    address: ""
+>>>>>>> 2a013f80c3e61cad59fca55b6300b0b592c4823f
   }
 
   
@@ -72,12 +84,19 @@ class Trucker extends React.Component {
     connectionsRef.on("value", snap => {
       let allUsers = []
       let locations = snap.val()
-      for(let key in locations){
-        if((locations[key].disco + 15) < Math.floor(Date.now() / 60000)){
-          console.log(locations[key])
-          console.log(Math.floor(Date.now() / 60000))
-          database.ref("userConnects").child(locations[key]).delete()
+      let connects = Object.keys(snap.val())
+      console.log(connects)
+      console.log(Math.floor(Date.now() / 1000))
+      for(let i = 0; i < connects.length; i++){
+        if((parseInt(connects[i]) + (60 * 15)) < Math.floor(Date.now() / 1000)){
+          connectionsRef.child(connects[i]).remove()
+          console.log(connectionsRef.child(connects[i]))
+          // console.log(Math.floor(Date.now() / 60000))
+          // console.log("parent: " + ddd)
+          // database.ref("userConnects").child(parent).delete()
         }
+      }
+      for(let key in locations){
         let user = {
           lat: locations[key].lat,
           lng: locations[key].lng
@@ -138,18 +157,31 @@ class Trucker extends React.Component {
   }
   /////////////////////////////////////////////////
   ////// CHECK ID PLACEMENT LATER
-  newPost = (id, name, lat, lng) => {
+  newPost = (id, name, lat, lng, address) => {
     if (id && name && lat && lng) {
       db.ref().child("trucks").child(id.replace(".", "%20")).set({
         name: name,
         lat: lat,
-        lng: lng
+        lng: lng,
+        address: this.state.address
       })
     }
   }
 
   newUpdate(id, name, lat, lng) {
     let interval;
+    let address;
+    Geocode.fromLatLng(lat, lng).then(
+      response => {
+        address = response.results[0].formatted_address;
+        this.setState({address: address})
+        console.log(address)
+      },
+      error => {
+        console.error(error);
+      })
+
+
     const updater = () => {
       if (this.state.active === true) {
         window.navigator.geolocation.getCurrentPosition(
@@ -158,7 +190,7 @@ class Trucker extends React.Component {
         )
 
         console.log("I work")
-        this.newPost(id, name, lat, lng)
+        this.newPost(id, name, lat, lng, address)
       }
       if (this.state.bool === true) {
         interval = setInterval(updater, 300000)
@@ -166,6 +198,7 @@ class Trucker extends React.Component {
       }
     }
     updater();
+    
   }
   /////////////////////////////////////////////////
 
