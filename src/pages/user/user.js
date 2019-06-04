@@ -52,8 +52,8 @@ class User extends Component {
 
 
   state = {
-    lat: 0,
-    lng: 0,
+    lat: 37.781237,
+    lng: -122.408114,
     trucks: [], //To view trucker information from firebase
     currentLocation: {},
     reviews: [], //To view reviews for a specific truck
@@ -65,9 +65,11 @@ class User extends Component {
     for (let i = 0; i < allTrucks.length; i++) {
       Geocode.fromLatLng(allTrucks[i].lat, allTrucks[i].lng).then(
         response => {
-          let address = response.results[0].formatted_address;
-          console.log(address)
-          allTrucks[i].address = address
+          if (response.results) {
+            let address = response.results[0].formatted_address;
+            console.log(address)
+            allTrucks[i].address = address
+          }
         },
         error => {
           console.error(error);
@@ -95,14 +97,14 @@ class User extends Component {
       .catch(err => console.log(err));
   }
 
-  gettruckInfo(){
+  gettruckInfo() {
     API.getAllTrucks().then((res) => {
-      this.setState({ sqltrucks: res.data})
+      this.setState({ sqltrucks: res.data })
       console.log("This is the current sql trucks info")
       console.log(this.state.sqltrucks)
 
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   }
 
   componentDidMount() {
@@ -142,7 +144,7 @@ class User extends Component {
           name: location[key].name,
           lat: location[key].lat,
           lng: location[key].lng,
-          address: "",
+          address: location[key].address,
           distance: 0,
         }
         allTrucks.push(truck)
@@ -153,9 +155,11 @@ class User extends Component {
         Geocode.fromLatLng(allTrucks[i].lat, allTrucks[i].lng).then(
           console.log("HELLO"),
           response => {
-            let address = response.results[0].formatted_address;
-            console.log(allTrucks[i].name + address)
-            allTrucks[i].address = address
+            if (response.results) {
+              let address = response.results[0].formatted_address;
+              console.log(allTrucks[i].name + address)
+              allTrucks[i].address = address
+            }
           },
           error => {
             console.error(error);
@@ -176,20 +180,20 @@ class User extends Component {
       allTrucks = allTrucks.sort(compare)
 
       console.log(allTrucks)
-      
+
       this.setState({
         trucks: allTrucks,
       })
-      
+
       console.log(this.state)
 
 
       // console.log(this.state)
 
-      console.log ("--------------this.state.trucks----------------------------")
-      console.log (this.state.trucks)
-      console.log ("--------------this.state.sqltrucks----------------------------")
-      console.log (this.state.sqltrucks)
+      console.log("--------------this.state.trucks----------------------------")
+      console.log(this.state.trucks)
+      console.log("--------------this.state.sqltrucks----------------------------")
+      console.log(this.state.sqltrucks)
     })
 
     connectedRef.on("value", snap => {
@@ -198,7 +202,7 @@ class User extends Component {
         lat: this.state.currentLocation.lat,
         lng: this.state.currentLocation.lng
       }
-      if (snap.val()) {
+      if (snap.val() && latlng.lat) {
         var con = connectionsRef.child(update).set({
           lat: latlng.lat,
           lng: latlng.lng
@@ -257,15 +261,15 @@ class User extends Component {
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
                             <Card.Body className="businessInfoBody">
-                                {this.state.sqltrucks.filter(sqltrucks => sqltrucks.businessName === truck.name).map(sqltrucks => (
-                                  <div className="businessInfo pl-5">
-                                    {/* {!sqltrucks.businessName
+                              {this.state.sqltrucks.filter(sqltrucks => sqltrucks.businessName === truck.name).map(sqltrucks => (
+                                <div className="businessInfo pl-5">
+                                  {/* {!sqltrucks.businessName
                                     ?  <p>Oh no, looks like this business does not have any. Be the first one!</p>
                                     : null
                                   } */}
-                                    <p className="pt-4"><i className="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> NEEDS TO HAVE ADDRESS</p>
-                                    
-                                   
+                                  <p className="pt-4"><i className="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> {truck.address}</p>
+
+
                                   {sqltrucks.cuisine
                                     ? <p><i className="fa-lg fas fa-utensils mr-2 purple"></i><span className="font-weight-bold mr-2">Cuisine:</span>{sqltrucks.cuisine}</p>
                                     : null
@@ -278,32 +282,32 @@ class User extends Component {
                                     ? <p><i className="fa-lg far fa-clock mr-1 beige" /> <span className="font-weight-bold mr-2">Hours of Operation:</span></p>
                                     : null
                                   }
-                                  
+
                                   {sqltrucks.monday
                                     ? <p><i className="" /> <span className="font-weight-bold mr-2">Monday:</span>{sqltrucks.monday}</p>
                                     : null
                                   }
-                                   {sqltrucks.tuesday
+                                  {sqltrucks.tuesday
                                     ? <p><i className="" /> <span className="font-weight-bold mr-2">Tuesday:</span>{sqltrucks.tuesday}</p>
                                     : null
                                   }
-                                   {sqltrucks.wednesday
+                                  {sqltrucks.wednesday
                                     ? <p><i className="" /> <span className="font-weight-bold mr-2">Wednesday:</span>{sqltrucks.wednesday}</p>
                                     : null
                                   }
-                                   {sqltrucks.thursday
+                                  {sqltrucks.thursday
                                     ? <p><i className="" /> <span className="font-weight-bold mr-2">Thursday:</span>{sqltrucks.thursday}</p>
                                     : null
                                   }
-                                   {sqltrucks.friday
+                                  {sqltrucks.friday
                                     ? <p><i className="" /> <span className="font-weight-bold mr-2">Friday:</span>{sqltrucks.friday}</p>
                                     : null
                                   }
-                                   {sqltrucks.saturday
+                                  {sqltrucks.saturday
                                     ? <p><i className="" /> <span className="font-weight-bold mr-2">Saturday:</span>{sqltrucks.saturday}</p>
                                     : null
                                   }
-                                   {sqltrucks.sunday
+                                  {sqltrucks.sunday
                                     ? <p><i className="" /> <span className="font-weight-bold mr-2">Sunday:</span>{sqltrucks.sunday}</p>
                                     : null
                                   }
@@ -318,13 +322,13 @@ class User extends Component {
                                     : null
                                   }
                                   {sqltrucks.menu
-                                    ?  <p><img className="pr-1 purple" id="menuimg" src="https://cdn2.iconfinder.com/data/icons/food-restaurant-1/128/flat-56-512.png" /><span className="font-weight-bold mr-2">Menu:</span> <a href={sqltrucks.menu}>{sqltrucks.menu}</a></p>
+                                    ? <p><img className="pr-1 purple" id="menuimg" src="https://cdn2.iconfinder.com/data/icons/food-restaurant-1/128/flat-56-512.png" /><span className="font-weight-bold mr-2">Menu:</span> <a href={sqltrucks.menu}>{sqltrucks.menu}</a></p>
                                     : null
                                   }
-                                    
-                                   
-                                  </div>
-                                ))}
+
+
+                                </div>
+                              ))}
                             </Card.Body>
                           </Accordion.Collapse>
                         </Card>
@@ -380,7 +384,7 @@ class User extends Component {
   }
 }
 
-function ReviewImages({reviews, truckName}) {
+function ReviewImages({ reviews, truckName }) {
   if (reviews == null) {
     return null;
   }
