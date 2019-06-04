@@ -52,8 +52,8 @@ class User extends Component {
 
 
   state = {
-    lat: 37.77,
-    lng: -122.45,
+    lat: 0,
+    lng: 0,
     trucks: [], //To view trucker information from firebase
     currentLocation: {},
     reviews: [], //To view reviews for a specific truck

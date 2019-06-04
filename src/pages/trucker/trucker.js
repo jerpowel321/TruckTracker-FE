@@ -53,7 +53,8 @@ class Trucker extends React.Component {
     bg: "redBg",
     buttonText: "Enable Geolocation",
     currentLocation: {},
-    userLocations: []
+    userLocations: [],
+    address: ""
   }
 
   
@@ -75,9 +76,11 @@ class Trucker extends React.Component {
       let locations = snap.val()
       let connects = Object.keys(snap.val())
       console.log(connects)
+      console.log(Math.floor(Date.now() / 1000))
       for(let i = 0; i < connects.length; i++){
-        if((connects[i] + (1000 * 60 * 15)) < Math.floor(Date.now() / 1000)){
+        if((parseInt(connects[i]) + (60 * 15)) < Math.floor(Date.now() / 1000)){
           connectionsRef.child(connects[i]).remove()
+          console.log(connectionsRef.child(connects[i]))
           // console.log(Math.floor(Date.now() / 60000))
           // console.log("parent: " + ddd)
           // database.ref("userConnects").child(parent).delete()
@@ -150,7 +153,7 @@ class Trucker extends React.Component {
         name: name,
         lat: lat,
         lng: lng,
-        address: address
+        address: this.state.address
       })
     }
   }
@@ -161,6 +164,7 @@ class Trucker extends React.Component {
     Geocode.fromLatLng(lat, lng).then(
       response => {
         address = response.results[0].formatted_address;
+        this.setState({address: address})
         console.log(address)
       },
       error => {
