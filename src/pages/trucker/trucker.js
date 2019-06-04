@@ -9,7 +9,7 @@ import { AuthUserContext, withAuthorization } from '../Signin/Session';
 import SignOutButton from '../Signin/SignOut';
 import API from "./../../utils/API"
 import * as firebase from "firebase"
-import { ReviewButton } from "../../components/TruckerImage";
+import { ImageUploadButton } from "../../components/TruckerImage";
 import Geocode from "react-geocode";
 
 Geocode.setApiKey("AIzaSyAebySY2-ib0pM0xXsMX3pC2dQkmW7n9fw");
@@ -276,9 +276,9 @@ class Trucker extends React.Component {
           }
 
 
-          <div className="truckerImageUpload">
-          <ReviewButton truckName={this.state.name} />
-          </div>
+          {/* <div className="truckerImageUpload">
+          <ImageUploadButton truckName={this.state.name} />
+          </div> */}
         </div>
       </div>
     )

@@ -3,9 +3,9 @@ import Nav from "../../../components/Nav";
 import API from "../../../utils/API"
 import 'firebase/auth';
 import SignOutButton from '../../Signin/SignOut';
-import { AuthUserContext, withAuthorization } from '../../Signin/Session';
+import { withAuthorization } from '../../Signin/Session';
 import { Link, withRouter } from 'react-router-dom';
-import { database } from "firebase";
+
 
 
 class TruckerApplication extends Component {
@@ -23,52 +23,77 @@ class TruckerApplication extends Component {
 		address2: "",
 		city: "",
 		state: "",
-		zip: ""
+		zip: "",
+		monday: "",
+		tuesday: "",
+		wednesday: "",
+		thursday: "",
+		friday: "",
+		saturday: "",
+		sunday: "",
+		wait: "",
+		businessImages: [],
+		businessDescription: "",
+		title: "Food Truck Application"
 	}
 
+
 	createNewTruck = (event) => {
-		if(this.state.companyName == null) {
+		if (this.state.companyName == null) {
 			return <div>Please provide a business name.</div>
 		}
-		if(this.state.firstName == null || this.state.lastName == null) {
+		if (this.state.firstName == null || this.state.lastName == null) {
 			return <div>Please a contact first and last name. </div>
 		}
-		if(this.state.phone == null) {
+		if (this.state.phone == null) {
 			return <div>Please provide a contact phone number.</div>
 		}
-		if(this.state.address == null || this.state.city == null || this.state.state == null || this.state.zip == null) {
+		if (this.state.address == null || this.state.city == null || this.state.state == null || this.state.zip == null) {
 			return <div>Please provide a valid address including state, city and postal code.</div>
 		}
-		
+
 		else {
 			console.log("Inside Create new truck!!--------------------")
 			event.preventDefault();
-		const newTruck = {
-			businessName: this.state.companyName,
-			website: this.state.website,
-			cuisine: this.state.cuisine,
-			menu: this.state.menu,
-			firstName: this.state.firstName,
-			middleInitial: this.state.middleInitial,
-			lastName: this.state.lastName,
-			email: this.state.email,
-			phone: this.state.phoneNumber,
-			address: this.state.address1,
-			address2: this.state.address2,
-			city: this.state.city,
-			state: this.state.state,
-			zip: this.state.zip
-		}
-		console.log(newTruck)
-		API.saveTruck(newTruck)
-			.then(res => {console.log(res)
-			console.log("This is the response")
-			if (res.errors){
-				console.log(res.errors)
+			const newTruck = {
+				businessName: this.state.businessName,
+				website: this.state.website,
+				cuisine: this.state.cuisine,
+				menu: this.state.menu,
+				firstName: this.state.firstName,
+				middleInitial: this.state.middleInitial,
+				lastName: this.state.lastName,
+				email: this.state.email,
+				phone: this.state.phoneNumber,
+				address: this.state.address1,
+				address2: this.state.address2,
+				city: this.state.city,
+				state: this.state.state,
+				zip: this.state.zip,
+				monday: this.state.monday,
+				tuesday: this.state.tuesday,
+				wednesday: this.state.wednesday,
+				thursday: this.state.thursday,
+				friday: this.state.friday,
+				saturday: this.state.saturday,
+				sunday: this.state.sunday,
+				wait: this.state.wait,
+				businessImages: this.state.businessImages,
+				businessDescription: this.state.businessDescription
+
 			}
-			});
+			console.log(newTruck)
+			API.saveTruck(newTruck)
+				.then(res => {
+					console.log(res)
+					console.log("This is the response")
+					if (res.errors) {
+						console.log(res.errors)
+					}
+				});
 		}
 	}
+
 	handleInputChange = (event) => {
 		let { name, value } = event.target;
 
@@ -77,39 +102,77 @@ class TruckerApplication extends Component {
 		});
 	}
 
+	componentDidMount() {
+
+		// API.getTruck(this.state.businessName).then((res) => {
+		// 	console.log(res)
+		// 	this.setState({ 
+		// 		// businessName: res.data.businessName,
+		// 		website: res.data.website,
+		// 		cuisine: res.data.cuisine,
+		// 		menu: res.data.menu,
+		// 		firstName: res.data.firstName,
+		// 		middleInitial: res.data.middleInitial,
+		// 		lastName: res.data.lastName,
+		// 		email: res.data.email,
+		// 		phone: res.data.phoneNumber,
+		// 		address: res.data.address1,
+		// 		address2: res.data.address2,
+		// 		city: res.data.city,
+		// 		state: res.data.state,
+		// 		zip: res.data.zip,
+		// 		monday: res.data.monday,
+		// 		tuesday: res.data.tuesday,
+		// 		wednesday: res.data.wednesday,
+		// 		thursday: res.data.thursday,
+		// 		friday: res.data.friday,
+		// 		saturday: res.data.saturday,
+		// 		sunday: res.data.sunday,
+		// 		wait: res.data.wait,
+		// 		businessDescription: res.data.businessDescription,
+		// 		title: "Update Business Information"
+		// 	})
+		// 	console.log("This is the current state")
+		// 	console.log(this.state)
+
+		// })
+		// 	.catch(err => console.log(err));
+
+	}
+
 	render() {
 		return (
 			<div className="test">
 
 				<Nav
-					 home="/trucker/dashboard"
-					 firstPage="/trucker/application"
-					 firstPageName="Application"
-					 secondPage="/trucker/account"
-           			secondPageName="Account"
-					 signOut={<SignOutButton />}
+					home="/trucker/dashboard"
+					firstPage="/trucker/application"
+					firstPageName="Application"
+					secondPage="/trucker/account"
+					secondPageName="Account"
+					signOut={<SignOutButton />}
 				/>
 				<div className="truckApplication">
 					<form>
 						<div className="form-row">
 							<div className="form-group col-md-12">
-								<h1 className="text-center largeTitles redText">Food Truck Application</h1>
+								<h1 className="text-center largeTitles redText">{this.state.title}</h1>
 							</div>
 						</div>
 						<div className="form-row">
 							<div className="form-group col-md-6">
-								<label for="companyName">Company Name</label>
-								<input name="companyName" type="text" className="form-control" id="companyName" placeholder="Koja Kitchen" onChange={this.handleInputChange} />
-								
+								<label htmlFor="companyName">Company Name</label>
+								<input name="businessName" type="text" className="form-control" id="companyName" placeholder="Koja Kitchen" onChange={this.handleInputChange} />
+
 							</div>
 							<div className="form-group col-md-6">
-								<label for="website">Website</label>
+								<label htmlFor="website">Website</label>
 								<input name="website" type="text" className="form-control" id="inputMiddleName" placeholder="" onChange={this.handleInputChange} />
 							</div>
 						</div>
 						<div className="form-row">
 							<div className="form-group col-md-6">
-								<label for="inputCuisineType">Type of Cuisine</label>
+								<label htmlFor="inputCuisineType">Type of Cuisine</label>
 								<select name="cuisine" id="inputCuisineType" className="form-control" onChange={this.handleInputChange} >
 									<option select>Select type</option>
 									<option value="American">American</option>
@@ -136,49 +199,49 @@ class TruckerApplication extends Component {
 								</select>
 							</div>
 							<div className="form-group col-md-6">
-								<label for="inputMenuLink">Menu Link</label>
+								<label htmlFor="inputMenuLink">Menu Link</label>
 								<input name="menu" type="text" className="form-control" id="inputMenuLink" placeholder="" onChange={this.handleInputChange} />
 							</div>
 						</div>
 						<div className="form-row">
 							<div className="form-group col-md-5">
-								<label for="inputFirstName"> Contact First Name</label>
+								<label htmlFor="inputFirstName"> Contact First Name</label>
 								<input name="firstName" type="text" className="form-control" id="inputFirstName" placeholder="William" onChange={this.handleInputChange} />
 							</div>
 							<div className="form-group col-md-2">
-								<label for="inputMiddleName">Middle Initial</label>
+								<label htmlFor="inputMiddleName">Middle Initial</label>
 								<input name="middleInitial" type="text" className="form-control" id="inputMiddleName" placeholder="B." onChange={this.handleInputChange} />
 							</div>
 							<div className="form-group col-md-5">
-								<label for="inputLastName">Last Name</label>
+								<label htmlFor="inputLastName">Last Name</label>
 								<input name="lastName" type="text" className="form-control" id="inputLastName" placeholder="Pitt" onChange={this.handleInputChange} />
 							</div>
 						</div>
 						<div className="form-row">
 							<div className="form-group col-md-6">
-								<label for="inputEmail4">Email</label>
-								<input name="email" type="email" className="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleInputChange} /> 
+								<label htmlFor="inputEmail4">Email</label>
+								<input name="email" type="email" className="form-control" id="inputEmail4" placeholder="Email" onChange={this.handleInputChange} />
 							</div>
 							<div className="form-group col-md-6">
-								<label for="inputPhoneNumber">Phone Number</label>
-								<input name="phoneNumber" type="number" className="form-control" id="inputPhoneNumber" placeholder="4155555" onChange={this.handleInputChange} />
+								<label htmlFor="inputPhoneNumber">Phone Number</label>
+								<input name="phoneNumber" type="number" className="form-control" id="inputPhoneNumber" placeholder="4155555555" onChange={this.handleInputChange} />
 							</div>
 						</div>
 						<div className="form-group">
-							<label for="inputAddress">Address</label>
+							<label htmlFor="inputAddress">Address</label>
 							<input name="address1" type="text" className="form-control" id="inputAddress" placeholder="1234 Main St" onChange={this.handleInputChange} />
 						</div>
 						<div className="form-group">
-							<label for="inputAddress2">Address 2</label>
+							<label htmlFor="inputAddress2">Address 2</label>
 							<input name="address2" type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" onChange={this.handleInputChange} />
 						</div>
 						<div className="form-row">
 							<div className="form-group col-md-6">
-								<label for="inputCity">City</label>
+								<label htmlFor="inputCity">City</label>
 								<input name="city" type="text" className="form-control" id="inputCity" onChange={this.handleInputChange} />
 							</div>
 							<div className="form-group col-md-4">
-								<label for="inputState">State</label>
+								<label htmlFor="inputState">State</label>
 								<select name="state" id="inputState" className="form-control" onChange={this.handleInputChange} >
 									<option selected>Choose a State</option>
 									<option value="AL">Alabama</option>
@@ -235,8 +298,48 @@ class TruckerApplication extends Component {
 								</select>
 							</div>
 							<div className="form-group col-md-2">
-								<label for="inputZip">Zip</label>
+								<label htmlFor="inputZip">Zip</label>
 								<input name="zip" type="text" className="form-control" id="inputZip" onChange={this.handleInputChange} />
+							</div>
+						</div>
+						<div className="form-row">
+							<div className="form-group col-md-6">
+								<label htmlFor="scheduleM">Monday</label>
+								<input name="monday" type="text" className="form-control" id="scheduleM" placeholder="9am-6pm" onChange={this.handleInputChange} />
+							</div>
+							<div className="form-group col-md-6">
+								<label htmlFor="scheduleT">Tuesday</label>
+								<input name="tuesday" type="text" className="form-control" id="scheduleT" placeholder="9am-6pm" onChange={this.handleInputChange} />
+							</div>
+							<div className="form-group col-md-6">
+								<label htmlFor="scheduleW">Wednesday</label>
+								<input name="wednesday" type="text" className="form-control" id="scheduleW" placeholder="9am-6pm" onChange={this.handleInputChange} />
+							</div>
+							<div className="form-group col-md-6">
+								<label htmlFor="scheduleTh">Thursday</label>
+								<input name="thursday" type="text" className="form-control" id="scheduleTh" placeholder="9am-6pm" onChange={this.handleInputChange} />
+							</div>
+							<div className="form-group col-md-6">
+								<label htmlFor="scheduleF">Friday</label>
+								<input name="friday" type="text" className="form-control" id="scheduleF" placeholder="9am-6pm" onChange={this.handleInputChange} />
+							</div>
+							<div className="form-group col-md-6">
+								<label htmlFor="scheduleS">Saturday</label>
+								<input name="saturday" type="text" className="form-control" id="scheduleS" placeholder="9am-6pm" onChange={this.handleInputChange} />
+							</div>
+							<div className="form-group col-md-6">
+								<label htmlFor="scheduleSu">Sunday</label>
+								<input name="sunday" type="text" className="form-control" id="scheduleSu" placeholder="9am-6pm" onChange={this.handleInputChange} />
+							</div>
+							<div className="form-group col-md-6">
+								<label htmlFor="waitTime">Current Wait Time</label>
+								<input name="wait" type="text" className="form-control" id="waitTime" placeholder="10" onChange={this.handleInputChange} />
+							</div>
+						</div>
+						<div>
+							<div className="form-group">
+								<label htmlFor="businessDescription">Business Description</label>
+								<textarea name="businessDescription" className="form-control" id="businessDescription" rows="3"></textarea>
 							</div>
 						</div>
 						<div className="text-center">
@@ -251,19 +354,21 @@ class TruckerApplication extends Component {
 };
 
 
-function InputValidationError({ error }) {
-	if (error == null) {
-		return null;
-	}
+// function InputValidationError({ error }) {
+// 	if (error == null) {
+// 		return null;
+// 	}
 
-	return (
-		<div className="text-danger" role="alert">
-			{error.message}
-		</div>
-	);
-}
+// 	return (
+// 		<div className="text-danger" role="alert">
+// 			{error.message}
+// 		</div>
+// 	);
+// }
 
 
 const condition = authUser => !!authUser;
 
 export default withAuthorization(condition)(TruckerApplication);
+
+

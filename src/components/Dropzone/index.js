@@ -55,7 +55,7 @@ export default class ImageUpload extends React.Component {
         {this.state.uploadedFileCloudinaryUrl === '' ? null :
         <div className="text-center bgGrey">
           <b><p className="pt-3">{this.state.uploadedFile.name}</p></b>
-          <p><img className="pb-3" src={this.state.uploadedFileCloudinaryUrl} /></p>
+          <p><img className="pb-3" src={this.state.uploadedFileCloudinaryUrl} alt="" /></p>
         </div>}
       </div>
     </div>
