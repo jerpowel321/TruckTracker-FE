@@ -9,6 +9,8 @@ import { AuthUserContext, withAuthorization } from '../Signin/Session';
 import SignOutButton from '../Signin/SignOut';
 import API from "./../../utils/API"
 import * as firebase from "firebase"
+import { ReviewButton } from "../../components/TruckerImage";
+
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -48,7 +50,9 @@ class Trucker extends React.Component {
     bg: "redBg",
     buttonText: "Enable Geolocation",
     currentLocation: {},
-    userLocations: []
+    userLocations: [],
+    userImages: [],
+
   }
 
   
@@ -244,6 +248,11 @@ class Trucker extends React.Component {
               err => console.log(err)
             )
           }
+
+
+          <div className="truckerImageUpload">
+          <ReviewButton truckName={this.state.name} />
+          </div>
         </div>
       </div>
     )
