@@ -9,7 +9,6 @@ import Nav from "../../../components/Nav";
 // import Container from "../../../components/admin/container";
 // import API from "../../../utils/API"
 import Chart from "../../../components/admin/chart";
-// import { Bar, Line, Pie } from "react-chartjs-2";
 import SignOutButton from '../../Signin/SignOut';
 
 class RegisteredTrucks extends Component {

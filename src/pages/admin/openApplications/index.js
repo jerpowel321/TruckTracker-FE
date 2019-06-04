@@ -32,6 +32,7 @@ class Admin extends Component {
   }
 
   approveApplication(id) {
+    console.log(id, "this is the ID of the truck")
     let truckData = [...this.state.truckData]
     truckData.forEach(truck => {
       if (truck.id === id){
