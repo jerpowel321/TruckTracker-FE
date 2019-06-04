@@ -13,7 +13,7 @@ import React, { Component } from "react";
 import Nav from "../../../components/Nav";
 import Container from "../../../components/admin/container";
 import API from "../../../utils/API"
-import { transformFileSync } from "@babel/core";
+// import { transformFileSync } from "@babel/core";
 import SignOutButton from '../../Signin/SignOut';
 // Cyrus Page Dont Touch
 
@@ -109,9 +109,9 @@ class Admin extends Component {
                         </button>
                       </div>
                       <div className="modal-body">
-                        Website: <a href={`${truck.website}`} target="_blank">Link</a><br />
+                        Website: <a href={`${truck.website}`} target="_blank" rel="noopener noreferrer" >Link</a><br />
                         Cuisine: {truck.cuisine}<br />
-                        Menu: <a href={`${truck.menu}`} target="_blank">Link</a><br />
+                        Menu: <a href={`${truck.menu}`} target="_blank" rel="noopener noreferrer" >Link</a><br />
                         Contact: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
                         Email: {truck.email}<br />
                         Phone: {truck.phone}<br />

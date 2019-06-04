@@ -274,11 +274,47 @@ class User extends Component {
                                     ? <p><i className="fa-lg fas fa-phone mr-1 text-info" /> <span className="font-weight-bold mr-2">Number:</span>{sqltrucks.phone}</p>
                                     : null
                                   }
+                                  {sqltrucks.monday || sqltrucks.tuesday || sqltrucks.wednesday || sqltrucks.thursday || sqltrucks.friday || sqltrucks.saturday || sqltrucks.sunday
+                                    ? <p><i className="fa-lg far fa-clock mr-1 beige" /> <span className="font-weight-bold mr-2">Hours of Operation:</span></p>
+                                    : null
+                                  }
                                   
-                                    <p><i className="fa-lg far fa-clock mr-1 beige" /> <span className="font-weight-bold mr-1">Hours of Operation:</span> 9am-6pm</p>
-                                    <p><i className="fa-lg fas fa-hourglass-half mr-2 orange" /> <span className="font-weight-bold mr-1">Wait Time:</span> 20mins</p>
-                                    {sqltrucks.website
-                                    ? <p><i className="fa-lg fab fa-internet-explorer pr-2 text-success"></i><span className="font-weight-bold mr-2">Website:</span><a href={sqltrucks.website}>{sqltrucks.website}</a></p>
+                                  {sqltrucks.monday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Monday:</span>{sqltrucks.monday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.tuesday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Tuesday:</span>{sqltrucks.tuesday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.wednesday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Wednesday:</span>{sqltrucks.wednesday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.thursday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Thursday:</span>{sqltrucks.thursday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.friday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Friday:</span>{sqltrucks.friday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.saturday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Saturday:</span>{sqltrucks.saturday}</p>
+                                    : null
+                                  }
+                                   {sqltrucks.sunday
+                                    ? <p><i className="" /> <span className="font-weight-bold mr-2">Sunday:</span>{sqltrucks.sunday}</p>
+                                    : null
+                                  }
+                                  {sqltrucks.wait
+                                    ? <p><i className="fa-lg fas fa-hourglass-half mr-2 orange" /> <span className="font-weight-bold mr-2">Current Wait Time:</span>{sqltrucks.wait}</p>
+                                    : null
+                                  }
+                                  {sqltrucks.website
+                                    ? <p><i className="fa-lg fab fa-internet-explorer pr-2 text-success"></i>
+                                      <span className="font-weight-bold mr-2">Website:</span>
+                                      <a href={sqltrucks.website} target="_blank">{sqltrucks.website}</a></p>
                                     : null
                                   }
                                   {sqltrucks.menu
@@ -301,15 +337,14 @@ class User extends Component {
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
-                            <Card.Body className="reviewBody pl-2">
-                                {this.state.reviews.filter(review => review.truckName === truck.name).map(review => (
-                                  <div className="review">
-                                    <h4 className="pt-2 text-center">{review.userName}</h4>
-                                    <Stars rating={review.rating} />
-                                    <p className="pl-2 pr-2 pb-1">{review.comment}</p>
-                                    
-                                  </div>
-                                ))}
+                            <Card.Body className="reviewBody pl-2 pr-5">
+                              {this.state.reviews.filter(review => review.truckName === truck.name).map(review => (
+                                <div className="review">
+                                  <h4 className="pt-3 text-center">{review.userName}</h4>
+                                  <Stars rating={review.rating} />
+                                  <p className="pl-3 pr-3 ">{review.comment}</p>
+                                </div>
+                              ))}
                             </Card.Body>
                           </Accordion.Collapse>
                         </Card>
@@ -351,6 +386,28 @@ class User extends Component {
       </div>
     );
   }
+}
+
+function ReviewImages({reviews, truckName}) {
+  if (reviews == null) {
+    return null;
+  }
+
+  const images = [];
+
+  for (const review of reviews) {
+    if (review.truckName === truckName && review.userImages != null) {
+      for (const image of review.userImages) {
+        images.push(image);
+      }
+    }
+  }
+
+  if (images.length === 0) {
+    return <div className="pt-1 pb-2 pl-5">No images currently available for this business.</div>;
+  }
+
+  return images.map(image => <img src={image} />);
 }
 
 export default User;

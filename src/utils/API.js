@@ -20,6 +20,9 @@ export default {
     saveReview(review) {
         return axios.post(BASEURL + "/api/reviews", review)
     },
+    saveOwnerImages(images) {
+        return axios.post(BASEURL + "/api/owner", images)
+    },
     viewReview(id) {
         return axios.get(BASEURL + `/api/reviews/${id}`)
     },
