@@ -5,6 +5,7 @@ import 'firebase/auth';
 import SignOutButton from '../../Signin/SignOut';
 import { AuthUserContext, withAuthorization } from '../../Signin/Session';
 import { Link, withRouter } from 'react-router-dom';
+import { database } from "firebase";
 
 class TruckerApplication extends Component {
 	state = {
@@ -45,9 +46,12 @@ class TruckerApplication extends Component {
 		}
 		console.log(newTruck)
 		API.saveTruck(newTruck)
-			.then(res => console.log(res + "THIS IS THE RESPONSEEEEE")
-			
-			);
+			.then(res => {console.log(res)
+			console.log("This is the response")
+			if (res.errors){
+				console.log(res.errors)
+			}
+			});
 	}
 	handleInputChange = (event) => {
 		let { name, value } = event.target;
@@ -94,6 +98,7 @@ class TruckerApplication extends Component {
 									<option value="American">American</option>
 									<option value="Cajun">Cajun</option>
 									<option value="Chinese">Chinese</option>
+									<option value="Thai">Dessert</option>
 									<option value="French<">French</option>
 									<option value="Filipino">Filipino</option>
 									<option value="Greek">Greek</option>
@@ -109,6 +114,7 @@ class TruckerApplication extends Component {
 									<option value="Russian">Russian</option>
 									<option value="Taiwanese">Taiwanese</option>
 									<option value="Thai">Thai</option>
+									<option value="Thai">Vietnamese</option>
 									<option value="Other">Other</option>
 								</select>
 							</div>
@@ -217,7 +223,7 @@ class TruckerApplication extends Component {
 							</div>
 						</div>
 						<div className="text-center">
-							<button type="submit" className="btn redBg text-white hvr-grow-shadow" onClick={this.createNewTruck}><Link to="/trucker/dashboard"> <b className="text-white">Submit</b></Link></button>
+							<button type="submit" className="btn redBg text-white hvr-grow-shadow" onClick={this.createNewTruck}> <b className="text-white">Submit</b></button>
 						</div>
 					</form>
 				</div>

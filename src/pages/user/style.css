@@ -25,6 +25,12 @@
     max-height: 310px;
     overflow: auto;
 }
+.reviewBody {
+    /* display: flex;
+    align-items: stretch;
+    justify-content: stretch; */
+
+}
 .reviewCard, .imagesCard, .businessInfoCard{
     background-color: #f8f9fa;
     margin: 0;

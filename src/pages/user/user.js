@@ -57,7 +57,7 @@ class User extends Component {
     trucks: [], //To view trucker information from firebase
     currentLocation: {},
     reviews: [], //To view reviews for a specific truck
-    allReviews: [], //To view reviews for all trucks, used for displaying images
+    allReviews: null, //To view reviews for all trucks, used for displaying images
     sqltrucks: [], //To get sql database trucker information
   }
 
@@ -95,14 +95,14 @@ class User extends Component {
       .catch(err => console.log(err));
   }
 
-  gettruckInfo(){
+  gettruckInfo() {
     API.getAllTrucks().then((res) => {
-      this.setState({ sqltrucks: res.data})
+      this.setState({ sqltrucks: res.data })
       console.log("This is the current sql trucks info")
       console.log(this.state.sqltrucks)
 
     })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   }
 
   componentDidMount() {
@@ -182,10 +182,10 @@ class User extends Component {
 
       // console.log(this.state)
 
-      console.log ("--------------this.state.trucks----------------------------")
-      console.log (this.state.trucks)
-      console.log ("--------------this.state.sqltrucks----------------------------")
-      console.log (this.state.sqltrucks)
+      console.log("--------------this.state.trucks----------------------------")
+      console.log(this.state.trucks)
+      console.log("--------------this.state.sqltrucks----------------------------")
+      console.log(this.state.sqltrucks)
     })
 
     connectedRef.on("value", snap => {
@@ -195,7 +195,7 @@ class User extends Component {
       }
       if (snap.val()) {
         var con = connectionsRef.push(latlng);
-        con.onDisconnect().update({disco: Math.floor(Date.now() / 60000)});
+        con.onDisconnect().update({ disco: Math.floor(Date.now() / 60000) });
       }
     })
   }
@@ -242,22 +242,22 @@ class User extends Component {
                       <h4 className="py-2 ">{truck.name}</h4>
                       <Accordion>
                         <Card className="businessInfoCard w-100">
-                          <Card.Header className="businessInfoHeader">
+                          <Card.Header className="businessInfoHeader ">
                             <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.gettruckInfo(truck.name)}>
                               <p><i class="fa-lg fas fa-info-circle mr-2"></i>Business Info</p>
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
                             <Card.Body className="businessInfoBody">
-                                {this.state.sqltrucks.filter(sqltrucks => sqltrucks.businessName === truck.name).map(sqltrucks => (
-                                  <div className="businessInfo pl-5">
-                                    {/* {!sqltrucks.businessName
+                              {this.state.sqltrucks.filter(sqltrucks => sqltrucks.businessName === truck.name).map(sqltrucks => (
+                                <div className="businessInfo pl-5">
+                                  {/* {!sqltrucks.businessName
                                     ?  <p>Oh no, looks like this business does not have any. Be the first one!</p>
                                     : null
                                   } */}
-                                    <p className="pt-4"><i class="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> NEEDS TO HAVE ADDRESS</p>
-                                    
-                                   
+                                  <p className="pt-4"><i class="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> NEEDS TO HAVE ADDRESS</p>
+
+
                                   {sqltrucks.cuisine
                                     ? <p><i className="fa-lg fas fa-utensils mr-2 purple"></i><span className="font-weight-bold mr-2">Cuisine:</span>{sqltrucks.cuisine}</p>
                                     : null
@@ -266,21 +266,26 @@ class User extends Component {
                                     ? <p><i className="fa-lg fas fa-phone mr-1 text-info" /> <span className="font-weight-bold mr-2">Number:</span>{sqltrucks.phone}</p>
                                     : null
                                   }
-                                  
-                                    <p><i className="fa-lg far fa-clock mr-1 beige" /> <span className="font-weight-bold mr-1">Hours of Operation:</span> 9am-6pm</p>
-                                    <p><i className="fa-lg fas fa-hourglass-half mr-2 orange" /> <span className="font-weight-bold mr-1">Wait Time:</span> 20mins</p>
-                                    {sqltrucks.website
-                                    ? <p><i className="fa-lg fab fa-internet-explorer pr-2 text-success"></i><span className="font-weight-bold mr-2">Website:</span><a href={sqltrucks.website}>{sqltrucks.website}</a></p>
+
+                                  <p><i className="fa-lg far fa-clock mr-1 beige" /> <span className="font-weight-bold mr-1">Hours of Operation:</span> 9am-6pm</p>
+                                  <p><i className="fa-lg fas fa-hourglass-half mr-2 orange" /> <span className="font-weight-bold mr-1">Wait Time:</span> 20mins</p>
+                                  {sqltrucks.website
+                                    ? <p><i className="fa-lg fab fa-internet-explorer pr-2 text-success"></i>
+                                      <span className="font-weight-bold mr-2">Website:</span>
+                                      <a href={sqltrucks.website} target="_blank">{sqltrucks.website}</a></p>
                                     : null
                                   }
                                   {sqltrucks.menu
-                                    ?  <p><img className="pr-1 purple" id="menuimg" src="https://cdn2.iconfinder.com/data/icons/food-restaurant-1/128/flat-56-512.png" /><span className="font-weight-bold mr-2">Menu:</span> <a href={sqltrucks.menu}>{sqltrucks.menu}</a></p>
+                                    ? <p><img className="pr-1 purple" id="menuimg" src="https://cdn2.iconfinder.com/data/icons/food-restaurant-1/128/flat-56-512.png" />
+                                      <span className="font-weight-bold mr-2">Menu:</span>
+                                      <a href={sqltrucks.menu} target="_blank">{sqltrucks.menu}</a>
+                                    </p>
                                     : null
                                   }
-                                    
-                                   
-                                  </div>
-                                ))}
+
+
+                                </div>
+                              ))}
                             </Card.Body>
                           </Accordion.Collapse>
                         </Card>
@@ -293,15 +298,15 @@ class User extends Component {
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
-                            <Card.Body className="reviewBody pl-2">
-                                {this.state.reviews.filter(review => review.truckName === truck.name).map(review => (
-                                  <div className="review">
-                                    <h4 className="pt-2 text-center">{review.userName}</h4>
-                                    <Stars rating={review.rating} />
-                                    <p className="pl-2 pr-2 pb-1">{review.comment}</p>
-                                    
-                                  </div>
-                                ))}
+                            <Card.Body className="reviewBody pl-2 pr-5">
+                              {this.state.reviews.filter(review => review.truckName === truck.name).map(review => (
+                                <div className="review">
+                                  <h4 className="pt-3 text-center">{review.userName}</h4>
+                                  <Stars rating={review.rating} />
+                                  <p className="pl-3 pr-3 ">{review.comment}</p>
+
+                                </div>
+                              ))}
                             </Card.Body>
                           </Accordion.Collapse>
                         </Card>
@@ -314,16 +319,8 @@ class User extends Component {
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
-                            <Card.Body className="imagesBody pl-2">
-                              {this.state.allReviews.filter(review => review.truckName === truck.name).map(review => (
-                                <div>
-                                  
-                                  {review.userImages[0]
-                                    ? <img src={review.userImages[0]} />
-                                    : null
-                                  }
-                                </div>
-                              ))}
+                            <Card.Body className="imagesBody pl-2 pr-5">
+                              <ReviewImages reviews={this.state.allReviews} truckName={truck.name} />
                             </Card.Body>
                           </Accordion.Collapse>
                         </Card>
@@ -343,6 +340,28 @@ class User extends Component {
       </div>
     );
   }
+}
+
+function ReviewImages({reviews, truckName}) {
+  if (reviews == null) {
+    return null;
+  }
+
+  const images = [];
+
+  for (const review of reviews) {
+    if (review.truckName === truckName && review.userImages != null) {
+      for (const image of review.userImages) {
+        images.push(image);
+      }
+    }
+  }
+
+  if (images.length === 0) {
+    return <div>No images available for this business.</div>;
+  }
+
+  return images.map(image => <img src={image} />);
 }
 
 export default User;
