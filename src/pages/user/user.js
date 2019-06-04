@@ -192,13 +192,17 @@ class User extends Component {
     })
 
     connectedRef.on("value", snap => {
+      let update = Math.floor(Date.now() / 1000)
       let latlng = {
         lat: this.state.currentLocation.lat,
         lng: this.state.currentLocation.lng
       }
       if (snap.val()) {
-        var con = connectionsRef.push(latlng);
-        con.onDisconnect().update({disco: Math.floor(Date.now() / 60000)});
+        var con = connectionsRef.child(update).set({
+          lat: latlng.lat,
+          lng: latlng.lng
+        });
+        // con.onDisconnect().update({disco: Math.floor(Date.now() / 60000)});
       }
     })
   }
