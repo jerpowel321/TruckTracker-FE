@@ -9,16 +9,13 @@ import { AuthUserContext, withAuthorization } from '../Signin/Session';
 import SignOutButton from '../Signin/SignOut';
 import API from "./../../utils/API"
 import * as firebase from "firebase"
-<<<<<<< HEAD
 import { ReviewButton } from "../../components/TruckerImage";
-
-=======
 import Geocode from "react-geocode";
 
 Geocode.setApiKey("AIzaSyAebySY2-ib0pM0xXsMX3pC2dQkmW7n9fw");
 
 Geocode.enableDebug();
->>>>>>> 2a013f80c3e61cad59fca55b6300b0b592c4823f
+
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -59,12 +56,8 @@ class Trucker extends React.Component {
     buttonText: "Enable Geolocation",
     currentLocation: {},
     userLocations: [],
-<<<<<<< HEAD
     userImages: [],
-
-=======
     address: ""
->>>>>>> 2a013f80c3e61cad59fca55b6300b0b592c4823f
   }
 
   
