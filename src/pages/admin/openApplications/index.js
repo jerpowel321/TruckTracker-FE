@@ -92,7 +92,7 @@ class Admin extends Component {
                     </div>
                     <div className="card-body bg-white">
                       <blockquote className="blockquote mb-0">
-                        Owner: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
+                        Contact: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
                         Phone: {truck.phone}<br />
                         Email: {truck.email}
                       </blockquote>
@@ -112,7 +112,7 @@ class Admin extends Component {
                         Website: <a href={`${truck.website}`} target="_blank">Link</a><br />
                         Cuisine: {truck.cuisine}<br />
                         Menu: <a href={`${truck.menu}`} target="_blank">Link</a><br />
-                        Owner: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
+                        Contact: {truck.firstName} {truck.middleInitial} {truck.lastName}<br />
                         Email: {truck.email}<br />
                         Phone: {truck.phone}<br />
                         Address: {truck.address} {truck.address2}, {truck.city}, {truck.state} {truck.zip}

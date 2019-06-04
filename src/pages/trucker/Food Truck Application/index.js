@@ -7,6 +7,7 @@ import { AuthUserContext, withAuthorization } from '../../Signin/Session';
 import { Link, withRouter } from 'react-router-dom';
 import { database } from "firebase";
 
+
 class TruckerApplication extends Component {
 	state = {
 		businessName: "",
@@ -26,8 +27,22 @@ class TruckerApplication extends Component {
 	}
 
 	createNewTruck = (event) => {
-		console.log("Inside Create new truck!!--------------------")
-		event.preventDefault();
+		if(this.state.companyName == null) {
+			return <div>Please provide a business name.</div>
+		}
+		if(this.state.firstName == null || this.state.lastName == null) {
+			return <div>Please a contact first and last name. </div>
+		}
+		if(this.state.phone == null) {
+			return <div>Please provide a contact phone number.</div>
+		}
+		if(this.state.address == null || this.state.city == null || this.state.state == null || this.state.zip == null) {
+			return <div>Please provide a valid address including state, city and postal code.</div>
+		}
+		
+		else {
+			console.log("Inside Create new truck!!--------------------")
+			event.preventDefault();
 		const newTruck = {
 			businessName: this.state.companyName,
 			website: this.state.website,
@@ -52,6 +67,7 @@ class TruckerApplication extends Component {
 				console.log(res.errors)
 			}
 			});
+		}
 	}
 	handleInputChange = (event) => {
 		let { name, value } = event.target;
@@ -84,6 +100,7 @@ class TruckerApplication extends Component {
 							<div className="form-group col-md-6">
 								<label for="companyName">Company Name</label>
 								<input name="companyName" type="text" className="form-control" id="companyName" placeholder="Koja Kitchen" onChange={this.handleInputChange} />
+								
 							</div>
 							<div className="form-group col-md-6">
 								<label for="website">Website</label>
@@ -232,6 +249,20 @@ class TruckerApplication extends Component {
 	}
 
 };
+
+
+function InputValidationError({ error }) {
+	if (error == null) {
+		return null;
+	}
+
+	return (
+		<div className="text-danger" role="alert">
+			{error.message}
+		</div>
+	);
+}
+
 
 const condition = authUser => !!authUser;
 
