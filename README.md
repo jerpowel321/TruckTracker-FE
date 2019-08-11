@@ -2,12 +2,12 @@
 =================================================================
 Our third project for our full-stack coding bootcamp, TruckTracker is a Food Truck locator application that provides users with the location and business information of Food Trucks near them. Food Trucks can also create an account and submit a business application. Once approved by an administrator, the Food Truck can log-in to the application and update their current location with a press of a button. Users will be able to view the truck's real-time location on a google map. 
 
-
+![website](/public/trucktracker.png "TruckTracker")
 ## Decoupled Application
 
 This is a decoupled application. We have an SQL server that only serves to create, update, and render JSON Data deployed on Heroku found [here](https://api-food-truck.herokuapp.com/). 
 
-Our react app is hosted on an entirely different server found [here](https://deployedwtt.herokuapp.com/). We built to make it easier for us in the future to build the front end later using react native or another method.
+Our react app is hosted on an entirely different server found [here](https://trucktrackerdemo.herokuapp.com/). We built to make it easier for us in the future to build the front end later using react native or another method.
 
 
 ## 🔑 How to Use the App:
@@ -73,7 +73,7 @@ This app has been deployed to Heroku, and the link can be found [here](https://d
   
 + The app follows the **MVC (Model, View, Controller)** architecture paradigm:
   
-![mvc pic](/public/mvc1.PNG "MVC architecture") ![mvc pic](/public/mvc2.png "MVC architecture")
+![mvc pic](/public/mvc1.png "MVC architecture") ![mvc pic](/public/mvc2.png "MVC architecture")
 
 
 ## 🌟 Acknowledgements
