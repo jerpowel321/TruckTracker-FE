@@ -60,8 +60,8 @@ class SignUpFormBase extends Component {
           this.props.history.push(ROUTES.ADMIN);
         }
         else {
-        this.props.history.push(ROUTES.ACCOUNT);
-      }
+          this.props.history.push(ROUTES.ACCOUNT);
+        }
 
       })
       .catch(error => {
@@ -103,73 +103,94 @@ class SignUpFormBase extends Component {
         <nav class="navbar navbar-expand-lg goldBg redText d-flex justify-content-end">
           <img className="logo alignLogo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" alt="TruckTracker Logo" />
           <div className="mr-2">
-      <NavLink className="font redText" to="/">Sign In</NavLink>
-      </div>
+            <NavLink className="font redText" to="/">Sign In</NavLink>
+          </div>
         </nav>
-        <div className="noMarginContainer signInCard">
+        <div id="signUpContainer">
+        <div className="signInCard">
           <form className="signUpForm" onSubmit={this.onSubmit}>
-            <h1 className="redText largeTitles text-center">Sign Up</h1>
+            <h1 className="redText largeTitles text-center pb-5">Sign Up</h1>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-4">
+                <b><label for="username" className="col-form-label text-white"><i class="fas fa-address-card mr-2"></i>Full Name</label></b>
+              </div>
+              <div class="col-sm-6">
+                <input
+                  name="username"
+                  value={username}
+                  onChange={this.onChange}
+                  type="text"
+                  placeholder="Full Name"
+                />
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-4">
+                <b><label for="email" className="col-form-label text-white"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
+              </div>
+              <div class="col-sm-6">
+                <input
+                  name="email"
+                  value={email}
+                  onChange={this.onChange}
+                  type="text"
+                  placeholder="Email Address"
+                />
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-4">
+                <b><label for="password" className="col-form-label text-white"><i class="fas fa-lock mr-2"></i>Password</label></b>
+              </div>
+              <div class="col-sm-6">
+                <input
+                  name="passwordOne"
+                  value={passwordOne}
+                  onChange={this.onChange}
+                  type="password"
+                  placeholder="Password"
+                />
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
 
-            <br></br>
-            <b><label for="username" className="col-sm-5 col-form-label text-white"><i class="fas fa-address-card mr-2"></i>Full Name</label></b>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-4">
+                <b><label for="password" className="col-form-label text-white"><i class="fas fa-user-lock mr-2"></i>Confirm Password</label></b>
+              </div>
+              <div class="col-sm-6">
+                <input
+                  name="passwordTwo"
+                  value={passwordTwo}
+                  onChange={this.onChange}
+                  type="password"
+                  placeholder="Confirm Password"
+                />
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-4">
+                <b><label for="password" className="col-form-label text-white"><i class="fas fa-star mr-2"></i>Admin</label></b>
+              </div>
+              <div class="col-sm-6">
+                <input
+                  name="isAdmin"
+                  type="checkbox"
+                  checked={isAdmin}
+                  onChange={this.onChangeCheckbox}
+                />
 
-
-            <input
-              name="username"
-              value={username}
-              onChange={this.onChange}
-              type="text"
-              placeholder="Full Name"
-            />
-
-
-
-            <b><label for="email" className="col-sm-5 col-form-label text-white"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
-
-            <input
-              name="email"
-              value={email}
-              onChange={this.onChange}
-              type="text"
-              placeholder="Email Address"
-            />
-
-
-            <br></br>
-            <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-lock mr-2"></i>Password</label></b>
-
-
-            <input
-              name="passwordOne"
-              value={passwordOne}
-              onChange={this.onChange}
-              type="password"
-              placeholder="Password"
-            />
-
-            <br></br>
-            <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-user-lock mr-2"></i>Confirm Password</label></b>
-
-            <input
-              name="passwordTwo"
-              value={passwordTwo}
-              onChange={this.onChange}
-              type="password"
-              placeholder="Confirm Password"
-            />
-
-<br></br>
-            <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-star mr-2"></i>Admin</label></b>
-
-           
-          
-          <input
-                name="isAdmin"
-                type="checkbox"
-                checked={isAdmin}
-                onChange={this.onChangeCheckbox}
-              />
-           
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
 
             {error && <p className="text-white darkbackground p-1 mt-3">{error.message}</p>}
 
@@ -187,6 +208,7 @@ class SignUpFormBase extends Component {
 
 
           </form>
+        </div>
         </div>
       </div>
     );

@@ -17,7 +17,7 @@ function NavItem({ children, to }) {
 
 function Nav(props) {
   return (
-    <nav className="navbar sticky-top navbar-light navbar-expand-lg blackBg redText d-flex justify-content-around">
+    <nav className="navbar sticky-top navbar-expand-sm blackBg redText d-flex justify-content-around">
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -32,7 +32,7 @@ function Nav(props) {
           <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" alt="TruckTracker Logo" />
         </div>
         <div className="navbar-group navbar-group-right">
-          <div className="font mr-5 redtText">{props.currentPage}</div>
+          <div className=" font mr-5  blackBg">{props.currentPage}</div>
           {props.signOut}
         </div>
       </div>

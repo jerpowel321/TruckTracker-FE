@@ -3,19 +3,19 @@
 }
 .font {
 font-size: 30px;
-font-family: 'Luckiest Guy', cursive;
-text-shadow: 2px 2px rgb(240, 188, 16);
+font-family: 'Oswald', sans-serif;
 }
 .font5 {
-font-family: 'Roboto', sans-serif;
+font-family: 'Oswald', sans-serif;
 font-size: 24px;
-text-shadow: 1px 1px black;
 }
 .font6 {
 	font-size: 40px;
-	font-family: 'Luckiest Guy', cursive;
-	text-shadow: 2px 2px red;
+	font-family: 'Oswald', sans-serif;
 	}
+.navbar a:hover {
+	color: gold
+}
 a:hover {
 opacity: 0.6;
 }
@@ -42,8 +42,7 @@ i:hover {
 
 .largeTitles {
 	font-size: 50px;
-	font-family: 'Luckiest Guy', cursive;
-	text-shadow: 2px 2px black;
+	font-family: 'Oswald', sans-serif;
 }
 .adminDashboard .card-body {
 	padding-bottom: 0;

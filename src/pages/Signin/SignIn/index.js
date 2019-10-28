@@ -16,35 +16,60 @@ const SignInPage = () =>
       <nav className="navbar sticky-top navbar-expand-lg blackBg redText d-flex justify-content-around">
         <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" alt="TruckTracker Logo" />
       </nav>
-      <div className="d-flex justify-content-center">
-        <div className="div  signInCard">
-          <div className="div ">
-          <div><i class="fas fa-lg fa-utensils"></i></div>
-
-
-            <h1 className="redText oswaldHeader text-center">Looking for food trucks?</h1>
-            <div className="text-center">
-              <button className="btn btn-md hvr-grow-shadow p-2 m-2 goldBg border-dark "><NavLink className=" text-white" to="/user/dashboard"><b>Yes! Take me There.</b></NavLink></button>
+      <div className="row">
+        <div className="col-md-2"></div>
+        <div className="col-md-3">
+          <div className="div  signInCard">
+            <div className="div ">
+              <h1 className="redText oswaldHeader text-center">Looking for food trucks?</h1>
+              <div className="text-center d-flex justify-content-center">
+                <div className="card darkbackground" style={{ width: '7rem' }} >
+                  <div><i className="fas goldText fa-4x fa-utensils"></i></div>
+                </div>
+              </div>
+              <div className="text-center">
+                <button className="btn btn-md hvr-grow-shadow p-2 m-2 redBorder"><NavLink className=" text-white" to="/user/dashboard"><b>Yes! Take me There.</b></NavLink></button>
+              </div>
             </div>
           </div>
         </div>
-      
-      
-      
+        <div className="col-md-2">
+          2 of 3
+    </div>
+        <div className="col-md-4">
+          <div className="div  signInCard">
+            <div className="div ">
+              <h1 className="redText oswaldHeader text-center mr-5">Sign In</h1>
+
+              <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                <SignInGoogle />
+                <SignInFacebook />
+              </div>
+
+              <SignInForm />
+            </div>
+          </div>
+        </div>
+        <div className="col-md-2">
+          2 of 3
+    </div>
+
+      </div>
+
+
+
+
+
+
+
+      <div className="d-flex justify-content-center">
+
+
+
+
       </div>
       <div className="d-flex justify-content-center">
-        <div className="div  signInCard">
-          <div className="div ">
-            <h1 className="redText oswaldHeader text-center mr-5">Sign In</h1>
 
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-              <SignInGoogle />
-              <SignInFacebook />
-            </div>
-
-            <SignInForm />
-          </div>
-        </div>
       </div>
     </div>
   );
@@ -100,54 +125,70 @@ class SignInFormBase extends Component {
 
     return (
       <div>
-
-        <h3 className="hr-text-4">
-          <span className="hr-text-5">OR</span>
-        </h3>
-
-        <div className="hr-text-2">
-          
-        </div>
-
-    
-
-
-
         <form className="mt-3" >
-          <b><label for="email" className="col-sm-5 col-form-label text-white"><i class="fas fa-envelope-square mr-2"></i>Email Address</label></b>
-          <input
-            name="email"
-            value={email}
-            onChange={this.onChange}
-            type="text"
-            placeholder="Enter Email Address"
-            id="email"
-          /> <br></br>
-          <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-lock mr-2"></i>Password</label></b>
-          <input
-            name="password"
-            value={password}
-            onChange={this.onChange}
-            type="password"
-            placeholder="Enter Password"
-            id="password"
-          />
-
-          <b><label for="password" className="col-sm-5 col-form-label text-white"><i class="fas fa-star mr-2"></i>Admin</label></b>
-
-          <input
-            name="isAdmin"
-            type="checkbox"
-            checked={isAdmin}
-            onChange={this.onChangeCheckbox}
-          />
+          <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+              <b><label for="email" className="col-form-label text-white"><i className="fas fa-envelope-square mr-2"></i>Email Address</label></b>
+            </div>
+            <div class="col-sm-6">
+              <input
+                name="email"
+                value={email}
+                onChange={this.onChange}
+                type="text"
+                placeholder="Enter Email Address"
+                id="email"
+              />
+            </div>
+            <div class="col-sm-1"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+              <b><label for="password" className="col-form-label text-white"><i className="fas fa-lock mr-2"></i>Password</label></b>
+            </div>
+            <div class="col-sm-6">
+              <input
+                name="password"
+                value={password}
+                onChange={this.onChange}
+                type="password"
+                placeholder="Enter Password"
+                id="password"
+              />
+            </div>
+            <div class="col-sm-1"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+              <b><label for="password" className="col-form-label text-white"><i className="fas fa-star mr-2"></i>Admin</label></b>
+            </div>
+            <div class="col-sm-6">
+              <input 
+                name="isAdmin"
+                type="checkbox"
+                checked={isAdmin}
+                onChange={this.onChangeCheckbox}
+              />
+            </div>
+            <div class="col-sm-1"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 text-center">
+            <button name="button" value="admin" id="adminSubmit" className="btn btn-md redBg text-white p-2 hvr-grow-shadow border-white" disabled={isInvalid} onClick={this.onSubmit} type="submit">
+                <b>Sign In</b>
+              </button>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
 
           <div className="">
             <div className="row mt-2 ">
 
-              <button name="button" value="admin" id="adminSubmit" className="btn btn-md redBg text-white p-2 hvr-grow-shadow ml-5 mt-2 border-dark" disabled={isInvalid} onClick={this.onSubmit} type="submit">
-                <b>Sign In</b>
-              </button>
+              
 
 
             </div>
@@ -202,15 +243,10 @@ class SignInGoogleBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-
         <div className="card darkbackground" style={{ width: '7rem' }} >
-          {/* <div style={{ height: '60vh', width: '50%', marginLeft: "25%" }}> */}
-          <i className="fab fa-google fa-4x text-primary mx-4 hvr-grow-shadow" onClick={this.onSubmit} ></i>
-          {/* <div className="card-body" style={{ height: '4rem' }}> */}
-          <b><p className="card-text text-center text-white">Sign In with Google</p></b>
-          {/* </div> */}
+          <i className="fab fa-google fa-4x goldText mx-4 hvr-grow-shadow" onClick={this.onSubmit} ></i>
+          <b><p className="card-text text-center text-white pt-2">Sign In with Google</p></b>
         </div>
-
         {error && <p>{error.message}</p>}
       </form>
     );
@@ -254,17 +290,13 @@ class SignInFacebookBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-
         <div className="card darkbackground" style={{ width: '7rem' }} >
-          <i className="fab fa-facebook-square fa-4x text-primary mx-4 hvr-grow-shadow" onClick={this.onSubmit} ></i>
-          <b><p className="card-text text-center text-white">Sign In with Facebook</p></b>
+          <i className="fab fa-facebook-square fa-4x goldText mx-4 hvr-grow-shadow" onClick={this.onSubmit} ></i>
+          <b><p className="card-text text-center text-white pt-2">Sign In with Facebook</p></b>
         </div>
-
         {error && <p>{error.message}</p>}
       </form>
     );
-
-
   }
 }
 
