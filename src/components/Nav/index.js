@@ -17,7 +17,7 @@ function NavItem({ children, to }) {
 
 function Nav(props) {
   return (
-    <nav className="navbar navbar-light navbar-expand-lg goldBg redText d-flex justify-content-around">
+    <nav className="navbar sticky-top navbar-light navbar-expand-lg blackBg redText d-flex justify-content-around">
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>

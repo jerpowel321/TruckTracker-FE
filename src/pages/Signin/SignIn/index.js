@@ -13,23 +13,29 @@ const SignInPage = () =>
 
   (
     <div className="redDoor" >
-      <nav className="navbar navbar-expand-lg goldBg redText d-flex justify-content-around">
+      <nav className="navbar sticky-top navbar-expand-lg blackBg redText d-flex justify-content-around">
         <img className="logo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" alt="TruckTracker Logo" />
       </nav>
       <div className="d-flex justify-content-center">
         <div className="div  signInCard">
           <div className="div ">
-            <h1 className="redText largeTitles text-center">Looking for food trucks?</h1>
+          <div><i class="fas fa-lg fa-utensils"></i></div>
+
+
+            <h1 className="redText oswaldHeader text-center">Looking for food trucks?</h1>
             <div className="text-center">
-              <button className="btn btn-md bg-warning p-2 hvr-grow-shadow p-2 border-dark"><NavLink className=" redText" to="/user/dashboard"><b>Yes! Take me There.</b></NavLink></button>
+              <button className="btn btn-md hvr-grow-shadow p-2 m-2 goldBg border-dark "><NavLink className=" text-white" to="/user/dashboard"><b>Yes! Take me There.</b></NavLink></button>
             </div>
           </div>
         </div>
+      
+      
+      
       </div>
       <div className="d-flex justify-content-center">
         <div className="div  signInCard">
           <div className="div ">
-            <h1 className="redText largeTitles text-center mr-5">Sign In</h1>
+            <h1 className="redText oswaldHeader text-center mr-5">Sign In</h1>
 
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
               <SignInGoogle />
