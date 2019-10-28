@@ -21,7 +21,7 @@ const SignInPage = () =>
         <div className="col-md-3">
           <div className="div  signInCard">
             <div className="div ">
-              <h1 className="redText oswaldHeader text-center">Looking for food trucks?</h1>
+              <h1 className="text-white oswaldHeader text-center">Looking for food trucks?</h1>
               <div className="text-center d-flex justify-content-center">
                 <div className="card darkbackground" style={{ width: '7rem' }} >
                   <div><i className="fas goldText fa-4x fa-utensils"></i></div>
@@ -39,7 +39,7 @@ const SignInPage = () =>
         <div className="col-md-4">
           <div className="div  signInCard">
             <div className="div ">
-              <h1 className="redText oswaldHeader text-center mr-5">Sign In</h1>
+              <h1 className="text-white oswaldHeader text-center mr-5">Sign In</h1>
 
               <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
                 <SignInGoogle />
