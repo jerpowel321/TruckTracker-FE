@@ -2,6 +2,7 @@
 <img src="https://github.com/jerpowel321/TruckTracker-FE/blob/master/public/TruckTrackerLogo.png" width="250">
 </p>
 =================================================================
+
 Our third project for our full-stack coding bootcamp, TruckTracker is a Food Truck locator application that provides users with the location and business information of Food Trucks near them. Food Trucks can also create an account and submit a business application. Once approved by an administrator, the Food Truck can log-in to the application and update their current location with a press of a button. Users will be able to view the truck's real-time location on a google map. 
 
 #### Landing Page
