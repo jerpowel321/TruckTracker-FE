@@ -209,11 +209,12 @@ class User extends Component {
           firstPage="/"
           firstPageName="TruckTracker"
         />
-        <div style={{ height: '50vh', width: '50%', marginLeft: "25%", marginTop: "5%" }}>
+        <div style={{ height: '50vh', width: '50%', marginLeft: "25%", marginTop: "5%" , backgroundColor: 'none'}}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: "AIzaSyCC9CsEo4ZXBb-6M2d9TfG8DgvcTXXcEo0" }}
             defaultCenter={this.state.currentLocation || this.props.center}
             defaultZoom={this.props.zoom}
+            
           >
             {this.state.trucks.map(truck => (
               <AnyReactComponent
