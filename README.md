@@ -2,7 +2,41 @@
 =================================================================
 Our third project for our full-stack coding bootcamp, TruckTracker is a Food Truck locator application that provides users with the location and business information of Food Trucks near them. Food Trucks can also create an account and submit a business application. Once approved by an administrator, the Food Truck can log-in to the application and update their current location with a press of a button. Users will be able to view the truck's real-time location on a google map. 
 
-![website](/public/trucktracker.png "TruckTracker")
+#### Landing Page
+![website](/public/TruckTrackerSignIn.png "TruckTracker")
+
+###### For our application, we have used firebase authentication and allow users the option to sign in with their google or facebook account.
+
+#### Business Application Page
+![Food Truck Application](/public/TTApplication.png "Food Truck Application")
+
+###### Once the Food Truck Owner has made an account, the first thing they want to do is fill out an application. This information will be reviewed by an Admin and the owner will be contacted if we have any questions. The information we receive is stored on mySql and once that application is approved by an admin, the business owner will be able to update their live location on their dashboard/home page. 
+
+#### Business Owner Dashboard
+![Food Truck Owner Dashboard](/public/TTHomePage.png "Food Truck Owner Dashboard")
+
+###### With a simple click of a button, the Food Truck may update their current location and leave the button active until they move locations or close out for the day. We use firebase to store the Food Truck's current location.
+
+#### Business Owner Dashboard
+![Account](/public/TTAccount.png "Food Truck Owner Account")
+
+###### If for whatever reason, the Business Owner wishes to change their account password, we allow them two methods to do so on their Account Page.
+
+
+#### Forget Password
+![Forget Password](/public/TTForgetPassword.png "Forget Password")
+
+###### If you forget your password, click on the "Forget Password" Link on the Landing Page and you will be directed to our Forget Password Page. Submit you email address and follow the prompts in the email you will receive. 
+
+#### Sign Up 
+![Sign Up](/public/TTSignUp.png "Sign Up")
+
+###### Food Truck Owners can click on the "Sign Up" Link located on the Landing Page and will be directed to the Sign Up page displayed above. 
+
+
+
+
+
 ## Decoupled Application
 
 This is a decoupled application. We have an SQL server that only serves to create, update, and render JSON Data deployed on Heroku found [here](https://api-food-truck.herokuapp.com/). 

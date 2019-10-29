@@ -6,7 +6,7 @@ import * as ROUTES from '../../../constants/routes';
 
 const PasswordForgetPage = () => (
   <div className="yellowBug">
-    <nav class="navbar navbar-expand-lg goldBg redText d-flex justify-content-end">
+    <nav class="navbar navbar-expand-lg blackBg redText d-flex justify-content-end">
     <img className="logo alignLogo" src="https://api-food-truck.herokuapp.com/assets/images/truckLogo.png" alt="TruckTracker Logo" />
     <div className="mr-2">
       <NavLink className="font redText" to="/">Sign In</NavLink>
