@@ -2,7 +2,6 @@ import API from "./../../utils/API"
 import Nav from "../../components/Nav";
 import { ReviewButton } from "../../components/Review";
 import Stars from "../../components/Stars";
-
 import * as firebase from "firebase"
 import GoogleMapReact from 'google-map-react';
 import React, { Component } from 'react';
@@ -11,11 +10,8 @@ import "./style.css";
 import Geocode from "react-geocode";
 import { Accordion, Card, Button } from 'react-bootstrap';
 
-
 Geocode.setApiKey("AIzaSyAebySY2-ib0pM0xXsMX3pC2dQkmW7n9fw");
-
 Geocode.enableDebug();
-
 
 var config = {
   apiKey: "AIzaSyDBJH8z5eJDf7cgAWMiRGXE2U1vBnQVa2g",
@@ -37,10 +33,6 @@ const connectionsRef = db.ref("userConnects");
 const AnyReactComponent = ({ text }) => <div title={text}><img src="https://api-food-truck.herokuapp.com/assets/images/truck.png" style={{ width: "20px" }}></img><p style={{ fontSize: "8px" }}></p></div>;
 
 
-
-
-
-
 class User extends Component {
   static defaultProps = {
     center: {
@@ -49,7 +41,6 @@ class User extends Component {
     },
     zoom: 15
   };
-
 
   state = {
     lat: 37.781237,
@@ -186,8 +177,6 @@ class User extends Component {
       })
 
       console.log(this.state)
-
-
       // console.log(this.state)
 
       console.log("--------------this.state.trucks----------------------------")
@@ -217,9 +206,8 @@ class User extends Component {
       // Important! Always set the container height explicitly
       <div className="beachBackground">
         <Nav
-          home="/user/dashboard"
           firstPage="/"
-          firstPageName="Back"
+          firstPageName="TruckTracker"
         />
         <div style={{ height: '50vh', width: '50%', marginLeft: "25%", marginTop: "5%" }}>
           <GoogleMapReact
@@ -238,7 +226,7 @@ class User extends Component {
           </GoogleMapReact>
         </div>
         <div className="resultsContainer">
-          <div className="card-header font redText goldBg">
+          <div className="card-header font text-white redBg">
             Food Truck Results
           </div>
 
@@ -250,13 +238,13 @@ class User extends Component {
                 const modalID = `truck-modal-${index}`;
                 return (
                   <div key={truck.name}>
-                    <li>
-                      <h4 className="py-2 ">{truck.name}</h4>
+                    <li className="py-2 redText ">
+                      <h4 className="py-2 redText ">{truck.name}</h4>
                       <Accordion>
                         <Card className="businessInfoCard w-100">
                           <Card.Header className="businessInfoHeader">
                             <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.gettruckInfo(truck.name)}>
-                              <p><i className="fa-lg fas fa-info-circle mr-2"></i>Business Info</p>
+                              <p className="goldText writeReview"><i className="fa-lg fas fa-info-circle mr-2"></i>Business Info</p>
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
@@ -267,7 +255,7 @@ class User extends Component {
                                     ?  <p>Oh no, looks like this business does not have any. Be the first one!</p>
                                     : null
                                   } */}
-                                  <p className="pt-4"><i className="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> {truck.address}</p>
+                                  <p className="pt-4 "><i className="fa-lg fas fa-map-marker-alt pr-2 text-danger"></i><span className="font-weight-bold">Address:</span> {truck.address}</p>
 
 
                                   {sqltrucks.cuisine
@@ -337,7 +325,7 @@ class User extends Component {
                         <Card className="reviewCard">
                           <Card.Header className="reviewHeader">
                             <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.viewReviews(truck.name)}>
-                              <p><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
+                              <p className="goldText writeReview"><i className="fa-lg fas fa-comment-alt mr-2" />Reviews</p>
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">
@@ -357,7 +345,7 @@ class User extends Component {
                         <Card className="imagesCard">
                           <Card.Header className="imagesHeader">
                             <Accordion.Toggle as={Button} variant="link" eventKey="0" onClick={() => this.getImages(truck.name)}>
-                              <p><i className="fa-lg far fa-images mr-2"></i>Images</p>
+                              <p className="goldText writeReview"><i className="fa-lg far fa-images mr-2"></i>Images</p>
                             </Accordion.Toggle>
                           </Card.Header>
                           <Accordion.Collapse eventKey="0">

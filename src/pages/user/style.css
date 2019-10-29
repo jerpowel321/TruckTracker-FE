@@ -58,10 +58,6 @@
     display:flex;
     flex-wrap: wrap;
 }
-.writeReview {
-    color: #007bff;
-    display: inline-block
-}
 .writeReview:hover {
     color: darkblue;
 }

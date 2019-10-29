@@ -140,7 +140,7 @@ export function ReviewButton({ truckName }) {
 	return (
 		<>
 			<div onClick={onClick}>
-				<p className="pt-1 pl-3 writeReview "><i className="fa-lg fas fa-pencil-alt mr-2 " />Click Here to write a review!</p>
+				<p className="pt-1 pl-3 writeReview goldText"><i className="fa-lg fas fa-pencil-alt mr-2 " />Click Here to write a review!</p>
 			</div>
 			<ReviewModal isShown={isShown} setIsShown={setIsShown} truckName={truckName} />
 		</>
